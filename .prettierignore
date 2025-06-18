@@ -1,0 +1,17 @@
+/dist Add commentMore actions
+.vscode/
+/coverage
+.github/
+*.yaml
+*.yml
+*.config.*
+
+
+/src/temp
+/migrations
+/src/migrations
+/temp/**/*.json
+schema.graphql
+/test/databaseAdapter.js
+importMap.js
+payload-types.ts
