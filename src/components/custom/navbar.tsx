@@ -44,8 +44,8 @@ const Navbar = () => {
               <span className="text-white font-bold text-sm">E</span>
             </div>
             <div className="flex flex-col">
-              <span className="text-sm font-semibold text-brand-primary">Edu</span>
-              <span className="text-xs text-nav-link">Lorem ipsum</span>
+              <span className="text-sm font-semibold text-brand-primary">College Cosmos</span>
+              {/* <span className="text-xs text-nav-link">College Cosmos</span> */}
             </div>
           </div>
 
