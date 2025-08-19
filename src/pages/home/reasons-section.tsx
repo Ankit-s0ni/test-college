@@ -1,42 +1,76 @@
-import React from 'react'
+'use client';
 
-type Props = {}
+import React from 'react';
+import Image from 'next/image';
+import { Check } from 'lucide-react';
 
-const ReasonsSection = (props: Props) => {
+import ReasonImg1 from '../../../public/assets/icons/reason-1.svg'
+import ReasonImg2 from '../../../public/assets/icons/reason-2.svg'
+
+const REASONS: React.ReactNode[] = [
+  <>50+ Universities at one platform</>,
+  <>Fast check admission <strong>eligibility</strong> criteria</>,
+  <>Choose your <strong>favourite</strong> university</>,
+  <>24×7 customer support</>,
+];
+
+export default function ReasonsSection() {
   return (
-    <div className="py-20 bg-muted/30">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
+    <section className="py-20 bg-background">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid lg:grid-cols-2 gap-10 lg:gap-12 items-start">
+          {/* Left: Heading + paragraph + illustration */}
+          <div className="flex flex-col gap-8">
             <div>
-              <h2 className="text-3xl font-bold mb-6">Reason To Choose Us</h2>
-              <p className="text-muted-foreground mb-8">
-                At Lorem, we provide exceptional technology solutions and services. We leverage our large base to deliver solutions that meet modern business and budget expectations.
+              <h2 className="text-3xl font-bold mb-4">Reason To Choose Us</h2>
+              <p className="text-muted-foreground max-w-[46ch]">
+                At Lorem, we provide exceptional technology solutions and services. We leverage our large
+                base to deliver solutions that meet customers, business and budget expectations. We firmly
+                deliver customized solutions for needs.
               </p>
-              <div className="space-y-4">
-                {[
-                  '50+ Universities at one platform',
-                  'Fast check admission eligibility criteria',
-                  'Choose your favourite university',
-                  '24*7 customer support'
-                ].map((reason) => (
-                  <div key={reason} className="flex items-center gap-3">
-                    <div className="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center">
-                      <span className="text-white text-sm">✓</span>
-                    </div>
-                    <span className="font-medium">{reason}</span>
-                  </div>
-                ))}
+            </div>
+
+            {/* Illustration (kept below text like the reference) */}
+            <div className="relative w-full ">
+              <div className="relative">
+                <Image
+                  src={ReasonImg1}
+                  alt="Students and learning materials"
+                  // fill
+                  // className="object-cover"
+                  priority={false}
+                />
               </div>
             </div>
-            <div className="relative">
-              <div className="aspect-square bg-gradient-to-br from-blue-100 to-purple-100 dark:from-blue-900/20 dark:to-purple-900/20 rounded-2xl flex items-center justify-center">
-                <div className="text-8xl">📚</div>
+          </div>
+
+          {/* Right: Big tick list + graduate illustration */}
+          <div className="flex flex-col lg:items-end gap-8">
+            <ul className="space-y-5 w-full">
+              {REASONS.map((item, i) => (
+                <li key={i} className="flex items-start gap-4">
+                  <span aria-hidden className="mt-0.5">
+                    <Check className="h-7 w-7" strokeWidth={3} />
+                  </span>
+                  <span className="text-base sm:text-[17px] font-medium leading-snug">{item}</span>
+                </li>
+              ))}
+            </ul>
+
+            {/* Illustration aligned to the right like the reference */}
+            <div className="relative w-full self-end">
+              <div className="relative">
+                <Image
+                  src={ReasonImg2}
+                  alt="Graduate leaping over stacks of books"
+                  // fill
+                  // className="object-cover"
+                />
               </div>
             </div>
           </div>
         </div>
       </div>
-  )
+    </section>
+  );
 }
-
-export default ReasonsSection
