@@ -12,7 +12,7 @@ const CoursesSection = ({ items }: { items: CoursesHero[] }) => {
     <section id="courses" className="space-y-4 bg-transparent p-6 rounded-lg">
       <h2 className="text-xl font-semibold">Courses</h2>
 
-      <ScrollArea className="w-full">
+      <ScrollArea className="w-full max-w-[248px] sm:max-w-full">
         <div className="flex gap-4 pb-4">
           {items.map((c, i) => (
             <div

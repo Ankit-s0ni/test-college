@@ -36,10 +36,6 @@ import SimilarUniversities from '@/pages/university/similar-universities';
 import ReviewsSection from '@/pages/university/reviews-section';
 import Stars from '@/components/custom/stars';
 
-// your existing sections
-// import ContactsSection from '@/components/ContactsSection';
-// import FooterSection from '@/components/FooterSection';
-
 /* -------------------------------------------------------------------------- */
 /*                                JSON TYPES                                  */
 /* -------------------------------------------------------------------------- */
@@ -182,45 +178,6 @@ export type UniversityPageData = {
   section13: Section13; // “Similar Programs/Universities” style block
   reviews: Reviews;
 };
-
-/* -------------------------------------------------------------------------- */
-/*                          BASE LIST (routing slugs)                          */
-/* -------------------------------------------------------------------------- */
-
-// const UNIVERSITIES = [
-//   {
-//     college_name: 'Amity University',
-//     college_link: 'amity-university-online',
-//     college_img:
-//       'https://images.unsplash.com/photo-1545048702-79362596cdc9?q=80&w=1400&auto=format&fit=crop',
-//     college_logo:
-//       'https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?q=80&w=200&auto=format&fit=crop',
-//   },
-//   {
-//     college_name: 'DPU University',
-//     college_link: 'dpu-university-online',
-//     college_img:
-//       'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=1400&auto=format&fit=crop',
-//     college_logo:
-//       'https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=200&auto=format&fit=crop',
-//   },
-//   {
-//     college_name: 'Lovely University',
-//     college_link: 'lovely-university-online',
-//     college_img:
-//       'https://images.unsplash.com/photo-1552581234-26160f608093?q=80&w=1400&auto=format&fit=crop',
-//     college_logo:
-//       'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80&w=200&auto=format&fit=crop',
-//   },
-//   {
-//     college_name: 'Sharda University',
-//     college_link: 'sharda-university-online',
-//     college_img:
-//       'https://images.unsplash.com/photo-1523580846011-d3a5bc25702b?q=80&w=1400&auto=format&fit=crop',
-//     college_logo:
-//       'https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?q=80&w=200&auto=format&fit=crop',
-//   },
-// ];
 
 /* -------------------------------------------------------------------------- */
 /*                              DUMMY PAGE DATA                                */
@@ -815,66 +772,6 @@ function FaqSection({ data }: { data: Faq }) {
     </section>
   );
 }
-
-/* -------------------------------- 14. REVIEWS ------------------------------ */
-
-// function ReviewsSection({ data }: { data: Reviews }) {
-//   return (
-//     <section id="reviews" className="space-y-5">
-//       <SectionHeader title="Student Reviews" />
-//       <Card>
-//         <CardContent className="p-4 sm:p-6">
-//           <div className="flex flex-col sm:flex-row gap-6">
-//             <div className="sm:w-56">
-//               <div className="text-3xl font-bold">{data.total.average.toFixed(1)}</div>
-//               <div className="flex items-center gap-1 text-yellow-500 mt-1">
-//                 {Array.from({ length: 5 }).map((_, i) => (
-//                   <Star key={i} className="h-4 w-4 fill-current" />
-//                 ))}
-//               </div>
-//               <p className="text-xs text-muted-foreground mt-1">
-//                 Based on {data.total.count.toLocaleString()} reviews
-//               </p>
-//               <div className="mt-4 space-y-2">
-//                 <ScoreBar label="Average" score={data.peripheral.avg} />
-//                 <ScoreBar label="Delivery/Interaction" score={data.peripheral.DI} />
-//                 <ScoreBar label="Curriculum" score={data.peripheral.curr} />
-//                 <ScoreBar label="VFM" score={data.peripheral.VFM} />
-//               </div>
-//             </div>
-
-//             <div className="flex-1 grid gap-4">
-//               {data.list.map((r, i) => (
-//                 <Card key={i}>
-//                   <CardContent className="p-4">
-//                     <div className="flex gap-3 items-center mb-2">
-//                       {/* eslint-disable-next-line @next/next/no-img-element */}
-//                       <img
-//                         src={r.image}
-//                         alt={r.name}
-//                         className="h-9 w-9 rounded-full object-cover"
-//                       />
-//                       <div>
-//                         <p className="text-sm font-medium">{r.name}</p>
-//                         <p className="text-xs text-muted-foreground">{r.date}</p>
-//                       </div>
-//                       <div className="ml-auto flex items-center gap-1 text-yellow-500">
-//                         {Array.from({ length: r.rating }).map((_, k) => (
-//                           <Star key={k} className="h-4 w-4 fill-current" />
-//                         ))}
-//                       </div>
-//                     </div>
-//                     <p className="text-sm text-muted-foreground">{r.description}</p>
-//                   </CardContent>
-//                 </Card>
-//               ))}
-//             </div>
-//           </div>
-//         </CardContent>
-//       </Card>
-//     </section>
-//   );
-// }
 
 /* -------------------------------------------------------------------------- */
 /*                                   PAGE                                      */

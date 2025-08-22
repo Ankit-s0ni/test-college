@@ -3,12 +3,32 @@ import React from 'react';
 
 const AboutSection = ({ data }: { data: About }) => {
   return (
-    <section id="about" className="space-y-4">
+    <section id="about" className="space-y-4 max-w-full">
       <h2 className="text-xl font-semibold">{data.title}</h2>
 
       <p className="text-sm">{data.description}</p>
 
-      <div className="overflow-x-auto rounded-none border border-black">
+      {/* Mobile: card list */}
+      <div className="md:hidden space-y-3">
+        {data.courses.map((c) => (
+          <div key={c.name} className="border border-black rounded-none">
+            <div className="bg-[#1E4BFF] text-white px-4 py-2 font-medium">{c.name}</div>
+            <dl className="grid grid-cols-2 gap-x-4 gap-y-2 px-4 py-3 text-sm">
+              <dt className="text-muted-foreground">Per Semester</dt>
+              <dd className="text-right font-medium">{c.perSem}</dd>
+
+              <dt className="text-muted-foreground">Total Fees</dt>
+              <dd className="text-right font-medium">{c.total}</dd>
+
+              <dt className="text-muted-foreground">Online</dt>
+              <dd className="text-right">N/A</dd>
+            </dl>
+          </div>
+        ))}
+      </div>
+
+      {/* Tablet/Desktop: table */}
+      <div className="hidden md:block overflow-x-auto rounded-none border border-black">
         <table className="min-w-full text-sm">
           <thead>
             <tr className="bg-[#1E4BFF] text-white border-black">
@@ -47,38 +67,6 @@ const AboutSection = ({ data }: { data: About }) => {
       </div>
     </section>
   );
-  //   return (
-  //     <section id="about" className="space-y-4">
-  //       <h2 className="text-xl font-semibold">{data.title}</h2>
-
-  //       <p className="text-sm text-muted-foreground">{data.description}</p>
-
-  //       <div className="overflow-x-auto rounded-md border">
-  //         <Table>
-  //           <TableHeader>
-  //             <TableRow>
-  //               <TableHead>Course</TableHead>
-  //               <TableHead>Per Sem</TableHead>
-  //               <TableHead>Total</TableHead>
-  //               <TableHead className="text-right">Mode</TableHead>
-  //             </TableRow>
-  //           </TableHeader>
-  //           <TableBody>
-  //             {data.courses.map((c) => (
-  //               <TableRow key={c.name}>
-  //                 <TableCell className="font-medium">{c.name}</TableCell>
-  //                 <TableCell>{c.perSem}</TableCell>
-  //                 <TableCell>{c.total}</TableCell>
-  //                 <TableCell className="text-right">
-  //                   {c.online ? 'Online' : 'On-Campus'}
-  //                 </TableCell>
-  //               </TableRow>
-  //             ))}
-  //           </TableBody>
-  //         </Table>
-  //       </div>
-  //     </section>
-  //   );
 };
 
 export default AboutSection;
