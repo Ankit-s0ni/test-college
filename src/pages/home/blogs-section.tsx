@@ -1,5 +1,6 @@
 import { Button } from '@/components/ui/button';
 import Image from 'next/image';
+import Link from 'next/link';
 import React from 'react';
 
 const BlogsSection = () => {
@@ -39,7 +40,7 @@ const BlogsSection = () => {
                   enhance your skills with AI tools that every modern PM needs to know.
                 </p>
                 <Button variant="outline" size="sm">
-                  See all details →
+                  <Link href={'/blog'}>See all details →</Link>
                 </Button>
               </div>
             </div>

@@ -30,10 +30,8 @@ const Navbar = () => {
   return (
     <nav
       className={cn(
-        'sticky top-0 z-50 w-full transition-all duration-300 ease-in-out',
-        isScrolled
-          ? 'bg-navbar-bg/95 backdrop-blur-sm supports-[backdrop-filter]:bg-navbar-bg/60 border-b border-navbar-border shadow-navbar'
-          : 'bg-transparent border-b border-transparent',
+        'sticky top-0 z-50 w-full transition-all duration-300 ease-in-out bg-white',
+        isScrolled ? 'border-b border-navbar-border shadow-navbar' : '',
       )}
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">

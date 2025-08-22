@@ -10,7 +10,7 @@ import { Textarea } from '@/components/ui/textarea';
 export default function ContactsSection() {
   // shared style to mimic light filled fields from the mock
   const filledField =
-    'bg-rose-50 border-transparent focus-visible:ring-0 focus-visible:ring-offset-0 placeholder:text-muted-foreground/60';
+    'bg-rose-50 border-transparent focus-visible:ring-0 focus-visible:ring-offset-0 placeholder:text-muted-foreground/60 bg-white';
 
   return (
     <section id="contact" className="py-20 bg-[#F7EEFD]">

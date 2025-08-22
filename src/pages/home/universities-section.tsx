@@ -68,11 +68,11 @@ export default function UniversitiesSection() {
               <Card
                 key={u.college_link}
                 className="
-                px-6
+                  px-5 py-[18px]
                   snap-start
                   flex-shrink-0
                   w-[85%] sm:w-[60%] md:w-[45%] lg:w-[24%]
-                  overflow-hidden
+                  overflow-hidden rounded-lg
                 "
               >
                 <CardContent className="p-0">
@@ -80,12 +80,12 @@ export default function UniversitiesSection() {
                     <Image
                       src={u.college_img}
                       alt={`${u.college_name} campus`}
-                      className="absolute inset-0 h-full w-full object-cover"
+                      className="absolute inset-0 h-full w-full object-cover rounded-lg"
                       loading="lazy"
                       width={320}
                       height={240}
                     />
-                    <div className="absolute inset-0 bg-gradient-to-b from-black/0 via-black/30 to-black/80" />
+                    <div className="absolute inset-0 bg-gradient-to-b from-black/0 via-black/30 to-black/80 rounded-lg" />
 
                     {/* Logo + name overlay */}
                     <div className="absolute bottom-4 left-4 right-4 flex items-center gap-3">
@@ -93,7 +93,7 @@ export default function UniversitiesSection() {
                         <Image
                           src={u.college_logo}
                           alt={`${u.college_name} logo`}
-                          className="h-full w-full object-cover"
+                          className="h-full w-full object-cover rounded-lg"
                           loading="lazy"
                           width={64}
                           height={64}
@@ -107,8 +107,8 @@ export default function UniversitiesSection() {
                   </div>
                 </CardContent>
 
-                <CardFooter className="p-4">
-                  <Button size="sm" className="w-full" asChild>
+                <CardFooter className="p-0">
+                  <Button size="sm" className="w-full rounded-sm" asChild>
                     <Link href={`/universities/${u.college_link}`}>Explore The Courses →</Link>
                   </Button>
                 </CardFooter>

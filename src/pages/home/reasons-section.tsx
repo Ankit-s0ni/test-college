@@ -27,7 +27,7 @@ export default function ReasonsSection() {
           <div className="flex flex-col gap-8">
             <div>
               <h2 className="text-3xl font-bold mb-4">Reason To Choose Us</h2>
-              <p className="text-muted-foreground max-w-[46ch]">
+              <p className="text-black max-w-[46ch]">
                 At Lorem, we provide exceptional technology solutions and services. We leverage our
                 large base to deliver solutions that meet customers, business and budget
                 expectations. We firmly deliver customized solutions for needs.
@@ -49,28 +49,25 @@ export default function ReasonsSection() {
           </div>
 
           {/* Right: Big tick list + graduate illustration */}
-          <div className="flex flex-col lg:items-end gap-8">
-            <ul className="space-y-5 w-full">
+          <div className="flex flex-col lg:items-end gap-8 relative h-[500px] lg:h-full">
+            <ul className="space-y-5 w-full h-full">
               {REASONS.map((item, i) => (
                 <li key={i} className="flex items-start gap-4">
                   <span aria-hidden className="mt-0.5">
                     <Check className="h-7 w-7" strokeWidth={3} />
                   </span>
-                  <span className="text-base sm:text-[17px] font-medium leading-snug">{item}</span>
+                  <span className="text-base sm:text-2xl font-medium leading-snug">{item}</span>
                 </li>
               ))}
             </ul>
 
-            {/* Illustration aligned to the right like the reference */}
-            <div className="relative w-full self-end">
-              <div className="relative">
-                <Image
-                  src={ReasonImg2}
-                  alt="Graduate leaping over stacks of books"
-                  // fill
-                  // className="object-cover"
-                />
-              </div>
+            <div className="absolute bottom-0 right-0">
+              <Image
+                src={ReasonImg2}
+                alt="Graduate leaping over stacks of books"
+                // fill
+                // className="object-cover"
+              />
             </div>
           </div>
         </div>
