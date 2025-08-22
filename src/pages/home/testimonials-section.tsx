@@ -19,32 +19,28 @@ const TESTIMONIALS: T[] = [
     date: 'July 27, 2023',
     initial: 'R',
     color: 'bg-orange-500',
-    text:
-      "The level of customer support we received from Slate was exceptional. Their team was responsive, knowledgeable and went above.",
+    text: 'The level of customer support we received from Slate was exceptional. Their team was responsive, knowledgeable and went above.',
   },
   {
     name: 'Sumit Kumar',
     date: 'July 27, 2023',
     initial: 'S',
     color: 'bg-red-500',
-    text:
-      "The level of customer support we received from Slate was exceptional. Their team was responsive, knowledgeable and went above.",
+    text: 'The level of customer support we received from Slate was exceptional. Their team was responsive, knowledgeable and went above.',
   },
   {
     name: 'Shweta Shrivastav',
     date: 'July 27, 2023',
     initial: 'S',
     color: 'bg-violet-600',
-    text:
-      "The level of customer support we received from Slate was exceptional. Their team was responsive, knowledgeable and went above.",
+    text: 'The level of customer support we received from Slate was exceptional. Their team was responsive, knowledgeable and went above.',
   },
   {
     name: 'Ramandeep Singh',
     date: 'July 27, 2023',
     initial: 'R',
     color: 'bg-orange-500',
-    text:
-      "The level of customer support we received from Slate was exceptional. Their team was responsive, knowledgeable and went above.",
+    text: 'The level of customer support we received from Slate was exceptional. Their team was responsive, knowledgeable and went above.',
   },
   // add more to test scrolling
 ];
@@ -80,9 +76,7 @@ export default function TestimonialsSection() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-8 sm:mb-12">
           <h2 className="text-3xl font-bold mb-2">Testimonial</h2>
-          <p className="text-muted-foreground">
-            Hear it from the people for yourself
-          </p>
+          <p className="text-muted-foreground">Hear it from the people for yourself</p>
         </div>
 
         {/* horizontal scroll like the mock */}
@@ -102,15 +96,11 @@ export default function TestimonialsSection() {
                     </div>
                     <div>
                       <p className="font-semibold leading-tight">{t.name}</p>
-                      <p className="text-xs text-muted-foreground">
-                        {t.date}
-                      </p>
+                      <p className="text-xs text-muted-foreground">{t.date}</p>
                     </div>
                   </div>
 
-                  <p className="text-sm text-muted-foreground mb-6">
-                    “{t.text}”
-                  </p>
+                  <p className="text-sm text-muted-foreground mb-6">“{t.text}”</p>
 
                   <div className="mt-auto flex gap-1 text-yellow-400">
                     {Array.from({ length: t.rating ?? 5 }).map((_, i) => (

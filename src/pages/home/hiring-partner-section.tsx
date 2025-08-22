@@ -1,8 +1,7 @@
 import { HiringPartners } from '@/app/universities/[slug]/page';
-import React from 'react'
+import React from 'react';
 
-const getPartnerNameFromSrc = (src: string) =>
-  src.split('/').pop()?.split('.')[0] ?? '';
+const getPartnerNameFromSrc = (src: string) => src.split('/').pop()?.split('.')[0] ?? '';
 
 const HiringPartnerSection = ({ data }: { data: HiringPartners }) => {
   return (
@@ -28,6 +27,6 @@ const HiringPartnerSection = ({ data }: { data: HiringPartners }) => {
       </div>
     </section>
   );
-}
+};
 
-export default HiringPartnerSection
+export default HiringPartnerSection;

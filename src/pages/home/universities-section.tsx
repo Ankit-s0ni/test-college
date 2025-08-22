@@ -53,15 +53,10 @@ export default function UniversitiesSection() {
   return (
     <section id="universities" className="py-20">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-3xl font-bold text-center mb-8">
-          Discover Leading Universities
-        </h2>
+        <h2 className="text-3xl font-bold text-center mb-8">Discover Leading Universities</h2>
 
         {/* Horizontal scroll row using ShadCN ScrollArea */}
-        <ScrollArea
-          className="w-full"
-          aria-label="Leading universities"
-        >
+        <ScrollArea className="w-full" aria-label="Leading universities">
           <div
             className="
               flex gap-6 pb-4
@@ -105,9 +100,7 @@ export default function UniversitiesSection() {
                         />
                       </div>
                       <div className="text-white">
-                        <p className="font-semibold leading-tight">
-                          {u.college_name}
-                        </p>
+                        <p className="font-semibold leading-tight">{u.college_name}</p>
                         <p className="text-xs opacity-90 leading-tight">Online</p>
                       </div>
                     </div>
@@ -116,9 +109,7 @@ export default function UniversitiesSection() {
 
                 <CardFooter className="p-4">
                   <Button size="sm" className="w-full" asChild>
-                    <Link href={`/universities/${u.college_link}`}>
-                      Explore The Courses →
-                    </Link>
+                    <Link href={`/universities/${u.college_link}`}>Explore The Courses →</Link>
                   </Button>
                 </CardFooter>
               </Card>

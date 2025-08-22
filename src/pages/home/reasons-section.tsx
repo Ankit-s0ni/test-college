@@ -4,13 +4,17 @@ import React from 'react';
 import Image from 'next/image';
 import { Check } from 'lucide-react';
 
-import ReasonImg1 from '../../../public/assets/icons/reason-1.svg'
-import ReasonImg2 from '../../../public/assets/icons/reason-2.svg'
+import ReasonImg1 from '../../../public/assets/icons/reason-1.svg';
+import ReasonImg2 from '../../../public/assets/icons/reason-2.svg';
 
 const REASONS: React.ReactNode[] = [
   <>50+ Universities at one platform</>,
-  <>Fast check admission <strong>eligibility</strong> criteria</>,
-  <>Choose your <strong>favourite</strong> university</>,
+  <>
+    Fast check admission <strong>eligibility</strong> criteria
+  </>,
+  <>
+    Choose your <strong>favourite</strong> university
+  </>,
   <>24×7 customer support</>,
 ];
 
@@ -24,9 +28,9 @@ export default function ReasonsSection() {
             <div>
               <h2 className="text-3xl font-bold mb-4">Reason To Choose Us</h2>
               <p className="text-muted-foreground max-w-[46ch]">
-                At Lorem, we provide exceptional technology solutions and services. We leverage our large
-                base to deliver solutions that meet customers, business and budget expectations. We firmly
-                deliver customized solutions for needs.
+                At Lorem, we provide exceptional technology solutions and services. We leverage our
+                large base to deliver solutions that meet customers, business and budget
+                expectations. We firmly deliver customized solutions for needs.
               </p>
             </div>
 

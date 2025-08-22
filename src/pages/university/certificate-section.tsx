@@ -1,7 +1,7 @@
-import { Certificate } from '@/app/universities/[slug]/page'
+import { Certificate } from '@/app/universities/[slug]/page';
 import Image from 'next/image';
-import React from 'react'
-import NaacImg from "../../../public/assets/images/naac.jpg"
+import React from 'react';
+import NaacImg from '../../../public/assets/images/naac.jpg';
 
 const CertificateSection = ({ data }: { data: Certificate }) => {
   return (
@@ -23,6 +23,6 @@ const CertificateSection = ({ data }: { data: Certificate }) => {
       </div>
     </section>
   );
-}
+};
 
-export default CertificateSection
+export default CertificateSection;

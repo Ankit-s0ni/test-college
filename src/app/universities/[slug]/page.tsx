@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
 
@@ -15,14 +16,8 @@ import {
   AccordionContent,
 } from '@/components/ui/accordion';
 
-
 // lucide
-import {
-  FileDown,
-  Plus,
-  GraduationCap,
-  Check,
-} from 'lucide-react';
+import { FileDown, Plus, GraduationCap, Check } from 'lucide-react';
 import ContactsSection from '@/pages/home/contact-section';
 import FooterSection from '@/pages/home/footer-section';
 import { UNIVERSITIES } from '@/pages/home/universities-section';
@@ -39,6 +34,7 @@ import CampusSection from '@/pages/university/campus-section';
 import AdvantagesSection from '@/pages/university/advantages-section';
 import SimilarUniversities from '@/pages/university/similar-universities';
 import ReviewsSection from '@/pages/university/reviews-section';
+import Stars from '@/components/custom/stars';
 
 // your existing sections
 // import ContactsSection from '@/components/ContactsSection';
@@ -99,7 +95,7 @@ export type FinancialAid = {
   }>;
   emiAvailable: boolean;
   loans: Array<{
-    program:string;
+    program: string;
     options?: any;
     title: string;
     total: string;
@@ -238,7 +234,7 @@ const BASE_GALLERY = [
   'https://images.unsplash.com/photo-1523580846011-d3a5bc25702b?q=80&w=1200&auto=format&fit=crop',
 ];
 
-const makePageData = (u: typeof UNIVERSITIES[number], seed = 0): UniversityPageData => ({
+const makePageData = (u: (typeof UNIVERSITIES)[number], seed = 0): UniversityPageData => ({
   name: `${u.college_name} (Online)`,
   details: 'UGC-Approved • NAAC A+ • 100% Online Programs',
   location: ['Noida, UP', 'Pune, MH', 'Phagwara, PB', 'Greater Noida, UP'][seed] || 'India',
@@ -252,8 +248,7 @@ const makePageData = (u: typeof UNIVERSITIES[number], seed = 0): UniversityPageD
 
   about: {
     title: `About ${u.college_name} Online University`,
-    description:
-      `${u.college_name} offers flexible online degrees designed for working professionals and fresh graduates. Learn from top faculty with a mix of live sessions and recorded lectures, plus career services.`,
+    description: `${u.college_name} offers flexible online degrees designed for working professionals and fresh graduates. Learn from top faculty with a mix of live sessions and recorded lectures, plus career services.`,
     courses: [
       { name: 'BBA (Online)', perSem: '₹35,000', total: '₹2,10,000', online: true },
       { name: 'MBA (Online)', perSem: '₹45,000', total: '₹1,80,000', online: true },
@@ -294,74 +289,170 @@ const makePageData = (u: typeof UNIVERSITIES[number], seed = 0): UniversityPageD
   },
 
   financialAid: {
-  title: 'Financial Aid & Scholarships',
-  description:
-    'Merit, need-based and defense scholarships are available. Easy EMIs help you manage fees.',
-  tableData: [
-    { category: 'Merit-based', scholarshipCredit: 'Up to 30%', eligibilityDocument: '10+2 / Grad marksheet' },
-    { category: 'Need-based', scholarshipCredit: 'Up to 20%', eligibilityDocument: 'Income certificate' },
-    { category: 'Defense/Ex-servicemen', scholarshipCredit: '15%', eligibilityDocument: 'Service ID / Discharge book' },
-  ],
-  emiAvailable: true,
-  loans: [
-    {
-      program: 'Online MBA',
-      options: [
-        { mode: 'Semester Wise', total: '₹43,750/-', loanAmount: '₹43,750/-', interest: '₹175,000/-', tenure: 'N/A', emi: 'N/A' },
-        { mode: 'Annually', total: '₹43,750/-', loanAmount: '₹43,750/-', interest: '₹175,000/-', tenure: 'N/A', emi: '7292' },
-        { mode: 'One Time', total: '₹43,750/-', loanAmount: '₹43,750/-', interest: '₹175,000/-', tenure: 'N/A', emi: '7292' }
-      ],
-      title: '',
-      total: '',
-      loanAmount: '',
-      interest: '',
-      tenure: '',
-      emi: ''
-    },
-    {
-      program: 'Online MCA',
-      options: [
-        { mode: 'Semester Wise', total: '₹43,750/-', loanAmount: '₹43,750/-', interest: '₹175,000/-', tenure: 'N/A', emi: 'N/A' },
-        { mode: 'Annually', total: '₹43,750/-', loanAmount: '₹43,750/-', interest: '₹175,000/-', tenure: 'N/A', emi: '7292' },
-        { mode: 'One Time', total: '₹43,750/-', loanAmount: '₹43,750/-', interest: '₹175,000/-', tenure: 'N/A', emi: '7292' }
-      ],
-      title: '',
-      total: '',
-      loanAmount: '',
-      interest: '',
-      tenure: '',
-      emi: ''
-    },
-    {
-      program: 'Online BBA',
-      options: [
-        { mode: 'Semester Wise', total: '₹43,750/-', loanAmount: '₹43,750/-', interest: '₹175,000/-', tenure: 'N/A', emi: 'N/A' },
-        { mode: 'Annually', total: '₹43,750/-', loanAmount: '₹43,750/-', interest: '₹175,000/-', tenure: 'N/A', emi: '7292' },
-        { mode: 'One Time', total: '₹43,750/-', loanAmount: '₹43,750/-', interest: '₹175,000/-', tenure: 'N/A', emi: '7292' }
-      ],
-      title: '',
-      total: '',
-      loanAmount: '',
-      interest: '',
-      tenure: '',
-      emi: ''
-    },
-    {
-      program: 'Online BCA',
-      options: [
-        { mode: 'Semester Wise', total: '₹43,750/-', loanAmount: '₹43,750/-', interest: '₹175,000/-', tenure: 'N/A', emi: 'N/A' },
-        { mode: 'Annually', total: '₹43,750/-', loanAmount: '₹43,750/-', interest: '₹175,000/-', tenure: 'N/A', emi: '7292' },
-        { mode: 'One Time', total: '₹43,750/-', loanAmount: '₹43,750/-', interest: '₹175,000/-', tenure: 'N/A', emi: '7292' }
-      ],
-      title: '',
-      total: '',
-      loanAmount: '',
-      interest: '',
-      tenure: '',
-      emi: ''
-    }
-  ]
-},
+    title: 'Financial Aid & Scholarships',
+    description:
+      'Merit, need-based and defense scholarships are available. Easy EMIs help you manage fees.',
+    tableData: [
+      {
+        category: 'Merit-based',
+        scholarshipCredit: 'Up to 30%',
+        eligibilityDocument: '10+2 / Grad marksheet',
+      },
+      {
+        category: 'Need-based',
+        scholarshipCredit: 'Up to 20%',
+        eligibilityDocument: 'Income certificate',
+      },
+      {
+        category: 'Defense/Ex-servicemen',
+        scholarshipCredit: '15%',
+        eligibilityDocument: 'Service ID / Discharge book',
+      },
+    ],
+    emiAvailable: true,
+    loans: [
+      {
+        program: 'Online MBA',
+        options: [
+          {
+            mode: 'Semester Wise',
+            total: '₹43,750/-',
+            loanAmount: '₹43,750/-',
+            interest: '₹175,000/-',
+            tenure: 'N/A',
+            emi: 'N/A',
+          },
+          {
+            mode: 'Annually',
+            total: '₹43,750/-',
+            loanAmount: '₹43,750/-',
+            interest: '₹175,000/-',
+            tenure: 'N/A',
+            emi: '7292',
+          },
+          {
+            mode: 'One Time',
+            total: '₹43,750/-',
+            loanAmount: '₹43,750/-',
+            interest: '₹175,000/-',
+            tenure: 'N/A',
+            emi: '7292',
+          },
+        ],
+        title: '',
+        total: '',
+        loanAmount: '',
+        interest: '',
+        tenure: '',
+        emi: '',
+      },
+      {
+        program: 'Online MCA',
+        options: [
+          {
+            mode: 'Semester Wise',
+            total: '₹43,750/-',
+            loanAmount: '₹43,750/-',
+            interest: '₹175,000/-',
+            tenure: 'N/A',
+            emi: 'N/A',
+          },
+          {
+            mode: 'Annually',
+            total: '₹43,750/-',
+            loanAmount: '₹43,750/-',
+            interest: '₹175,000/-',
+            tenure: 'N/A',
+            emi: '7292',
+          },
+          {
+            mode: 'One Time',
+            total: '₹43,750/-',
+            loanAmount: '₹43,750/-',
+            interest: '₹175,000/-',
+            tenure: 'N/A',
+            emi: '7292',
+          },
+        ],
+        title: '',
+        total: '',
+        loanAmount: '',
+        interest: '',
+        tenure: '',
+        emi: '',
+      },
+      {
+        program: 'Online BBA',
+        options: [
+          {
+            mode: 'Semester Wise',
+            total: '₹43,750/-',
+            loanAmount: '₹43,750/-',
+            interest: '₹175,000/-',
+            tenure: 'N/A',
+            emi: 'N/A',
+          },
+          {
+            mode: 'Annually',
+            total: '₹43,750/-',
+            loanAmount: '₹43,750/-',
+            interest: '₹175,000/-',
+            tenure: 'N/A',
+            emi: '7292',
+          },
+          {
+            mode: 'One Time',
+            total: '₹43,750/-',
+            loanAmount: '₹43,750/-',
+            interest: '₹175,000/-',
+            tenure: 'N/A',
+            emi: '7292',
+          },
+        ],
+        title: '',
+        total: '',
+        loanAmount: '',
+        interest: '',
+        tenure: '',
+        emi: '',
+      },
+      {
+        program: 'Online BCA',
+        options: [
+          {
+            mode: 'Semester Wise',
+            total: '₹43,750/-',
+            loanAmount: '₹43,750/-',
+            interest: '₹175,000/-',
+            tenure: 'N/A',
+            emi: 'N/A',
+          },
+          {
+            mode: 'Annually',
+            total: '₹43,750/-',
+            loanAmount: '₹43,750/-',
+            interest: '₹175,000/-',
+            tenure: 'N/A',
+            emi: '7292',
+          },
+          {
+            mode: 'One Time',
+            total: '₹43,750/-',
+            loanAmount: '₹43,750/-',
+            interest: '₹175,000/-',
+            tenure: 'N/A',
+            emi: '7292',
+          },
+        ],
+        title: '',
+        total: '',
+        loanAmount: '',
+        interest: '',
+        tenure: '',
+        emi: '',
+      },
+    ],
+  },
 
   admission: {
     title: 'Admission Process',
@@ -387,73 +478,82 @@ const makePageData = (u: typeof UNIVERSITIES[number], seed = 0): UniversityPageD
   },
 
   campus: {
-  title: 'Manipal Online University Campuses',
-  groups: [
-    {
-      label: 'All Over India',
-      color: '#FFF4BF',
-      locations: ['Mangaluru', 'Jaipur', 'Sikkim']
-    },
-    {
-      label: 'International Campus',
-      color: '#FEE1EE',
-      locations: ['Dubai', 'Malaysia', 'Dubai']
-    }
-  ]
-},
+    title: 'Manipal Online University Campuses',
+    groups: [
+      {
+        label: 'All Over India',
+        color: '#FFF4BF',
+        locations: ['Mangaluru', 'Jaipur', 'Sikkim'],
+      },
+      {
+        label: 'International Campus',
+        color: '#FEE1EE',
+        locations: ['Dubai', 'Malaysia', 'Dubai'],
+      },
+    ],
+  },
 
   advantages: {
-  title: 'Manipal Online University Advantages',
-  description:
-    'The Manipal Online University has gained popularity in the educational world as it provides many opportunities for growth with the degree. These benefits or opportunities are briefly explained as follows:',
-  tableData: [
-    {
-      benefit: 'Globally Accepted',
-      description:
-        'Manipal online degrees are globally recognized and accepted, because of which the students and the learners get multiple opportunities for their career growth in India as well as abroad. Manipal University online accreditation makes the university trust worthy and popular.'
-    },
-    {
-      benefit: 'Flexibility & Self-Paced Learning',
-      description:
-        'The Manipal online degrees are completely online. This flexibility provides the opportunity to study at their convenience without disturbing any of their professional or personal commitments.'
-    },
-    {
-      benefit: 'Industry-Driven Curriculum',
-      description:
-        'The Manipal online degrees have been designed based on industry expectations which include real-life case studies and live projects, helping the students get experiential learning and become more skilled.'
-    },
-    {
-      benefit: 'Advanced Learning Resources',
-      description:
-        'Manipal online education is supported by an advanced AI-enabled digital learning system that creates an interactive and engaging learning environment. The Manipal university online classes recorded live lectures, quizzes, assignments, discussion forums and projects, making the learning even more enjoyable.'
-    },
-    {
-      benefit: 'Learn from Experts and Industry Mentors',
-      description:
-        'With Manipal university online registration, the students benefit from highly qualified faculty members who are or have been in the industry, which gives them perspectives on real-world business and technical challenges. Hence, they develop practical skills and knowledge related to their specific needs.'
-    },
-    {
-      benefit: 'Affordable Education',
-      description:
-        'Manipal Online University has an affordable fee structure compared to the campus degree programs, with EMI options and scholarships available. This makes quality education accessible to all.'
-    },
-    {
-      benefit: 'Career & Placement Assistance',
-      description:
-        'To ensure that students can find job opportunities, the university provides career counseling, resume-building workshop sessions, LinkedIn profile optimization, and mock interviews. Also, the placement drives with the top companies allow the students to start their careers.'
-    },
-    {
-      benefit: 'Networking Opportunities',
-      description:
-        'Students get an opportunity to interact with a vast alumni network, industry professionals, and peers for career advancements and collaborative work experiences.'
-    }
-  ]
-},
+    title: 'Manipal Online University Advantages',
+    description:
+      'The Manipal Online University has gained popularity in the educational world as it provides many opportunities for growth with the degree. These benefits or opportunities are briefly explained as follows:',
+    tableData: [
+      {
+        benefit: 'Globally Accepted',
+        description:
+          'Manipal online degrees are globally recognized and accepted, because of which the students and the learners get multiple opportunities for their career growth in India as well as abroad. Manipal University online accreditation makes the university trust worthy and popular.',
+      },
+      {
+        benefit: 'Flexibility & Self-Paced Learning',
+        description:
+          'The Manipal online degrees are completely online. This flexibility provides the opportunity to study at their convenience without disturbing any of their professional or personal commitments.',
+      },
+      {
+        benefit: 'Industry-Driven Curriculum',
+        description:
+          'The Manipal online degrees have been designed based on industry expectations which include real-life case studies and live projects, helping the students get experiential learning and become more skilled.',
+      },
+      {
+        benefit: 'Advanced Learning Resources',
+        description:
+          'Manipal online education is supported by an advanced AI-enabled digital learning system that creates an interactive and engaging learning environment. The Manipal university online classes recorded live lectures, quizzes, assignments, discussion forums and projects, making the learning even more enjoyable.',
+      },
+      {
+        benefit: 'Learn from Experts and Industry Mentors',
+        description:
+          'With Manipal university online registration, the students benefit from highly qualified faculty members who are or have been in the industry, which gives them perspectives on real-world business and technical challenges. Hence, they develop practical skills and knowledge related to their specific needs.',
+      },
+      {
+        benefit: 'Affordable Education',
+        description:
+          'Manipal Online University has an affordable fee structure compared to the campus degree programs, with EMI options and scholarships available. This makes quality education accessible to all.',
+      },
+      {
+        benefit: 'Career & Placement Assistance',
+        description:
+          'To ensure that students can find job opportunities, the university provides career counseling, resume-building workshop sessions, LinkedIn profile optimization, and mock interviews. Also, the placement drives with the top companies allow the students to start their careers.',
+      },
+      {
+        benefit: 'Networking Opportunities',
+        description:
+          'Students get an opportunity to interact with a vast alumni network, industry professionals, and peers for career advancements and collaborative work experiences.',
+      },
+    ],
+  },
 
   faq: [
-    { question: 'Is the online degree recognized?', answer: 'Yes, UGC-entitled; valid for jobs and higher studies.' },
-    { question: 'Do you provide placement help?', answer: 'Yes—resume prep, mock interviews, and exclusive job fairs.' },
-    { question: 'Are classes live or recorded?', answer: 'Both. Live weekend classes with recordings for self-paced study.' },
+    {
+      question: 'Is the online degree recognized?',
+      answer: 'Yes, UGC-entitled; valid for jobs and higher studies.',
+    },
+    {
+      question: 'Do you provide placement help?',
+      answer: 'Yes—resume prep, mock interviews, and exclusive job fairs.',
+    },
+    {
+      question: 'Are classes live or recorded?',
+      answer: 'Both. Live weekend classes with recordings for self-paced study.',
+    },
   ],
 
   section13: {
@@ -496,16 +596,14 @@ const makePageData = (u: typeof UNIVERSITIES[number], seed = 0): UniversityPageD
         image: 'https://i.pravatar.cc/80?img=12',
         name: 'Kriti Sharma',
         date: 'May 07, 2025',
-        description:
-          'Great mentors and flexible schedule. LMS is smooth and support is quick.',
+        description: 'Great mentors and flexible schedule. LMS is smooth and support is quick.',
         rating: 5,
       },
       {
         image: 'https://i.pravatar.cc/80?img=22',
         name: 'Arjun Mehta',
         date: 'Apr 19, 2025',
-        description:
-          'Curriculum is relevant and the projects helped me switch roles.',
+        description: 'Curriculum is relevant and the projects helped me switch roles.',
         rating: 4,
       },
     ],
@@ -513,7 +611,7 @@ const makePageData = (u: typeof UNIVERSITIES[number], seed = 0): UniversityPageD
 });
 
 const PAGE_DB: Record<string, UniversityPageData> = Object.fromEntries(
-  UNIVERSITIES.map((u, idx) => [u.college_link, makePageData(u, idx)])
+  UNIVERSITIES.map((u, idx) => [u.college_link, makePageData(u, idx)]),
 );
 
 /* -------------------------------------------------------------------------- */
@@ -528,35 +626,6 @@ const SectionHeader = ({ title, subtitle }: { title: string; subtitle?: string }
 );
 
 /* -------------------------------- 1. HERO --------------------------------- */
-
-function Stars({ value }: { value: number }) {
-  // simple whole/half star renderer (round to nearest .5)
-  const v = Math.max(0, Math.min(5, Math.round(value * 2) / 2));
-  return (
-    <div className="flex items-center gap-0.5 text-yellow-500">
-      {Array.from({ length: 5 }).map((_, i) => {
-        const full = v >= i + 1;
-        const half = !full && v >= i + 0.5;
-        return (
-          <svg key={i} viewBox="0 0 24 24" className="h-4 w-4">
-            <defs>
-              <linearGradient id={`half-${i}`} x1="0" y1="0" x2="1" y2="0">
-                <stop offset="50%" stopColor="currentColor" />
-                <stop offset="50%" stopColor="transparent" />
-              </linearGradient>
-            </defs>
-            <path
-              d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
-              fill={full ? 'currentColor' : half ? `url(#half-${i})` : 'none'}
-              stroke="currentColor"
-              strokeWidth="1.2"
-            />
-          </svg>
-        );
-      })}
-    </div>
-  );
-}
 
 function Gauge({ value }: { value: number }) {
   const r = 54;
@@ -600,7 +669,9 @@ function Gauge({ value }: { value: number }) {
           <span className="text-3xl font-bold leading-none">{value.toFixed(1)}</span>
           <span className="text-xs text-muted-foreground leading-none pb-1">/ 5</span>
         </div>
-        <div className="mt-1"><Stars value={value} /></div>
+        <div className="mt-1">
+          <Stars value={value} />
+        </div>
       </div>
     </div>
   );
@@ -629,7 +700,8 @@ function HeroSection({ data }: { data: UniversityPageData }) {
               </li>
               <li className="flex gap-3 text-[15px] text-muted-foreground">
                 <Check className="h-5 w-5 text-emerald-600 shrink-0 mt-0.5" />
-                Focuses on interdisciplinary research engagement with the wider dynamic research community.
+                Focuses on interdisciplinary research engagement with the wider dynamic research
+                community.
               </li>
             </ul>
 
@@ -642,15 +714,20 @@ function HeroSection({ data }: { data: UniversityPageData }) {
                 </Link>
               </Button>
 
-              <Button asChild variant="outline" className="border-green-600 text-green-700 hover:bg-green-50 w-[200px]">
-                <Link href={data.scheduleLink}>
-                  Schedule 1:1 Call
-                </Link>
+              <Button
+                asChild
+                variant="outline"
+                className="border-green-600 text-green-700 hover:bg-green-50 w-[200px]"
+              >
+                <Link href={data.scheduleLink}>Schedule 1:1 Call</Link>
               </Button>
             </div>
 
             {/* big CTA */}
-            <Button asChild className="mt-4 w-full sm:w-[420px] bg-[#0247D2] hover:bg-blue-700 h-11 text-[15px]">
+            <Button
+              asChild
+              className="mt-4 w-full sm:w-[420px] bg-[#0247D2] hover:bg-blue-700 h-11 text-[15px]"
+            >
               <Link href={data.applyLink}>
                 <GraduationCap className="mr-2 h-4 w-4" />
                 Apply Now
@@ -717,7 +794,7 @@ function HeroSection({ data }: { data: UniversityPageData }) {
 
 function FaqSection({ data }: { data: Faq }) {
   return (
-    <section id="faq">
+    <section id="faq" className="bg-[#F7EEFD] px-5 py-8">
       <SectionHeader title="FAQs" subtitle="List of questions that are generally asked!" />
       <Accordion type="single" collapsible className="space-y-3">
         {data.map((f, i) => (
@@ -803,10 +880,9 @@ function FaqSection({ data }: { data: Faq }) {
 /*                                   PAGE                                      */
 /* -------------------------------------------------------------------------- */
 
-export default function UniversitySlugPage({params}: any) {
+export default function UniversitySlugPage({ params }: any) {
   const slug = params.slug;
   const pageData = PAGE_DB[slug];
-  
 
   if (!pageData) {
     return (
@@ -823,7 +899,7 @@ export default function UniversitySlugPage({params}: any) {
   }
 
   return (
-    <>
+    <div className="bg-[#F7EEFD66]">
       <HeroSection data={pageData} />
 
       <section className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
@@ -853,12 +929,12 @@ export default function UniversitySlugPage({params}: any) {
             <ReviewsSection data={pageData.reviews} />
 
             <div id="contact" />
-            <ContactsSection />
           </main>
         </div>
+        <ContactsSection />
       </section>
 
       <FooterSection />
-    </>
+    </div>
   );
 }

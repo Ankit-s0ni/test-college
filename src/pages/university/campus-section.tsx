@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Campus } from '@/app/universities/[slug]/page';
-import React from 'react'
+import React from 'react';
 
 const CampusSection = ({ data }: { data: Campus }) => {
   return (
@@ -25,6 +25,6 @@ const CampusSection = ({ data }: { data: Campus }) => {
       </div>
     </section>
   );
-}
+};
 
-export default CampusSection
+export default CampusSection;

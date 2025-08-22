@@ -3,13 +3,12 @@ import { Button } from '@/components/ui/button';
 import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area';
 import Image from 'next/image';
 import Link from 'next/link';
-import React from 'react'
-import ManipalLogoImg from "../../../public/assets/images/manipal-logo.jpg"
+import React from 'react';
+import ManipalLogoImg from '../../../public/assets/images/manipal-logo.jpg';
 import { Download } from 'lucide-react';
 
-
 const CoursesSection = ({ items }: { items: CoursesHero[] }) => {
-   return (
+  return (
     <section id="courses" className="space-y-4 bg-transparent p-6 rounded-lg">
       <h2 className="text-xl font-semibold">Courses</h2>
 
@@ -21,12 +20,7 @@ const CoursesSection = ({ items }: { items: CoursesHero[] }) => {
               className="w-[300px] sm:w-[360px] flex-shrink-0 overflow-hidden bg-white shadow-sm"
             >
               <div className="relative h-40">
-                <Image
-                  src={c.image}
-                  alt="course"
-                  fill
-                  className="object-cover"
-                />
+                <Image src={c.image} alt="course" fill className="object-cover" />
                 {/* University logo overlay */}
                 <div className="absolute top-2 left-2 bg-white/80 px-2 py-1">
                   <Image
@@ -45,16 +39,14 @@ const CoursesSection = ({ items }: { items: CoursesHero[] }) => {
                   <span className="text-sm font-medium">4/5 ⭐</span>
                 </div>
 
-                <p className="text-xs text-muted-foreground">
-                  AICTE, NAAC, NBA, QS, UGC
-                </p>
+                <p className="text-xs text-muted-foreground">AICTE, NAAC, NBA, QS, UGC</p>
 
                 <Link
-                    href={c.prospectusLink}
-                    className="mt-2 inline-flex items-center gap-1 rounded-none bg-[#E8F8EF] text-[#17733B] text-xs px-3 py-1"
+                  href={c.prospectusLink}
+                  className="mt-2 inline-flex items-center gap-1 rounded-none bg-[#E8F8EF] text-[#17733B] text-xs px-3 py-1"
                 >
-                    <Download className="h-3 w-3" />
-                    Download Prospectus
+                  <Download className="h-3 w-3" />
+                  Download Prospectus
                 </Link>
               </div>
 
@@ -72,6 +64,6 @@ const CoursesSection = ({ items }: { items: CoursesHero[] }) => {
       </ScrollArea>
     </section>
   );
-}
+};
 
-export default CoursesSection
+export default CoursesSection;

@@ -1,5 +1,5 @@
 import { Advantages } from '@/app/universities/[slug]/page';
-import React from 'react'
+import React from 'react';
 
 const AdvantagesSection = ({ data }: { data: Advantages }) => {
   return (
@@ -27,6 +27,6 @@ const AdvantagesSection = ({ data }: { data: Advantages }) => {
       </div>
     </section>
   );
-}
+};
 
-export default AdvantagesSection
+export default AdvantagesSection;

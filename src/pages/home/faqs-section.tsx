@@ -8,7 +8,6 @@ import {
   AccordionContent,
 } from '@/components/ui/accordion';
 
-
 const FAQS = [
   {
     q: 'What is Lorem ipsum?',
@@ -43,12 +42,7 @@ export default function FaqsSection() {
           </p>
         </header>
 
-        <Accordion
-          type="single"
-          collapsible
-          defaultValue="item-1"
-          className="space-y-4"
-        >
+        <Accordion type="single" collapsible defaultValue="item-1" className="space-y-4">
           {FAQS.map((item, idx) => {
             const id = `item-${idx + 1}`;
             return (
@@ -58,14 +52,10 @@ export default function FaqsSection() {
                 className="rounded-xl border border-border bg-card shadow-sm data-[state=open]:shadow-md overflow-hidden"
               >
                 <AccordionTrigger className="px-5 sm:px-6 py-4 text-left hover:no-underline">
-                  <span className="text-[15px] sm:text-base font-medium">
-                    {item.q}
-                  </span>
+                  <span className="text-[15px] sm:text-base font-medium">{item.q}</span>
                 </AccordionTrigger>
                 <AccordionContent className="px-5 sm:px-6 pb-5">
-                  <p className="text-sm text-muted-foreground leading-relaxed">
-                    {item.a}
-                  </p>
+                  <p className="text-sm text-muted-foreground leading-relaxed">{item.a}</p>
                 </AccordionContent>
               </AccordionItem>
             );

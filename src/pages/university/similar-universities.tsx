@@ -1,14 +1,13 @@
-import { Section13 } from '@/app/universities/[slug]/page'
+import { Section13 } from '@/app/universities/[slug]/page';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft, Download, ArrowRight } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
-import React from 'react'
-import ManipalLogoImg from "../../../public/assets/images/manipal-logo.jpg"
-
+import React from 'react';
+import ManipalLogoImg from '../../../public/assets/images/manipal-logo.jpg';
 
 const SimilarUniversities = ({ data }: { data: Section13 }) => {
-    const scrollRef = React.useRef<HTMLDivElement>(null);
+  const scrollRef = React.useRef<HTMLDivElement>(null);
 
   const scroll = (offset: number) => {
     if (scrollRef.current) {
@@ -29,17 +28,11 @@ const SimilarUniversities = ({ data }: { data: Section13 }) => {
           <ArrowLeft className="h-4 w-4" />
         </button>
 
-        <div
-          ref={scrollRef}
-          className="flex gap-4 overflow-x-auto scroll-smooth pb-2"
-        >
+        <div ref={scrollRef} className="flex gap-4 overflow-x-auto scroll-smooth pb-2">
           {data.data.map((it, i) => (
-            <div
-              key={i}
-              className="w-[300px] flex-shrink-0 overflow-hidden bg-white shadow-sm"
-            >
+            <div key={i} className="w-[300px] flex-shrink-0 overflow-hidden bg-white shadow-sm">
               <div className="relative h-40">
-                <Image src={it.image} alt={it.name} fill className="object-cover"  />
+                <Image src={it.image} alt={it.name} fill className="object-cover" />
                 <div className="absolute top-2 left-2 bg-white/80 px-2 py-1 rounded-md">
                   <Image
                     src={ManipalLogoImg}
@@ -54,9 +47,7 @@ const SimilarUniversities = ({ data }: { data: Section13 }) => {
               <div className="p-4 space-y-1">
                 <div className="flex items-center justify-between">
                   <p className="font-semibold text-sm">{it.name}</p>
-                  <span className="text-sm font-medium">
-                    {it.rating}/5 ⭐
-                  </span>
+                  <span className="text-sm font-medium">{it.rating}/5 ⭐</span>
                 </div>
                 <p className="text-xs text-muted-foreground">{it.affiliation}</p>
 
@@ -90,6 +81,6 @@ const SimilarUniversities = ({ data }: { data: Section13 }) => {
       </div>
     </section>
   );
-}
+};
 
-export default SimilarUniversities
+export default SimilarUniversities;

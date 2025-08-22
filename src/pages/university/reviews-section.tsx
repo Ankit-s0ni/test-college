@@ -1,6 +1,6 @@
 import { Reviews } from '@/app/universities/[slug]/page';
 import { Star } from 'lucide-react';
-import React from 'react'
+import React from 'react';
 
 const ScoreBar = ({ label, score }: { label: string; score: number }) => (
   <div className="flex items-center justify-between text-sm mb-1">
@@ -8,7 +8,7 @@ const ScoreBar = ({ label, score }: { label: string; score: number }) => (
     <div className="flex items-center">
       {Array.from({ length: Math.floor(score) }).map((_, i) => (
         <Star key={i} className="h-4 w-4 fill-current text-yellow-500" />
-        ))}
+      ))}
     </div>
   </div>
 );
@@ -80,11 +80,7 @@ const ReviewsSection = ({ data }: { data: Reviews }) => {
             className="min-w-[260px] bg-white rounded-lg border p-4 space-y-2 flex-shrink-0"
           >
             <div className="flex gap-3 items-center">
-              <img
-                src={r.image}
-                alt={r.name}
-                className="h-9 w-9 rounded-full object-cover"
-              />
+              <img src={r.image} alt={r.name} className="h-9 w-9 rounded-full object-cover" />
               <div className="flex-1">
                 <p className="text-sm font-medium">{r.name}</p>
                 <p className="text-xs text-muted-foreground">{r.date}</p>
@@ -101,6 +97,6 @@ const ReviewsSection = ({ data }: { data: Reviews }) => {
       </div>
     </section>
   );
-}
+};
 
-export default ReviewsSection
+export default ReviewsSection;

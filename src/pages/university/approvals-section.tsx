@@ -1,15 +1,11 @@
-import { Approvals } from '@/app/universities/[slug]/page'
-import React from 'react'
-import NaacImg from "../../../public/assets/images/naac.jpg"
-import Image from 'next/image'
-
+import { Approvals } from '@/app/universities/[slug]/page';
+import React from 'react';
+import NaacImg from '../../../public/assets/images/naac.jpg';
+import Image from 'next/image';
 
 const ApprovalsSection = ({ data }: { data: Approvals }) => {
   return (
-    <section
-      id="approvals"
-      className="space-y-4 rounded-lg bg-[#F9F9FF]"
-    >
+    <section id="approvals" className="space-y-4 rounded-lg bg-[#F9F9FF]">
       <h2 className="text-xl font-semibold">{data.title}</h2>
       <p className="text-sm">{data.description}</p>
 
@@ -27,14 +23,12 @@ const ApprovalsSection = ({ data }: { data: Approvals }) => {
               width={200}
               height={100}
             />
-            <div className="w-full text-center bg-[#1E4BFF] text-white text-xs py-1">
-              NAAC
-            </div>
+            <div className="w-full text-center bg-[#1E4BFF] text-white text-xs py-1">NAAC</div>
           </div>
         ))}
       </div>
     </section>
   );
-}
+};
 
-export default ApprovalsSection
+export default ApprovalsSection;
