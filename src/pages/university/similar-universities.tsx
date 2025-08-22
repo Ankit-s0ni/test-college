@@ -54,8 +54,8 @@ const SimilarUniversities = ({ data }: { data: Section13 }) => {
 
   return (
     <section id="similar-universities" className="space-y-4 p-4 sm:p-6">
-      <h2 className="text-lg sm:text-xl font-semibold">{data.title}</h2>
-      <p className="text-sm text-muted-foreground">{data.description}</p>
+      <h2 className="text-lg sm:text-xl font-semibold">{data?.title}</h2>
+      <p className="text-sm text-muted-foreground">{data?.description}</p>
 
       <div className="relative">
         {/* edge fades */}

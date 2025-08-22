@@ -1,127 +1,3 @@
-// import { ArticleBlock } from '@/app/blog/blog-articles'
-// import { Card, CardContent } from '@/components/ui/card';
-// import Image from 'next/image';
-// import React from 'react'
-
-// const ArticleRenderer = ({ blocks }: { blocks: ArticleBlock[] }) => {
-//    return (
-//     <article className="prose prose-neutral dark:prose-invert max-w-none prose-p:leading-7 prose-img:rounded-xl prose-li:marker:text-muted-foreground">
-//       {blocks.map((b, i) => {
-//         switch (b.type) {
-//           case "h2":
-//             return (
-//               <h2 key={i} className="scroll-mt-24">
-//                 {b.text}
-//               </h2>
-//             );
-//           case "h3":
-//             return (
-//               <h3 key={i} className="scroll-mt-24">
-//                 {b.text}
-//               </h3>
-//             );
-//           case "p":
-//             return <p key={i}>{b.text}</p>;
-//           case "ul":
-//             return (
-//               <ul key={i}>
-//                 {b.items.map((it, idx) => (
-//                   <li key={idx}>{it}</li>
-//                 ))}
-//               </ul>
-//             );
-//           case "image":
-//             return (
-//               <figure key={i} className="not-prose my-6">
-//                 {/* Using a remote Unsplash-style URL so you don’t need local assets */}
-//                 <div className="relative aspect-[16/9] w-full overflow-hidden rounded-xl bg-muted">
-//                   <Image src={b.src} alt={b.alt ?? ""} fill className="object-cover" />
-//                 </div>
-//                 {b.caption && (
-//                   <figcaption className="mt-2 text-center text-sm text-muted-foreground">
-//                     {b.caption}
-//                   </figcaption>
-//                 )}
-//               </figure>
-//             );
-//           case "callout":
-//             return (
-//               <Card key={i} className="my-6 border-amber-300/50 bg-amber-50 dark:bg-amber-950/20">
-//                 <CardContent className="p-4">
-//                   <div className="text-sm leading-6">{b.text}</div>
-//                 </CardContent>
-//               </Card>
-//             );
-//           case "comparison":
-//             return (
-//               <div key={i} className="not-prose my-8">
-//                 <h3 className="mb-4 text-xl font-semibold">{b.title}</h3>
-//                 <div className="relative grid gap-4 rounded-2xl border p-4 sm:grid-cols-2">
-//                   {/* left */}
-//                   <div>
-//                     <div className="mb-2 font-medium">India</div>
-//                     <ul className="space-y-1 text-sm">
-//                       {b.india.map((it, idx) => (
-//                         <li key={idx} className="leading-6">• {it}</li>
-//                       ))}
-//                     </ul>
-//                   </div>
-//                   {/* right */}
-//                   <div>
-//                     <div className="mb-2 font-medium">International</div>
-//                     <ul className="space-y-1 text-sm">
-//                       {b.abroad.map((it, idx) => (
-//                         <li key={idx} className="leading-6">• {it}</li>
-//                       ))}
-//                     </ul>
-//                   </div>
-//                   {/* VS pill */}
-//                   <div className="absolute left-1/2 top-0 -translate-x-1/2 -translate-y-1/2">
-//                     <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary text-xs font-bold text-primary-foreground shadow">
-//                       VS
-//                     </div>
-//                   </div>
-//                 </div>
-//               </div>
-//             );
-//           case "benefits":
-//             return (
-//               <div key={i} className="not-prose my-8">
-//                 <h3 className="mb-4 text-xl font-semibold">Benefits</h3>
-//                 <div className="grid gap-4 sm:grid-cols-2">
-//                   <Card>
-//                     <CardContent className="p-4">
-//                       <div className="mb-2 font-medium">India</div>
-//                       <ul className="space-y-1 text-sm">
-//                         {b.india.map((it, idx) => (
-//                           <li key={idx}>• {it}</li>
-//                         ))}
-//                       </ul>
-//                     </CardContent>
-//                   </Card>
-//                   <Card>
-//                     <CardContent className="p-4">
-//                       <div className="mb-2 font-medium">Abroad</div>
-//                       <ul className="space-y-1 text-sm">
-//                         {b.abroad.map((it, idx) => (
-//                           <li key={idx}>• {it}</li>
-//                         ))}
-//                       </ul>
-//                     </CardContent>
-//                   </Card>
-//                 </div>
-//               </div>
-//             );
-//           default:
-//             return null;
-//         }
-//       })}
-//     </article>
-//   );
-// }
-
-// export default ArticleRenderer
-
 import { Card, CardContent } from '@/components/ui/card';
 import Image from 'next/image';
 import React from 'react';
@@ -138,7 +14,7 @@ const ArticleRenderer = ({ blocks }: { blocks: ArticleBlock[] }) => {
         prose-li:marker:text-muted-foreground
       "
     >
-      {blocks.map((b, i) => {
+      {blocks?.map((b, i) => {
         switch (b.type) {
           case 'h2':
             return (
@@ -164,7 +40,7 @@ const ArticleRenderer = ({ blocks }: { blocks: ArticleBlock[] }) => {
           case 'ul':
             return (
               <ul key={i} className="space-y-1 mb-5">
-                {b.items.map((it, idx) => (
+                {b?.items?.map((it, idx) => (
                   <li key={idx}>{it}</li>
                 ))}
               </ul>
@@ -174,7 +50,7 @@ const ArticleRenderer = ({ blocks }: { blocks: ArticleBlock[] }) => {
           case 'ol':
             return (
               <ol key={i} className="list-decimal pl-5 space-y-1 mb-5">
-                {b.items.map((it, idx) => (
+                {b.items?.map((it, idx) => (
                   <li key={idx} className="text-base font-normal">
                     {it}
                   </li>
@@ -241,14 +117,14 @@ const ArticleRenderer = ({ blocks }: { blocks: ArticleBlock[] }) => {
                 <div className="grid gap-6 sm:grid-cols-2">
                   <div>
                     <ul className="space-y-1 text-sm sm:text-[15px]">
-                      {b.india.map((it, idx) => (
+                      {b?.india?.map((it, idx) => (
                         <li key={idx}>• {it}</li>
                       ))}
                     </ul>
                   </div>
                   <div>
                     <ul className="space-y-1 text-sm sm:text-[15px]">
-                      {b.abroad.map((it, idx) => (
+                      {b?.abroad?.map((it, idx) => (
                         <li key={idx}>• {it}</li>
                       ))}
                     </ul>
@@ -266,7 +142,7 @@ const ArticleRenderer = ({ blocks }: { blocks: ArticleBlock[] }) => {
                     <CardContent className="p-4">
                       <div className="mb-2 font-medium">India</div>
                       <ul className="space-y-1 text-sm sm:text-[15px]">
-                        {b.india.map((it, idx) => (
+                        {b?.india?.map((it, idx) => (
                           <li key={idx}>• {it}</li>
                         ))}
                       </ul>
@@ -276,7 +152,7 @@ const ArticleRenderer = ({ blocks }: { blocks: ArticleBlock[] }) => {
                     <CardContent className="p-4">
                       <div className="mb-2 font-medium">Abroad</div>
                       <ul className="space-y-1 text-sm sm:text-[15px]">
-                        {b.abroad.map((it, idx) => (
+                        {b?.abroad?.map((it, idx) => (
                           <li key={idx}>• {it}</li>
                         ))}
                       </ul>
@@ -293,7 +169,7 @@ const ArticleRenderer = ({ blocks }: { blocks: ArticleBlock[] }) => {
                   {b.title ?? 'Frequently Asked Questions (FAQs)'}
                 </h2>
                 <ol className="list-decimal pl-5 space-y-4">
-                  {b.items.map((it, idx) => (
+                  {b?.items?.map((it, idx) => (
                     <li key={idx}>
                       <p className="font-semibold">{it.q}</p>
                       <p className="mt-1">{it.a}</p>
