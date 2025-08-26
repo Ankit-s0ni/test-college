@@ -1,16 +1,16 @@
-'use client'
+'use client';
 
-import { useState, useEffect } from "react";
-import { Button } from "@/components/ui/button";
-import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
-import { Menu } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { useState, useEffect } from 'react';
+import { Button } from '@/components/ui/button';
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
+import { Menu } from 'lucide-react';
+import { cn } from '@/lib/utils';
 
 const navigationItems = [
-  { name: "Top Universities", href: "#universities" },
-  { name: "About Us", href: "#about" },
-  { name: "Blog", href: "#blog" },
-  { name: "Contact Us", href: "#contact" },
+  { name: 'Top Universities', href: '#universities' },
+  { name: 'About Us', href: '#about' },
+  { name: 'Blog', href: '#blog' },
+  { name: 'Contact Us', href: '#contact' },
 ];
 
 const Navbar = () => {
@@ -26,14 +26,12 @@ const Navbar = () => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-  
+
   return (
-    <nav 
+    <nav
       className={cn(
-        "sticky top-0 z-50 w-full transition-all duration-300 ease-in-out",
-        isScrolled 
-          ? "bg-navbar-bg/95 backdrop-blur-sm supports-[backdrop-filter]:bg-navbar-bg/60 border-b border-navbar-border shadow-navbar" 
-          : "bg-transparent border-b border-transparent"
+        'sticky top-0 z-50 w-full transition-all duration-300 ease-in-out bg-white',
+        isScrolled ? 'border-b border-navbar-border shadow-navbar' : '',
       )}
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -66,9 +64,7 @@ const Navbar = () => {
 
           {/* CTA Button - Desktop */}
           <div className="hidden md:block">
-            <Button className="font-medium">
-              Get In Touch
-            </Button>
+            <Button className="font-medium">Get In Touch</Button>
           </div>
 
           {/* Mobile menu sheet */}
@@ -130,7 +126,7 @@ const Navbar = () => {
         </div>
       </div>
     </nav>
-  )
-}
+  );
+};
 
-export default Navbar
+export default Navbar;
