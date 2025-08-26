@@ -1,6 +1,6 @@
-import type { Metadata } from "next";
-import "./globals.css";
-import Navbar from "@/components/custom/navbar";
+import type { Metadata } from 'next';
+import './globals.css';
+import Navbar from '@/components/custom/navbar';
 
 import { Inter } from 'next/font/google';
 
@@ -10,8 +10,8 @@ const inter = Inter({
   variable: '--font-inter',
 });
 export const metadata: Metadata = {
-  title: "College Cosmos",
-  description: "Explore universities, programs, blogs, and more at College Cosmos",
+  title: 'College Cosmos',
+  description: 'Explore universities, programs, blogs, and more at College Cosmos',
 };
 
 export default function RootLayout({
@@ -21,9 +21,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${inter.variable}`}
-      >
+      <body className={`${inter.variable}`}>
         <Navbar />
         {children}
       </body>
