@@ -5,11 +5,12 @@ import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
 import { Menu } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import Link from 'next/link';
 
 const navigationItems = [
-  { name: 'Top Universities', href: '#universities' },
+  { name: 'Top Universities', href: '/universities' },
   { name: 'About Us', href: '#about' },
-  { name: 'Blog', href: '#blog' },
+  { name: 'Blog', href: '/blog' },
   { name: 'Contact Us', href: '#contact' },
 ];
 
@@ -37,15 +38,14 @@ const Navbar = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           {/* Logo Section */}
-          <div className="flex items-center space-x-3">
+          <Link href="/" className="flex items-center space-x-3">
             <div className="h-8 w-8 rounded-md bg-linear-to-br from-brand-primary to-brand-primary/80 flex items-center justify-center">
               <span className="text-white font-bold text-sm">E</span>
             </div>
             <div className="flex flex-col">
               <span className="text-sm font-semibold text-brand-primary">College Cosmos</span>
-              {/* <span className="text-xs text-nav-link">College Cosmos</span> */}
             </div>
-          </div>
+          </Link>
 
           {/* Desktop Navigation */}
           <div className="hidden md:block">
