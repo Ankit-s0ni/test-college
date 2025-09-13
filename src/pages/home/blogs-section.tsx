@@ -46,6 +46,13 @@ const BlogsSection = () => {
             </div>
           ))}
         </div>
+        <div className="w-full flex justify-center items-center mt-8">
+          <Link href="/blog">
+            <Button variant="outline" className="cursor-pointer">
+              Browse all blogs
+            </Button>
+          </Link>
+        </div>
       </div>
     </div>
   );

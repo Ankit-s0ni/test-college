@@ -117,6 +117,14 @@ export default function UniversitiesSection() {
           </div>
           <ScrollBar orientation="horizontal" />
         </ScrollArea>
+
+        <div className="w-full flex justify-center items-center mt-4">
+          <Link href="/universities">
+            <Button variant="outline" className="cursor-pointer">
+              Browse all universities
+            </Button>
+          </Link>
+        </div>
       </div>
     </section>
   );
