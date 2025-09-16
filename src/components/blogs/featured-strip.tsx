@@ -5,10 +5,14 @@ import Link from 'next/link';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { CalendarDays, Share2, SquareArrowOutUpRight } from 'lucide-react';
-import { BLOG_POSTS } from '@/app/blog/blog-list';
+import { BlogAPI } from '@/types/blog';
 
-export default function FeaturedStrip() {
-  const featured = BLOG_POSTS.find((p) => p.featured);
+interface FeaturedStripProps {
+  blogs?: BlogAPI[];
+}
+
+export default function FeaturedStrip({ blogs = [] }: FeaturedStripProps) {
+  const featured = blogs.find((blog) => blog.featured);
   if (!featured) return null;
 
   const pub = new Date(featured.publishedAt).toLocaleDateString('en-IN', {
@@ -33,10 +37,10 @@ export default function FeaturedStrip() {
                 <div className="mt-2 text-[13px]">
                   by{' '}
                   <Link
-                    href={featured.authorHref || '#'}
+                    href={(featured as any).authorHref || '#'}
                     className="text-[#1d4ed8] font-medium hover:underline underline-offset-4"
                   >
-                    {featured.author}
+                    {(featured as any).author || featured.author?.name || 'College Cosmos Team'}
                   </Link>
                   <span className="text-muted-foreground"> - {pub}</span>
                 </div>
@@ -45,11 +49,11 @@ export default function FeaturedStrip() {
                   {featured.excerpt}
                 </p>
 
-                {featured.badges?.length ? (
+                {(featured as any).badges?.length ? (
                   <div className="mt-6">
                     <div className="text-sm font-semibold">7 Major Changes</div>
                     <div className="mt-2 flex flex-wrap gap-2">
-                      {featured.badges.map((b, i) => (
+                      {(featured as any).badges.map((b: any, i: number) => (
                         <Badge key={i} variant="secondary" className="rounded-full">
                           {b}
                         </Badge>

@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import Navbar from '@/components/custom/navbar';
+import AutoPopupModal from '@/components/auto-popup-modal';
 
 import { Inter } from 'next/font/google';
 
@@ -24,6 +25,7 @@ export default function RootLayout({
       <body className={`${inter.variable}`}>
         <Navbar />
         {children}
+        <AutoPopupModal delaySeconds={7} />
       </body>
     </html>
   );

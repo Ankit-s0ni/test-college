@@ -1,13 +1,13 @@
 import React from 'react';
-import HeroSection from '@/pages/home/hero-section';
-import ProgramsSection from '@/pages/home/programs-section';
-import UniversitiesSection from '@/pages/home/universities-section';
-import ReasonsSection from '@/pages/home/reasons-section';
-import TestimonialsSection from '@/pages/home/testimonials-section';
-import BlogsSection from '@/pages/home/blogs-section';
-import ContactsSection from '@/pages/home/contact-section';
-import FooterSection from '@/pages/home/footer-section';
-import FaqsSection from '@/pages/home/faqs-section';
+import HeroSection from '@/components/home/hero-section';
+import ProgramsSection from '@/components/home/programs-section';
+import UniversitiesSection from '@/components/home/universities-section';
+import ReasonsSection from '@/components/home/reasons-section';
+import TestimonialsSection from '@/components/home/testimonials-section';
+import BlogsSection from '@/components/home/blogs-section';
+import ContactsSection from '@/components/home/contact-section';
+import FooterSection from '@/components/home/footer-section';
+import FaqsSection from '@/components/home/faqs-section';
 
 export default function Home() {
   return (

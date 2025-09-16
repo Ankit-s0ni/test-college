@@ -53,6 +53,7 @@
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { ArrowRight } from 'lucide-react';
+import StudentLeadModal from '@/components/student-lead-modal';
 
 export default function BlogHero() {
   return (
@@ -89,14 +90,28 @@ export default function BlogHero() {
             </h1>
 
             <div className="mt-5 flex flex-wrap items-center gap-3">
-              <Button className="h-9 rounded-md px-4 text-[13px] font-medium">
-                Talk To Our Expert
-                <ArrowRight className="ml-1.5 h-4 w-4" />
-              </Button>
-              <Button variant="outline" className="h-9 rounded-md px-4 text-[13px] font-medium">
-                Schedule 1:1 Call
-                <ArrowRight className="ml-1.5 h-4 w-4" />
-              </Button>
+              <StudentLeadModal
+                universityName="College Cosmos"
+                triggerContent={
+                  <>
+                    Talk To Our Expert
+                    <ArrowRight className="ml-1.5 h-4 w-4" />
+                  </>
+                }
+                modalTitle="Talk To Our Expert"
+                triggerClassName="h-9 rounded-md px-4 text-[13px] font-medium bg-[#0247D2] hover:bg-blue-700 text-white"
+              />
+              <StudentLeadModal
+                universityName="College Cosmos"
+                triggerContent={
+                  <>
+                    Schedule 1:1 Call
+                    <ArrowRight className="ml-1.5 h-4 w-4" />
+                  </>
+                }
+                modalTitle="Schedule 1:1 Call"
+                triggerClassName="h-9 rounded-md px-4 text-[13px] font-medium border border-gray-300 bg-transparent text-gray-700 hover:bg-gray-50"
+              />
             </div>
           </div>
 

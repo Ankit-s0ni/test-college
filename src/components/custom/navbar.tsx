@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
 import { Menu } from 'lucide-react';
+import StudentLeadModal from '@/components/student-lead-modal';
 import { cn } from '@/lib/utils';
 import Link from 'next/link';
 
@@ -64,7 +65,12 @@ const Navbar = () => {
 
           {/* CTA Button - Desktop */}
           <div className="hidden md:block">
-            <Button className="font-medium">Get In Touch</Button>
+            <StudentLeadModal
+              universityName="College Cosmos"
+              triggerContent="Get In Touch"
+              modalTitle="Get In Touch with College Cosmos"
+              triggerClassName="font-medium bg-[#0247D2] hover:bg-blue-700 text-white px-4 py-2 rounded-md"
+            />
           </div>
 
           {/* Mobile menu sheet */}
@@ -115,9 +121,12 @@ const Navbar = () => {
 
                   {/* Footer CTA */}
                   <div className="p-6 border-t border-border">
-                    <Button size="lg" className="w-full font-medium">
-                      Get In Touch
-                    </Button>
+                    <StudentLeadModal
+                      universityName="College Cosmos"
+                      triggerContent="Get In Touch"
+                      modalTitle="Get In Touch with College Cosmos"
+                      triggerClassName="w-full font-medium bg-[#0247D2] hover:bg-blue-700 text-white px-4 py-2 rounded-md h-11"
+                    />
                   </div>
                 </div>
               </SheetContent>

@@ -2,7 +2,10 @@
 
 import { Button } from '@/components/ui/button';
 import { GraduationCap, LineChart, Library, FlaskConical, BadgeCheck } from 'lucide-react';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { programsAPI } from '@/lib/api';
+import { transformProgramsData } from '@/lib/transformers';
+import { ProgramListItem, ProgramCategory } from '@/types/program';
 
 const ALL_PROGRAMS: { name: string; duration: string; icon: string; category: string }[] = [
   // Executive
@@ -41,13 +44,17 @@ const ALL_PROGRAMS: { name: string; duration: string; icon: string; category: st
 ];
 
 const ProgramsSection = () => {
-  const categories = [
+  const [programs, setPrograms] = useState<ProgramListItem[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  const categories: ProgramCategory[] = [
     'Executive Programs',
     'PG Courses',
     'UG Courses',
     'Doctorate/Ph.D',
     'Certification',
-  ] as const;
+  ];
 
   const icons = {
     'Executive Programs': GraduationCap,
@@ -57,9 +64,56 @@ const ProgramsSection = () => {
     Certification: BadgeCheck,
   } as const;
 
-  const [active, setActive] = useState<(typeof categories)[number]>('Executive Programs');
+  const [active, setActive] = useState<ProgramCategory>('Executive Programs');
 
-  const visiblePrograms = ALL_PROGRAMS.filter((p) => p.category === active);
+  // Fetch programs from API
+  useEffect(() => {
+    async function fetchPrograms() {
+      try {
+        console.log('🔍 Fetching programs from API...');
+        setLoading(true);
+        setError(null);
+        
+        const response = await programsAPI.getAll();
+        console.log('✅ Programs API Response:', response);
+        
+        const transformedPrograms = transformProgramsData(response.data);
+        console.log('🔄 Transformed Programs:', transformedPrograms);
+        
+        // Log category distribution
+        const categoryCount = transformedPrograms.reduce((acc, program) => {
+          acc[program.category] = (acc[program.category] || 0) + 1;
+          return acc;
+        }, {} as Record<string, number>);
+        console.log('📊 Programs by category:', categoryCount);
+        
+        setPrograms(transformedPrograms);
+      } catch (error) {
+        console.error('❌ Failed to fetch programs:', error);
+        setError('Failed to load programs');
+        
+        // Fallback to dummy data if API fails
+        const fallbackPrograms: ProgramListItem[] = ALL_PROGRAMS.map((program, index) => ({
+          id: index + 1,
+          name: program.name,
+          slug: program.name.toLowerCase().replace(/\s+/g, '-'),
+          duration: program.duration,
+          category: program.category as ProgramCategory,
+          icon: program.icon,
+          degree: program.name,
+          level: program.category.includes('UG') ? 'undergraduate' : 'postgraduate',
+          featured: false,
+        }));
+        setPrograms(fallbackPrograms);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchPrograms();
+  }, []);
+
+  const visiblePrograms = programs.filter((p) => p.category === active);
 
   return (
     <div id="programs" className="py-20 bg-muted/30">
@@ -94,23 +148,49 @@ const ProgramsSection = () => {
         </div>
 
         {/* Program Section */}
-        <div className="flex flex-wrap items-center justify-center gap-3">
-          {visiblePrograms.map((program) => (
-            <div
-              key={program.name}
-              className="w-[180px] bg-card rounded-lg p-3 text-center border border-border hover:shadow-lg transition-shadow"
-            >
-              <p className="text-xs text-muted-foreground mb-4 border rounded p-2">
-                Course Duration: {program.duration}
-              </p>
-              <div className="text-3xl mb-3">{program.icon}</div>
-              <h3 className="font-semibold text-lg mb-2">{program.name}</h3>
-              <Button size="sm" className="w-full rounded-sm">
-                View Program
-              </Button>
-            </div>
-          ))}
-        </div>
+        {loading ? (
+          <div className="text-center py-12">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto"></div>
+            <p className="text-muted-foreground mt-4">Loading programs...</p>
+          </div>
+        ) : error ? (
+          <div className="text-center py-12">
+            <p className="text-muted-foreground">{error}</p>
+          </div>
+        ) : (
+          <div className="flex flex-wrap items-center justify-center gap-3">
+            {visiblePrograms.map((program) => (
+              <div
+                key={program.id}
+                className="w-[180px] bg-card rounded-lg p-3 text-center border border-border hover:shadow-lg transition-shadow"
+              >
+                <p className="text-xs text-muted-foreground mb-4 border rounded p-2">
+                  Course Duration: {program.duration}
+                </p>
+                <div className="text-3xl mb-3">{program.icon}</div>
+                <h3 className="font-semibold text-lg mb-2">{program.name}</h3>
+                <Button size="sm" className="w-full rounded-sm" asChild>
+                  <a href={`/programs/${program.slug}`} className="inline-flex items-center justify-center">
+                    View Program
+                  </a>
+                </Button>
+              </div>
+            ))}
+            {visiblePrograms.length === 0 && !loading && (
+              <div className="text-center py-8 w-full">
+                <p className="text-muted-foreground">No programs available in this category.</p>
+                {active !== 'Executive Programs' && (
+                  <button 
+                    onClick={() => setActive('Executive Programs')}
+                    className="text-primary hover:underline mt-2"
+                  >
+                    View Executive Programs instead
+                  </button>
+                )}
+              </div>
+            )}
+          </div>
+        )}
       </div>
     </div>
   );

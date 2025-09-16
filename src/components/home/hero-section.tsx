@@ -6,6 +6,7 @@ import HeroImage from '../../../public/assets/images/hero-img.png';
 import HeroBg from '../../../public/assets/icons/hero-bg.svg';
 import ApplierIcon from '../../../public/assets/icons/applier-icon-group.svg';
 import { MoveRight } from 'lucide-react';
+import StudentLeadModal from '@/components/student-lead-modal';
 
 const HeroSection = () => {
   return (
@@ -22,14 +23,28 @@ const HeroSection = () => {
             Recruitment reimagined through intelligent conversations
           </p>
           <div className="flex flex-col sm:flex-row gap-4 mb-8">
-            <Button className="font-semibold flex items gap-2">
-              <p>Talk To Our Expert</p>
-              <MoveRight />
-            </Button>
-            <Button variant="outline" className="font-semibold">
-              <p>Schedule 1:1 Call</p>
-              <MoveRight />
-            </Button>
+            <StudentLeadModal
+              universityName="College Cosmos"
+              triggerContent={
+                <>
+                  Talk To Our Expert
+                  <MoveRight className="ml-2 h-4 w-4" />
+                </>
+              }
+              modalTitle="Talk To Our Expert"
+              triggerClassName="font-semibold flex items-center gap-2 bg-[#0247D2] hover:bg-blue-700 text-white px-4 py-2 rounded-md"
+            />
+            <StudentLeadModal
+              universityName="College Cosmos"
+              triggerContent={
+                <>
+                  Schedule 1:1 Call
+                  <MoveRight className="ml-2 h-4 w-4" />
+                </>
+              }
+              modalTitle="Schedule 1:1 Call"
+              triggerClassName="font-semibold flex items-center gap-2 border border-gray-300 bg-transparent text-gray-700 hover:bg-gray-50 px-4 py-2 rounded-md"
+            />
           </div>
           <Image src={ApplierIcon} alt="trust us image" width={300} height={40} />
           {/* <div className="flex items-center gap-3 bg-muted/50 rounded-full px-4 py-2 w-fit">

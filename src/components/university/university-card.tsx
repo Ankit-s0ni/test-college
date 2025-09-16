@@ -10,7 +10,8 @@ type UniversityCardProps = {
 };
 
 export default function UniversityCard({ university }: UniversityCardProps) {
-  const ratingOutOfFive = `${Math.round(university.rating)}/5`;
+  const rating = university.rating || 0;
+  const ratingDisplay = rating.toFixed(1); // Show one decimal place
   const approvalsText = university.approvals.join(', ');
   const hasProspectus = Boolean(university.prospectusUrl);
 
@@ -66,8 +67,19 @@ export default function UniversityCard({ university }: UniversityCardProps) {
           </h3>
 
           <div className="flex shrink-0 items-center gap-1 text-[13px] font-semibold text-[#111827]">
-            <span>{ratingOutOfFive}</span>
-            <Star className="h-4 w-4 fill-[#F5DE08] text-[#F5DE08]" />
+            <span>{ratingDisplay}</span>
+            <div className="flex items-center">
+              {Array.from({ length: 5 }).map((_, i) => (
+                <Star 
+                  key={i} 
+                  className={`h-3 w-3 ${
+                    i < Math.floor(rating) 
+                      ? 'fill-[#F5DE08] text-[#F5DE08]' 
+                      : 'text-[#E5E7EB]'
+                  }`} 
+                />
+              ))}
+            </div>
           </div>
         </div>
 
