@@ -31,16 +31,6 @@ export const PROGRAM_TABS: ProgramFilterGroup[] = [
     label: 'UG Courses',
     options: ['BBA', 'BCA', 'B.Tech', 'B.Com', 'BA'],
   },
-  {
-    key: 'phd',
-    label: 'Doctorate/PhD',
-    options: ['PhD (Mgmt)', 'PhD (CS)', 'PhD (Engg)'],
-  },
-  {
-    key: 'cert',
-    label: 'Certification',
-    options: ['Data Analytics', 'PMI‑PMP', 'Digital Marketing'],
-  },
 ];
 
 export const UNIVERSITIES: UniversityListItem[] = [

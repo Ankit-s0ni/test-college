@@ -1,9 +1,7 @@
 export type ProgramCategory =
   | 'Executive Programs'
   | 'PG Courses'
-  | 'UG Courses'
-  | 'Doctorate/PhD'
-  | 'Certification';
+  | 'UG Courses';
 
 export interface ProgramFilterGroup {
   key: string;

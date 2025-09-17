@@ -185,10 +185,10 @@ export function transformBlogsData(apiBlogs: BlogAPI[]): BlogPost[] {
 export function transformProgramData(apiProgram: ProgramAPI): ProgramListItem {
   // Map degree to category
   const categoryMapping: Record<string, string> = {
-    'Certificate': 'Certification',
+    'Certificate': 'Executive Programs', // Map certificates to Executive Programs
     'Bachelor': 'UG Courses',
     'Master': 'PG Courses',
-    'Doctorate': 'Doctorate/Ph.D',
+    'Doctorate': 'PG Courses', // Map doctorate to PG Courses
   };
 
   // Use category from API if available, otherwise derive from degree

@@ -79,6 +79,4 @@ export interface ProgramListItem {
 export type ProgramCategory =
   | 'Executive Programs'
   | 'PG Courses'
-  | 'UG Courses'
-  | 'Doctorate/Ph.D'
-  | 'Certification';
+  | 'UG Courses';

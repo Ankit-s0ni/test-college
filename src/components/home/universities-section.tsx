@@ -1,20 +1,17 @@
 'use client';
 
 import * as React from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Card, CardContent, CardFooter } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area';
 import Image from 'next/image';
+import { universitiesAPI } from '@/lib/api';
+import { UniversityAPI } from '@/types/university';
 
-type University = {
-  college_img: string;
-  college_logo: string;
-  college_name: string;
-  college_link: string; // slug used in URL
-};
-
-export const UNIVERSITIES: University[] = [
+// Fallback data for loading state or error
+const FALLBACK_UNIVERSITIES = [
   {
     college_img:
       'https://images.unsplash.com/photo-1545048702-79362596cdc9?q=80&w=1400&auto=format&fit=crop',
@@ -50,6 +47,65 @@ export const UNIVERSITIES: University[] = [
 ];
 
 export default function UniversitiesSection() {
+  const [universities, setUniversities] = useState<UniversityAPI[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchUniversities = async () => {
+      try {
+        setLoading(true);
+        const response = await universitiesAPI.getAll();
+        
+        // Get first 4 universities for the home page, sorted by featured/order
+        const displayUniversities = response.data
+          .sort((a, b) => {
+            // Sort by featured first, then by order (with fallbacks)
+            const aFeatured = a.featured || false;
+            const bFeatured = b.featured || false;
+            if (aFeatured && !bFeatured) return -1;
+            if (!aFeatured && bFeatured) return 1;
+            return (a.order || 0) - (b.order || 0);
+          })
+          .slice(0, 4);
+        
+        setUniversities(displayUniversities);
+      } catch (err) {
+        console.error('Error fetching universities:', err);
+        setError('Failed to load universities');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchUniversities();
+  }, []);
+
+  // Transform API data to match the old format for rendering
+  const getDisplayUniversities = () => {
+    if (loading || error || universities.length === 0) {
+      return FALLBACK_UNIVERSITIES;
+    }
+
+    // Base URL for the API
+    const API_BASE_URL = 'https://collegecosmos.manavkhadka.com.np';
+
+    return universities.map(uni => ({
+      college_img: uni.coverImage?.url 
+        ? `${API_BASE_URL}${uni.coverImage.url}` 
+        : uni.featuredImage?.url 
+        ? `${API_BASE_URL}${uni.featuredImage.url}` 
+        : FALLBACK_UNIVERSITIES[0].college_img,
+      college_logo: uni.logo?.url 
+        ? `${API_BASE_URL}${uni.logo.url}` 
+        : FALLBACK_UNIVERSITIES[0].college_logo,
+      college_name: uni.name,
+      college_link: uni.slug,
+    }));
+  };
+
+  const displayUniversities = getDisplayUniversities();
+
   return (
     <section id="universities" className="py-20">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -64,7 +120,7 @@ export default function UniversitiesSection() {
               px-1
               "
           >
-            {UNIVERSITIES.map((u) => (
+            {displayUniversities.map((u) => (
               <Card
                 key={u.college_link}
                 className="

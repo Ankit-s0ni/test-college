@@ -25,12 +25,12 @@ import {
 import { FileDown, Plus, GraduationCap, Check } from 'lucide-react';
 import ContactsSection from '@/components/home/contact-section';
 import FooterSection from '@/components/home/footer-section';
-import { UNIVERSITIES } from '@/components/home/universities-section';
 import UniversitySidebar from '@/components/custom/university-sidebar';
 import AboutSection from '@/components/university/about-section';
 import ApprovalsSection from '@/components/university/approvals-section';
 import CoursesSection from '@/components/university/courses-section';
 import CertificateSection from '@/components/university/certificate-section';
+import FeesSection from '@/components/university/fees-section';
 import RankingSection from '@/components/university/ranking-section';
 import FinancialAidSection from '@/components/university/financial-aid-section';
 import HiringPartnerSection from '@/components/home/hiring-partner-section';
@@ -158,6 +158,22 @@ export type Reviews = {
   list: Array<{ image: string; name: string; date: string; description: string; rating: number }>;
 };
 
+export type Fees = {
+  title: string;
+  description: string;
+  fees: Array<{
+    courseType: string;
+    category: string;
+    tuitionFee: number;
+    otherFees: number;
+    hostelFee?: number;
+    messFee?: number;
+    transportFee?: number;
+    totalFee: number;
+    frequency: string;
+  }>;
+};
+
 export type UniversityPageDataAPI = {
   name: string;
   details: string;
@@ -181,6 +197,7 @@ export type UniversityPageDataAPI = {
   faq?: Faq;
   examination?: Examination;
   certificate?: Certificate;
+  fees?: Fees;
 };
 
 export type UniversityPageData = {
@@ -209,6 +226,7 @@ export type UniversityPageData = {
   faq: Faq;
   section13: Section13; // “Similar Programs/Universities” style block
   reviews: Reviews;
+  fees?: Fees;
 };
 
 /* -------------------------------------------------------------------------- */
@@ -223,385 +241,7 @@ const BASE_GALLERY = [
   'https://images.unsplash.com/photo-1523580846011-d3a5bc25702b?q=80&w=1200&auto=format&fit=crop',
 ];
 
-const makePageData = (u: (typeof UNIVERSITIES)[number], seed = 0): UniversityPageData => ({
-  name: `${u.college_name} (Online)`,
-  details: 'UGC-Approved • NAAC A+ • 100% Online Programs',
-  location: ['Noida, UP', 'Pune, MH', 'Phagwara, PB', 'Greater Noida, UP'][seed] || 'India',
-  established: 2010 + seed,
-  ratings: { overall: 4.6 - seed * 0.1, average: 4.5, DI: 4.7, curriculum: 4.4, VFM: 4.6 },
-  prospectusLink: '#',
-  scheduleLink: '#',
-  applyLink: '#',
-  headerImage: u.college_img,
-  logo: u.college_logo,
-
-  about: {
-    title: `About ${u.college_name} Online University`,
-    description: `${u.college_name} offers flexible online degrees designed for working professionals and fresh graduates. Learn from top faculty with a mix of live sessions and recorded lectures, plus career services.`,
-    courses: [
-      { name: 'BBA (Online)', perSem: '₹35,000', total: '₹2,10,000', online: true },
-      { name: 'MBA (Online)', perSem: '₹45,000', total: '₹1,80,000', online: true },
-      { name: 'MCA (Online)', perSem: '₹40,000', total: '₹1,60,000', online: true },
-    ],
-  },
-
-  approvals: {
-    title: 'Approvals & Accreditations',
-    description: 'Recognized by top statutory bodies and accreditation councils.',
-    images: [
-      'https://dummyimage.com/100x60/edf2f7/333&text=UGC',
-      'https://dummyimage.com/100x60/edf2f7/333&text=AICTE',
-      'https://dummyimage.com/100x60/edf2f7/333&text=NAAC+A+',
-    ],
-  },
-
-  courses: BASE_GALLERY.map((g, i) => ({
-    image: g,
-    detailsLink: '#',
-    prospectusLink: '#',
-  })),
-
-  certificate: {
-    title: 'Degree & Sample Certificates',
-    images: [
-      'https://dummyimage.com/420x260/f5f5f5/333&text=Degree+Sample',
-      'https://dummyimage.com/420x260/f5f5f5/333&text=Provisional+Certificate',
-    ],
-  },
-
-  ranking: {
-    title: 'Ranking',
-    rankings: [
-      { year: '2024', body: 'NIRF (Management)', rank: 'Top 50' },
-      { year: '2023', body: 'India Today (Overall)', rank: 'Top 30' },
-    ],
-  },
-
-  financialAid: {
-    title: 'Financial Aid & Scholarships',
-    description:
-      'Merit, need-based and defense scholarships are available. Easy EMIs help you manage fees.',
-    tableData: [
-      {
-        category: 'Merit-based',
-        scholarshipCredit: 'Up to 30%',
-        eligibilityDocument: '10+2 / Grad marksheet',
-      },
-      {
-        category: 'Need-based',
-        scholarshipCredit: 'Up to 20%',
-        eligibilityDocument: 'Income certificate',
-      },
-      {
-        category: 'Defense/Ex-servicemen',
-        scholarshipCredit: '15%',
-        eligibilityDocument: 'Service ID / Discharge book',
-      },
-    ],
-    emiAvailable: true,
-    loans: [
-      {
-        program: 'Online MBA',
-        options: [
-          {
-            mode: 'Semester Wise',
-            total: '₹43,750/-',
-            loanAmount: '₹43,750/-',
-            interest: '₹175,000/-',
-            tenure: 'N/A',
-            emi: 'N/A',
-          },
-          {
-            mode: 'Annually',
-            total: '₹43,750/-',
-            loanAmount: '₹43,750/-',
-            interest: '₹175,000/-',
-            tenure: 'N/A',
-            emi: '7292',
-          },
-          {
-            mode: 'One Time',
-            total: '₹43,750/-',
-            loanAmount: '₹43,750/-',
-            interest: '₹175,000/-',
-            tenure: 'N/A',
-            emi: '7292',
-          },
-        ],
-        title: '',
-        total: '',
-        loanAmount: '',
-        interest: '',
-        tenure: '',
-        emi: '',
-      },
-      {
-        program: 'Online MCA',
-        options: [
-          {
-            mode: 'Semester Wise',
-            total: '₹43,750/-',
-            loanAmount: '₹43,750/-',
-            interest: '₹175,000/-',
-            tenure: 'N/A',
-            emi: 'N/A',
-          },
-          {
-            mode: 'Annually',
-            total: '₹43,750/-',
-            loanAmount: '₹43,750/-',
-            interest: '₹175,000/-',
-            tenure: 'N/A',
-            emi: '7292',
-          },
-          {
-            mode: 'One Time',
-            total: '₹43,750/-',
-            loanAmount: '₹43,750/-',
-            interest: '₹175,000/-',
-            tenure: 'N/A',
-            emi: '7292',
-          },
-        ],
-        title: '',
-        total: '',
-        loanAmount: '',
-        interest: '',
-        tenure: '',
-        emi: '',
-      },
-      {
-        program: 'Online BBA',
-        options: [
-          {
-            mode: 'Semester Wise',
-            total: '₹43,750/-',
-            loanAmount: '₹43,750/-',
-            interest: '₹175,000/-',
-            tenure: 'N/A',
-            emi: 'N/A',
-          },
-          {
-            mode: 'Annually',
-            total: '₹43,750/-',
-            loanAmount: '₹43,750/-',
-            interest: '₹175,000/-',
-            tenure: 'N/A',
-            emi: '7292',
-          },
-          {
-            mode: 'One Time',
-            total: '₹43,750/-',
-            loanAmount: '₹43,750/-',
-            interest: '₹175,000/-',
-            tenure: 'N/A',
-            emi: '7292',
-          },
-        ],
-        title: '',
-        total: '',
-        loanAmount: '',
-        interest: '',
-        tenure: '',
-        emi: '',
-      },
-      {
-        program: 'Online BCA',
-        options: [
-          {
-            mode: 'Semester Wise',
-            total: '₹43,750/-',
-            loanAmount: '₹43,750/-',
-            interest: '₹175,000/-',
-            tenure: 'N/A',
-            emi: 'N/A',
-          },
-          {
-            mode: 'Annually',
-            total: '₹43,750/-',
-            loanAmount: '₹43,750/-',
-            interest: '₹175,000/-',
-            tenure: 'N/A',
-            emi: '7292',
-          },
-          {
-            mode: 'One Time',
-            total: '₹43,750/-',
-            loanAmount: '₹43,750/-',
-            interest: '₹175,000/-',
-            tenure: 'N/A',
-            emi: '7292',
-          },
-        ],
-        title: '',
-        total: '',
-        loanAmount: '',
-        interest: '',
-        tenure: '',
-        emi: '',
-      },
-    ],
-  },
-
-  admission: {
-    title: 'Admission Process',
-    description:
-      'Apply online, upload KYC and educational documents, pay the application fee, appear for counseling (if applicable), and receive the offer letter.',
-  },
-
-  partners: {
-    title: 'Hiring Partners',
-    description: 'Trusted by leading companies for talent and internships.',
-    images: [
-      'https://dummyimage.com/120x60/e2e8f0/333&text=Infosys',
-      'https://dummyimage.com/120x60/e2e8f0/333&text=TCS',
-      'https://dummyimage.com/120x60/e2e8f0/333&text=Accenture',
-      'https://dummyimage.com/120x60/e2e8f0/333&text=Capgemini',
-    ],
-  },
-
-  examination: {
-    title: 'Examination & Assessment',
-    description:
-      'Online proctored exams at the end of each term with a mix of MCQs, case studies, and assignments. Internal assessments carry 30–40% weightage.',
-  },
-
-  campus: {
-    title: 'Manipal Online University Campuses',
-    groups: [
-      {
-        label: 'All Over India',
-        color: '#FFF4BF',
-        locations: ['Mangaluru', 'Jaipur', 'Sikkim'],
-      },
-      {
-        label: 'International Campus',
-        color: '#FEE1EE',
-        locations: ['Dubai', 'Malaysia', 'Dubai'],
-      },
-    ],
-  },
-
-  advantages: {
-    title: 'Manipal Online University Advantages',
-    description:
-      'The Manipal Online University has gained popularity in the educational world as it provides many opportunities for growth with the degree. These benefits or opportunities are briefly explained as follows:',
-    tableData: [
-      {
-        benefit: 'Globally Accepted',
-        description:
-          'Manipal online degrees are globally recognized and accepted, because of which the students and the learners get multiple opportunities for their career growth in India as well as abroad. Manipal University online accreditation makes the university trust worthy and popular.',
-      },
-      {
-        benefit: 'Flexibility & Self-Paced Learning',
-        description:
-          'The Manipal online degrees are completely online. This flexibility provides the opportunity to study at their convenience without disturbing any of their professional or personal commitments.',
-      },
-      {
-        benefit: 'Industry-Driven Curriculum',
-        description:
-          'The Manipal online degrees have been designed based on industry expectations which include real-life case studies and live projects, helping the students get experiential learning and become more skilled.',
-      },
-      {
-        benefit: 'Advanced Learning Resources',
-        description:
-          'Manipal online education is supported by an advanced AI-enabled digital learning system that creates an interactive and engaging learning environment. The Manipal university online classes recorded live lectures, quizzes, assignments, discussion forums and projects, making the learning even more enjoyable.',
-      },
-      {
-        benefit: 'Learn from Experts and Industry Mentors',
-        description:
-          'With Manipal university online registration, the students benefit from highly qualified faculty members who are or have been in the industry, which gives them perspectives on real-world business and technical challenges. Hence, they develop practical skills and knowledge related to their specific needs.',
-      },
-      {
-        benefit: 'Affordable Education',
-        description:
-          'Manipal Online University has an affordable fee structure compared to the campus degree programs, with EMI options and scholarships available. This makes quality education accessible to all.',
-      },
-      {
-        benefit: 'Career & Placement Assistance',
-        description:
-          'To ensure that students can find job opportunities, the university provides career counseling, resume-building workshop sessions, LinkedIn profile optimization, and mock interviews. Also, the placement drives with the top companies allow the students to start their careers.',
-      },
-      {
-        benefit: 'Networking Opportunities',
-        description:
-          'Students get an opportunity to interact with a vast alumni network, industry professionals, and peers for career advancements and collaborative work experiences.',
-      },
-    ],
-  },
-
-  faq: [
-    {
-      question: 'Is the online degree recognized?',
-      answer: 'Yes, UGC-entitled; valid for jobs and higher studies.',
-    },
-    {
-      question: 'Do you provide placement help?',
-      answer: 'Yes—resume prep, mock interviews, and exclusive job fairs.',
-    },
-    {
-      question: 'Are classes live or recorded?',
-      answer: 'Both. Live weekend classes with recordings for self-paced study.',
-    },
-  ],
-
-  section13: {
-    title: 'Similar Universities',
-    description: 'You may also be interested in these online universities.',
-    data: [
-      {
-        image: BASE_GALLERY[0],
-        name: 'ABC Online University',
-        affiliation: 'UGC | NAAC A',
-        rating: 4.4,
-        prospectusLink: '#',
-        viewDetailsLink: '#',
-      },
-      {
-        image: BASE_GALLERY[0],
-        name: 'XYZ Digital University',
-        affiliation: 'UGC | AICTE',
-        rating: 4.3,
-        prospectusLink: '#',
-        viewDetailsLink: '#',
-      },
-      {
-        image: BASE_GALLERY[2],
-        name: 'PQR Tech University',
-        affiliation: 'UGC',
-        rating: 4.2,
-        prospectusLink: '#',
-        viewDetailsLink: '#',
-      },
-    ],
-  },
-
-  reviews: {
-    total: { count: 1248 + seed * 100, average: 4.5 },
-    counts: { one: 20, two: 30, three: 120, four: 420, five: 658 },
-    peripheral: { avg: 4.5, DI: 4.6, curr: 4.4, VFM: 4.6 },
-    list: [
-      {
-        image: 'https://i.pravatar.cc/80?img=12',
-        name: 'Kriti Sharma',
-        date: 'May 07, 2025',
-        description: 'Great mentors and flexible schedule. LMS is smooth and support is quick.',
-        rating: 5,
-      },
-      {
-        image: 'https://i.pravatar.cc/80?img=22',
-        name: 'Arjun Mehta',
-        date: 'Apr 19, 2025',
-        description: 'Curriculum is relevant and the projects helped me switch roles.',
-        rating: 4,
-      },
-    ],
-  },
-});
-
-const PAGE_DB: Record<string, UniversityPageData> = Object.fromEntries(
-  UNIVERSITIES.map((u, idx) => [u.college_link, makePageData(u, idx)]),
-);
+const PAGE_DB: Record<string, UniversityPageData> = {};
 
 /* -------------------------------------------------------------------------- */
 /*                          API DATA CONVERSION                               */
@@ -819,6 +459,25 @@ function convertAPIDataToPageData(apiResponse: UniversityDetailAPIResponse): Uni
         description: review.review,
         rating: review.overallRating,
       })) || [],
+    };
+  }
+
+  // Add Fees section if we have fees data
+  if (university.fees && university.fees.length > 0) {
+    conditionalData.fees = {
+      title: 'Fee Structure',
+      description: 'Detailed fee breakdown for all courses and categories.',
+      fees: university.fees.map((fee: any) => ({
+        courseType: fee.courseType,
+        category: fee.category,
+        tuitionFee: fee.tuitionFee,
+        otherFees: fee.otherFees,
+        hostelFee: fee.hostelFee,
+        messFee: fee.messFee,
+        transportFee: fee.transportFee,
+        totalFee: fee.totalFee,
+        frequency: fee.frequency,
+      })),
     };
   }
 
@@ -1135,19 +794,19 @@ export default function UniversitySlugPage({ params }: any) {
             {pageData.courses && pageData.courses.length > 0 && <CoursesSection items={pageData.courses} />}
             {pageData.certificate && <CertificateSection data={pageData.certificate} />}
             {pageData.ranking && <RankingSection data={pageData.ranking} />}
-            {pageData.examination && (
-              <section id="examination" className="bg-[#F7EEFD] px-5 py-8">
-                <div className="mb-4 sm:mb-6">
-                  <h3 className="text-lg sm:text-xl font-semibold">{pageData.examination.title}</h3>
-                </div>
-                <p className="text-muted-foreground">{pageData.examination.description}</p>
-              </section>
-            )}
+            {pageData.fees && <FeesSection data={pageData.fees} />}
+            {pageData.examination && <ExaminationSection />}
             {pageData.financialAid && <FinancialAidSection data={pageData.financialAid} />}
+            {!pageData.financialAid && <div id="financial-aid" />}
             {pageData.partners && <HiringPartnerSection data={pageData.partners} />}
+            {!pageData.partners && <div id="partners" />}
             {pageData.campus && <CampusSection data={pageData.campus} />}
             {pageData.advantages && <AdvantagesSection data={pageData.advantages} />}
-            {pageData.faq && <FaqSection data={pageData.faq} />}
+            
+            {/* Placeholder sections for sidebar navigation */}
+            <div id="faq" />
+            <div id="similar-universities" />
+            
             {pageData.reviews && <ReviewsSection data={pageData.reviews} />}
 
             {/* Show message if using API data but no optional sections are available */}

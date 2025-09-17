@@ -33,14 +33,6 @@ const ALL_PROGRAMS: { name: string; duration: string; icon: string; category: st
   { name: 'BBA', duration: '3 Years', icon: '📚', category: 'UG Courses' },
   { name: 'BCA', duration: '3 Years', icon: '💻', category: 'UG Courses' },
   { name: 'B.Com', duration: '3 Years', icon: '🧾', category: 'UG Courses' },
-
-  // Doctorate/Ph.D
-  { name: 'Ph.D (Mgmt)', duration: '4–6 Years', icon: '📖', category: 'Doctorate/Ph.D' },
-  { name: 'Ph.D (CS)', duration: '4–6 Years', icon: '🧠', category: 'Doctorate/Ph.D' },
-
-  // Certification
-  { name: 'Data Analytics', duration: '6–9 Months', icon: '📈', category: 'Certification' },
-  { name: 'Product Mgmt', duration: '4–6 Months', icon: '🗂️', category: 'Certification' },
 ];
 
 const ProgramsSection = () => {
@@ -52,16 +44,12 @@ const ProgramsSection = () => {
     'Executive Programs',
     'PG Courses',
     'UG Courses',
-    'Doctorate/Ph.D',
-    'Certification',
   ];
 
   const icons = {
     'Executive Programs': GraduationCap,
     'PG Courses': LineChart,
     'UG Courses': Library,
-    'Doctorate/Ph.D': FlaskConical,
-    Certification: BadgeCheck,
   } as const;
 
   const [active, setActive] = useState<ProgramCategory>('Executive Programs');

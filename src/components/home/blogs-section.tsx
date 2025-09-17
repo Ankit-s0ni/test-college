@@ -1,9 +1,92 @@
+'use client';
+
 import { Button } from '@/components/ui/button';
 import Image from 'next/image';
 import Link from 'next/link';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { blogsAPI } from '@/lib/api';
+import { BlogAPI } from '@/types/blog';
+
+// Fallback data for loading state or error
+const FALLBACK_BLOGS = [
+  {
+    id: '1',
+    title: 'Mastering Online Exams In India; A comprehensive...',
+    excerpt: 'Accelerate your career with confidence. Learn by doing, build your portfolio, and enhance your skills with AI tools that every modern PM needs to know.',
+    slug: 'mastering-online-exams',
+    cover: 'https://images.unsplash.com/photo-1545048702-79362596cdc9?q=80&w=1400&auto=format&fit=crop',
+  },
+  {
+    id: '2',
+    title: 'Mastering Online Exams In India; A comprehensive...',
+    excerpt: 'Accelerate your career with confidence. Learn by doing, build your portfolio, and enhance your skills with AI tools that every modern PM needs to know.',
+    slug: 'mastering-online-exams-2',
+    cover: 'https://images.unsplash.com/photo-1545048702-79362596cdc9?q=80&w=1400&auto=format&fit=crop',
+  },
+  {
+    id: '3',
+    title: 'Mastering Online Exams In India; A comprehensive...',
+    excerpt: 'Accelerate your career with confidence. Learn by doing, build your portfolio, and enhance your skills with AI tools that every modern PM needs to know.',
+    slug: 'mastering-online-exams-3',
+    cover: 'https://images.unsplash.com/photo-1545048702-79362596cdc9?q=80&w=1400&auto=format&fit=crop',
+  },
+];
 
 const BlogsSection = () => {
+  const [blogs, setBlogs] = useState<BlogAPI[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchBlogs = async () => {
+      try {
+        setLoading(true);
+        const response = await blogsAPI.getAll();
+        
+        // Get first 3 blogs for the home page, prioritize featured ones
+        const displayBlogs = response.data
+          .sort((a, b) => {
+            // Sort by featured first, then by publishedAt (newest first)
+            if (a.featured && !b.featured) return -1;
+            if (!a.featured && b.featured) return 1;
+            return new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime();
+          })
+          .slice(0, 3);
+        
+        setBlogs(displayBlogs);
+      } catch (err) {
+        console.error('Error fetching blogs:', err);
+        setError('Failed to load blogs');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchBlogs();
+  }, []);
+
+  // Transform API data to display format
+  const getDisplayBlogs = () => {
+    if (loading || error || blogs.length === 0) {
+      return FALLBACK_BLOGS;
+    }
+
+    // Base URL for the API
+    const API_BASE_URL = 'https://collegecosmos.manavkhadka.com.np';
+
+    return blogs.map(blog => ({
+      id: blog.documentId || blog.id.toString(),
+      title: blog.title,
+      excerpt: blog.excerpt || 'Read this interesting article to learn more.',
+      slug: blog.slug,
+      cover: blog.cover?.url 
+        ? `${API_BASE_URL}${blog.cover.url}` 
+        : FALLBACK_BLOGS[0].cover,
+    }));
+  };
+
+  const displayBlogs = getDisplayBlogs();
+
   return (
     <div id="blog" className="py-20 bg-muted/30">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -15,17 +98,14 @@ const BlogsSection = () => {
           </p>
         </div>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {[...Array(3)].map((_, index) => (
+          {displayBlogs.map((blog, index) => (
             <div
-              key={index}
+              key={blog.id}
               className="bg-card rounded-lg overflow-hidden border border-border hover:shadow-lg transition-shadow"
             >
-              {/* <div className="h-48 bg-gradient-to-r from-blue-500 to-purple-500"></div> */}
               <Image
-                src={
-                  'https://images.unsplash.com/photo-1545048702-79362596cdc9?q=80&w=1400&auto=format&fit=crop'
-                }
-                alt={`blog`}
+                src={blog.cover}
+                alt={blog.title}
                 className="p-6 pb-0 rounded w-full object-cover h-48 bg-gradient-to-r from-blue-500 to-purple-500"
                 loading="lazy"
                 width={472}
@@ -33,14 +113,13 @@ const BlogsSection = () => {
               />
               <div className="p-6">
                 <h3 className="font-semibold mb-2">
-                  Mastering Online Exams In India; A comprehensive...
+                  {blog.title}
                 </h3>
                 <p className="text-sm text-muted-foreground mb-4">
-                  Accelerate your career with confidence. Learn by doing, build your portfolio, and
-                  enhance your skills with AI tools that every modern PM needs to know.
+                  {blog.excerpt}
                 </p>
                 <Button variant="outline" size="sm">
-                  <Link href={'/blog'}>See all details →</Link>
+                  <Link href={`/blog/${blog.slug}`}>See all details →</Link>
                 </Button>
               </div>
             </div>
