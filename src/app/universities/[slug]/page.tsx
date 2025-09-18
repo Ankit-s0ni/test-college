@@ -596,7 +596,7 @@ function HeroSection({
 
               <StudentLeadModal
                 universityName={data.name}
-                triggerContent="Schedule 1:1 Call"
+                triggerContent="Talk to our expert"
                 modalTitle={`Schedule a Call with ${data.name}`}
                 triggerClassName="border-green-600 text-green-700 hover:bg-green-50 w-[200px] bg-transparent"
               />
@@ -805,7 +805,12 @@ export default function UniversitySlugPage({ params }: any) {
             {pageData.certificate && <CertificateSection data={pageData.certificate} />}
             {pageData.ranking && <RankingSection data={pageData.ranking} />}
             {pageData.fees && <FeesSection data={pageData.fees} />}
-            {pageData.examination && <ExaminationSection />}
+            {pageData.examination?.title && pageData.examination?.description && (
+              <ExaminationSection
+                title={pageData.examination.title}
+                description={pageData.examination.description}
+              />
+            )}
             {pageData.financialAid && <FinancialAidSection data={pageData.financialAid} />}
             {!pageData.financialAid && <div id="financial-aid" />}
             {pageData.partners && <HiringPartnerSection data={pageData.partners} />}

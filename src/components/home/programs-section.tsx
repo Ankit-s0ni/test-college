@@ -5,103 +5,74 @@ import { GraduationCap, LineChart, Library, FlaskConical, BadgeCheck } from 'luc
 import React, { useState, useEffect } from 'react';
 import { programsAPI } from '@/lib/api';
 import { transformProgramsData } from '@/lib/transformers';
-import { ProgramListItem, ProgramCategory } from '@/types/program';
-
-const ALL_PROGRAMS: { name: string; duration: string; icon: string; category: string }[] = [
-  // Executive
-  { name: 'MCA', duration: '3 Years', icon: '💻', category: 'Executive Programs' },
-  { name: 'MBA', duration: '2 Years', icon: '🎓', category: 'Executive Programs' },
-  { name: 'MAJMC', duration: '2 Years', icon: '🎤', category: 'Executive Programs' },
-  { name: 'M.TECH', duration: '2 Years', icon: '⚙️', category: 'Executive Programs' },
-  { name: 'Dual MBA', duration: '2 Years', icon: '🎯', category: 'Executive Programs' },
-  { name: 'M.Sc', duration: '2 Years', icon: '🔬', category: 'Executive Programs' },
-  { name: 'Online MBA', duration: '2 Years', icon: '💼', category: 'Executive Programs' },
-  { name: 'PGDBA', duration: '2 Years', icon: '📊', category: 'Executive Programs' },
-  { name: '1-Year MBA', duration: '1 Year', icon: '⏱️', category: 'Executive Programs' },
-  { name: 'PGDM', duration: '2 Years', icon: '📈', category: 'Executive Programs' },
-  { name: 'PGDM(Ex)', duration: '2 Years', icon: '🧑‍💼', category: 'Executive Programs' },
-  { name: 'Executive MBA', duration: '2 Years', icon: '👔', category: 'Executive Programs' },
-  { name: 'LLM', duration: '2 Years', icon: '⚖️', category: 'Executive Programs' },
-  { name: 'Distance MBA', duration: '2 Years', icon: '🎓', category: 'Executive Programs' },
-
-  // PG
-  { name: 'MBA (PG)', duration: '2 Years', icon: '🎓', category: 'PG Courses' },
-  { name: 'M.Tech (PG)', duration: '2 Years', icon: '⚙️', category: 'PG Courses' },
-  { name: 'M.Sc (PG)', duration: '2 Years', icon: '🧪', category: 'PG Courses' },
-
-  // UG
-  { name: 'BBA', duration: '3 Years', icon: '📚', category: 'UG Courses' },
-  { name: 'BCA', duration: '3 Years', icon: '💻', category: 'UG Courses' },
-  { name: 'B.Com', duration: '3 Years', icon: '🧾', category: 'UG Courses' },
-];
+import { ProgramListItem } from '@/types/program';
+import { programCategoriesAPI, ProgramCategoryAPI } from '@/lib/program-categories-api';
 
 const ProgramsSection = () => {
   const [programs, setPrograms] = useState<ProgramListItem[]>([]);
+  const [categories, setCategories] = useState<ProgramCategoryAPI[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [active, setActive] = useState<string | null>(null);
 
-  const categories: ProgramCategory[] = [
-    'Executive Programs',
-    'PG Courses',
-    'UG Courses',
-  ];
-
-  const icons = {
-    'Executive Programs': GraduationCap,
-    'PG Courses': LineChart,
-    'UG Courses': Library,
-  } as const;
-
-  const [active, setActive] = useState<ProgramCategory>('Executive Programs');
-
-  // Fetch programs from API
   useEffect(() => {
-    async function fetchPrograms() {
+    async function fetchData() {
       try {
-        console.log('🔍 Fetching programs from API...');
         setLoading(true);
-        setError(null);
-        
-        const response = await programsAPI.getAll();
-        console.log('✅ Programs API Response:', response);
-        
-        const transformedPrograms = transformProgramsData(response.data);
-        console.log('🔄 Transformed Programs:', transformedPrograms);
-        
-        // Log category distribution
-        const categoryCount = transformedPrograms.reduce((acc, program) => {
-          acc[program.category] = (acc[program.category] || 0) + 1;
-          return acc;
-        }, {} as Record<string, number>);
-        console.log('📊 Programs by category:', categoryCount);
-        
-        setPrograms(transformedPrograms);
+        const [catRes, progRes] = await Promise.all([
+          programCategoriesAPI.getAll(),
+          programsAPI.getAll(),
+        ]);
+
+        // Transform programs and map to categories based on degree type
+        const transformedPrograms = transformProgramsData(progRes.data);
+
+        // Remove duplicate categories based on label and key
+        const uniqueCategories = catRes.data.filter((category, index, array) => 
+          array.findIndex(cat => cat.label === category.label && cat.key === category.key) === index
+        );
+
+        // Since programs don't have direct category relationships, map by degree type
+        const categoriesWithPrograms = uniqueCategories.map((category) => {
+          let associatedPrograms: ProgramListItem[] = [];
+          
+          // Map programs to categories based on category key and program degree
+          if (category.key === 'ug-program') {
+            associatedPrograms = transformedPrograms.filter(program => program.degree === 'Bachelor');
+          } else if (category.key === 'pg-program') {
+            associatedPrograms = transformedPrograms.filter(program => program.degree === 'Master');
+          } else if (category.key === 'diploma') {
+            associatedPrograms = transformedPrograms.filter(program => program.degree === 'Certificate' || program.degree === 'Diploma');
+          } else if (category.key === 'executive-program') {
+            // For executive programs, we can filter by a different criteria or leave empty for now
+            associatedPrograms = [];
+          }
+
+          return {
+            ...category,
+            programs: associatedPrograms,
+          };
+        });
+
+        setCategories(categoriesWithPrograms);
+
+        // Set first category as active by default
+        if (categoriesWithPrograms.length > 0) {
+          setActive(categoriesWithPrograms[0].label);
+        }
       } catch (error) {
-        console.error('❌ Failed to fetch programs:', error);
+        console.error('❌ Failed to fetch data:', error);
         setError('Failed to load programs');
-        
-        // Fallback to dummy data if API fails
-        const fallbackPrograms: ProgramListItem[] = ALL_PROGRAMS.map((program, index) => ({
-          id: index + 1,
-          name: program.name,
-          slug: program.name.toLowerCase().replace(/\s+/g, '-'),
-          duration: program.duration,
-          category: program.category as ProgramCategory,
-          icon: program.icon,
-          degree: program.name,
-          level: program.category.includes('UG') ? 'undergraduate' : 'postgraduate',
-          featured: false,
-        }));
-        setPrograms(fallbackPrograms);
       } finally {
         setLoading(false);
       }
     }
-
-    fetchPrograms();
+    fetchData();
   }, []);
 
-  const visiblePrograms = programs.filter((p) => p.category === active);
+  // Filter programs by active category
+  const visiblePrograms =
+    categories.find((category) => category.label === active)?.programs || [];
 
   return (
     <div id="programs" className="py-20 bg-muted/30">
@@ -112,12 +83,11 @@ const ProgramsSection = () => {
         <div className="mb-10 flex justify-center">
           <div className="inline-flex rounded-md border bg-white p-1 shadow-sm overflow-x-auto space-x-2">
             {categories.map((category) => {
-              const Icon = icons[category];
-              const isActive = active === category;
+              const isActive = active === category.label;
               return (
                 <button
-                  key={category}
-                  onClick={() => setActive(category)}
+                  key={category.id}
+                  onClick={() => setActive(category.label)}
                   className={[
                     'inline-flex items-center gap-2 rounded-md px-4 py-2 text-sm transition whitespace-nowrap',
                     isActive
@@ -125,10 +95,7 @@ const ProgramsSection = () => {
                       : 'text-muted-foreground hover:bg-muted/60',
                   ].join(' ')}
                 >
-                  <Icon
-                    className={'h-4 w-4 ' + (isActive ? 'text-[#1E40AF]' : 'text-muted-foreground')}
-                  />
-                  <span className={isActive ? 'font-medium' : ''}>{category}</span>
+                  <span className={isActive ? 'font-medium' : ''}>{category.label}</span>
                 </button>
               );
             })}
@@ -146,26 +113,96 @@ const ProgramsSection = () => {
             <p className="text-muted-foreground">{error}</p>
           </div>
         ) : (
-          <div className="flex flex-wrap items-center justify-center gap-3">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
             {visiblePrograms.map((program) => (
               <div
                 key={program.id}
-                className="w-[180px] bg-card rounded-lg p-3 text-center border border-border hover:shadow-lg transition-shadow"
+                className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden hover:shadow-md transition-shadow duration-300"
               >
-                <p className="text-xs text-muted-foreground mb-4 border rounded p-2">
-                  Course Duration: {program.duration}
-                </p>
-                <div className="text-3xl mb-3">{program.icon}</div>
-                <h3 className="font-semibold text-lg mb-2">{program.name}</h3>
-                <Button size="sm" className="w-full rounded-sm" asChild>
-                  <a href={`/programs/${program.slug}`} className="inline-flex items-center justify-center">
-                    View Program
-                  </a>
-                </Button>
+                {/* Program Image */}
+                <div className="h-24 bg-gray-50 flex items-center justify-center overflow-hidden">
+                  <img
+                    src={`https://images.unsplash.com/photo-${
+                      program.name.toLowerCase().includes('mba') ? '1513475382585-d06e58bcb0e0' :
+                      program.name.toLowerCase().includes('mca') ? '1513475382585-d06e58bcb0e0' :
+                      program.name.toLowerCase().includes('mcom') ? '1513475382585-d06e58bcb0e0' :
+                      program.name.toLowerCase().includes('computer') ? '1513475382585-d06e58bcb0e0' :
+                      program.name.toLowerCase().includes('business') ? '1513475382585-d06e58bcb0e0' :
+                      program.name.toLowerCase().includes('commerce') ? '1513475382585-d06e58bcb0e0' :
+                      program.name.toLowerCase().includes('education') ? '1513475382585-d06e58bcb0e0' :
+                      program.name.toLowerCase().includes('arts') ? '1513475382585-d06e58bcb0e0' :
+                      program.name.toLowerCase().includes('law') ? '1513475382585-d06e58bcb0e0' :
+                      program.name.toLowerCase().includes('technology') ? '1513475382585-d06e58bcb0e0' :
+                      program.name.toLowerCase().includes('science') ? '1513475382585-d06e58bcb0e0' :
+                      '1513475382585-d06e58bcb0e0'
+                    }?auto=format&fit=crop&w=200&h=120&q=80`}
+                    alt={program.name}
+                    className="w-full h-full object-cover"
+                    onError={(e) => {
+                      // Fallback to a colored background with icon
+                      const target = e.currentTarget as HTMLImageElement;
+                      target.style.display = 'none';
+                      const parent = target.parentElement!;
+                      parent.innerHTML = `
+                        <div class="w-full h-full ${
+                          program.id % 5 === 0 ? 'bg-blue-100' :
+                          program.id % 5 === 1 ? 'bg-green-100' :
+                          program.id % 5 === 2 ? 'bg-purple-100' :
+                          program.id % 5 === 3 ? 'bg-orange-100' :
+                          'bg-teal-100'
+                        } flex items-center justify-center">
+                          <div class="text-2xl ${
+                            program.id % 5 === 0 ? 'text-blue-600' :
+                            program.id % 5 === 1 ? 'text-green-600' :
+                            program.id % 5 === 2 ? 'text-purple-600' :
+                            program.id % 5 === 3 ? 'text-orange-600' :
+                            'text-teal-600'
+                          }">
+                            ${program.name.toLowerCase().includes('mba') ? '🎓' :
+                              program.name.toLowerCase().includes('mca') ? '💻' :
+                              program.name.toLowerCase().includes('mcom') ? '📊' :
+                              program.name.toLowerCase().includes('computer') ? '💻' :
+                              program.name.toLowerCase().includes('business') ? '�' :
+                              program.name.toLowerCase().includes('commerce') ? '�' :
+                              program.name.toLowerCase().includes('education') ? '�‍🏫' :
+                              program.name.toLowerCase().includes('arts') ? '🎨' :
+                              program.name.toLowerCase().includes('law') ? '⚖️' :
+                              program.name.toLowerCase().includes('technology') ? '�' :
+                              program.name.toLowerCase().includes('science') ? '�' : '📚'}
+                          </div>
+                        </div>
+                      `;
+                    }}
+                  />
+                </div>
+                
+                {/* Program Details */}
+                <div className="p-3">
+                  <h3 className="font-medium text-sm text-gray-900 mb-1 leading-tight overflow-hidden" style={{
+                    display: '-webkit-box',
+                    WebkitLineClamp: 2,
+                    WebkitBoxOrient: 'vertical' as any,
+                    lineHeight: '1.2'
+                  }}>
+                    {program.name}
+                  </h3>
+                  <p className="text-xs text-gray-500 mb-3">
+                    Duration: {program.duration}
+                  </p>
+                  <Button 
+                    size="sm" 
+                    className="w-full rounded-sm" 
+                    asChild
+                  >
+                    <a href={`/programs/${program.slug}`} className="inline-flex items-center justify-center">
+                      Read More
+                    </a>
+                  </Button>
+                </div>
               </div>
             ))}
-            {visiblePrograms.length === 0 && !loading && (
-              <div className="text-center py-8 w-full">
+            {visiblePrograms.length === 0 && (
+              <div className="col-span-full text-center py-8">
                 <p className="text-muted-foreground">No programs available in this category.</p>
                 {active !== 'Executive Programs' && (
                   <button 

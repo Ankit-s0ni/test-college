@@ -38,11 +38,11 @@ const HeroSection = () => {
               universityName="College Cosmos"
               triggerContent={
                 <>
-                  Schedule 1:1 Call
+                  Talk to our expert
                   <MoveRight className="ml-2 h-4 w-4" />
                 </>
               }
-              modalTitle="Schedule 1:1 Call"
+              modalTitle="Talk to our expert"
               triggerClassName="font-semibold flex items-center gap-2 border border-gray-300 bg-transparent text-gray-700 hover:bg-gray-50 px-4 py-2 rounded-md"
             />
           </div>

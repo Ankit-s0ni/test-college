@@ -105,11 +105,11 @@ export default function BlogHero() {
                 universityName="College Cosmos"
                 triggerContent={
                   <>
-                    Schedule 1:1 Call
+                    Talk to our expert
                     <ArrowRight className="ml-1.5 h-4 w-4" />
                   </>
                 }
-                modalTitle="Schedule 1:1 Call"
+                modalTitle="Talk to our expert"
                 triggerClassName="h-9 rounded-md px-4 text-[13px] font-medium border border-gray-300 bg-transparent text-gray-700 hover:bg-gray-50"
               />
             </div>

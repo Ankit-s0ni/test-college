@@ -106,14 +106,14 @@ export const coursesAPI = {
  */
 export const programsAPI = {
   /**
-   * Get all programs
+   * Get all programs with category populated
    */
-  getAll: () => fetchAPI<ProgramsAPIResponse>('/programs'),
+  getAll: () => fetchAPI<ProgramsAPIResponse>('/programs?populate=category'),
   
   /**
    * Get featured programs
    */
-  getFeatured: () => fetchAPI<ProgramsAPIResponse>('/programs?featured=true'),
+  getFeatured: () => fetchAPI<ProgramsAPIResponse>('/programs?featured=true&populate=category'),
   
   /**
    * Get programs by category
