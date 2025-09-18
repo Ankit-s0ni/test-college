@@ -282,10 +282,10 @@ function convertAPIDataToPageData(apiResponse: UniversityDetailAPIResponse): Uni
     conditionalData.about = {
       title: `About ${university.name}`,
       description: university.description,
-      courses: university.courseDetails?.map((course: any) => ({
-        name: course.courseName,
-        perSem: course.fees,
-        total: course.fees,
+      courses: university.courses?.map((course: any) => ({
+        name: course.name,
+        perSem: course.feeRange || 'Contact for details',
+        total: course.feeRange || 'Contact for details',
         online: course.mode.toLowerCase().includes('online')
       })) || [],
     };
@@ -311,9 +311,9 @@ function convertAPIDataToPageData(apiResponse: UniversityDetailAPIResponse): Uni
     };
   }
 
-  // Only add Courses section if we have real course details data
-  if (university.courseDetails && university.courseDetails.length > 0) {
-    conditionalData.courses = university.courseDetails.map((course: any) => ({
+  // Only add Courses section if we have real courses data
+  if (university.courses && university.courses.length > 0) {
+    conditionalData.courses = university.courses.map((course: any) => ({
       image: 'https://images.unsplash.com/photo-1523580846011-d3a5bc25702b?q=80&w=1200&auto=format&fit=crop',
       detailsLink: '#',
       prospectusLink: '#',
@@ -791,7 +791,17 @@ export default function UniversitySlugPage({ params }: any) {
             {/* Only show sections where we have real API data */}
             {pageData.about && <AboutSection data={pageData.about} />}
             {pageData.approvals && <ApprovalsSection data={pageData.approvals} />}
-            {pageData.courses && pageData.courses.length > 0 && <CoursesSection items={pageData.courses} />}
+            {(pageData.courses && pageData.courses.length > 0) || (apiData?.data?.courses && apiData.data.courses.length > 0) ? (
+              <CoursesSection 
+                items={pageData.courses || []} 
+                universityData={{
+                  name: apiData?.data?.name || pageData.name,
+                  logo: apiData?.data?.logo?.url ? `https://collegecosmos.manavkhadka.com.np${apiData.data.logo.url}` : pageData.logo,
+                  rating: apiData?.data?.rating,
+                  courses: apiData?.data?.courses || []
+                }}
+              />
+            ) : null}
             {pageData.certificate && <CertificateSection data={pageData.certificate} />}
             {pageData.ranking && <RankingSection data={pageData.ranking} />}
             {pageData.fees && <FeesSection data={pageData.fees} />}
@@ -803,14 +813,17 @@ export default function UniversitySlugPage({ params }: any) {
             {pageData.campus && <CampusSection data={pageData.campus} />}
             {pageData.advantages && <AdvantagesSection data={pageData.advantages} />}
             
+            {/* FAQ section */}
+            {pageData.faq && pageData.faq.length > 0 && <FaqSection data={pageData.faq} />}
+            {!pageData.faq && <div id="faq" />}
+            
             {/* Placeholder sections for sidebar navigation */}
-            <div id="faq" />
             <div id="similar-universities" />
             
             {pageData.reviews && <ReviewsSection data={pageData.reviews} />}
 
             {/* Show message if using API data but no optional sections are available */}
-            {apiData && !pageData.about && !pageData.approvals && (!pageData.courses || pageData.courses.length === 0) && !pageData.ranking && !pageData.reviews && !pageData.financialAid && !pageData.partners && !pageData.campus && !pageData.advantages && !pageData.faq && (
+            {apiData && !pageData.about && !pageData.approvals && (!pageData.courses || pageData.courses.length === 0) && !pageData.ranking && !pageData.reviews && !pageData.financialAid && !pageData.partners && !pageData.campus && !pageData.advantages && (!pageData.faq || pageData.faq.length === 0) && (
               <div className="text-center py-12">
                 <h3 className="text-xl font-semibold mb-2">More Details Coming Soon</h3>
                 <p className="text-muted-foreground">
