@@ -1,8 +1,10 @@
 'use client';
 
-import { useState } from 'react';
-import { studentLeadsAPI } from '@/lib/api';
+import { useState, useEffect } from 'react';
+import { studentLeadsAPI, programsAPI } from '@/lib/api';
 import { StudentLeadSubmission } from '@/types/student-lead';
+import { ProgramListItem } from '@/types/program';
+import { transformProgramsData } from '@/lib/transformers';
 
 // shadcn/ui components
 import {
@@ -36,14 +38,40 @@ export default function StudentLeadModal({
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [programs, setPrograms] = useState<ProgramListItem[]>([]);
+  const [loadingPrograms, setLoadingPrograms] = useState(false);
   
   const [formData, setFormData] = useState<StudentLeadSubmission>({
     name: '',
     email: '',
     phone: '',
+    program: '',
     stateProvince: 'Andhra Pradesh',
+    status: 'new',
+    message: '',
+    leadSource: 'website',
     locale: 'en'
   });
+
+  // Fetch programs when modal opens
+  useEffect(() => {
+    if (isOpen && programs.length === 0) {
+      fetchPrograms();
+    }
+  }, [isOpen]);
+
+  const fetchPrograms = async () => {
+    try {
+      setLoadingPrograms(true);
+      const response = await programsAPI.getAll();
+      const transformedPrograms = transformProgramsData(response.data);
+      setPrograms(transformedPrograms);
+    } catch (error) {
+      console.error('Failed to fetch programs:', error);
+    } finally {
+      setLoadingPrograms(false);
+    }
+  };
 
   const handleInputChange = (field: keyof StudentLeadSubmission, value: string | string[]) => {
     setFormData(prev => ({
@@ -104,7 +132,11 @@ export default function StudentLeadModal({
       name: '',
       email: '',
       phone: '',
+      program: '',
       stateProvince: 'Andhra Pradesh',
+      status: 'new',
+      message: '',
+      leadSource: 'website',
       locale: 'en'
     });
   };
@@ -196,6 +228,27 @@ export default function StudentLeadModal({
             </div>
 
             <div className="space-y-2">
+              <Label htmlFor="program">Interested Program</Label>
+              <select
+                id="program"
+                value={formData.program}
+                onChange={(e) => handleInputChange('program', e.target.value)}
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              >
+                <option value="">Select a program</option>
+                {loadingPrograms ? (
+                  <option value="">Loading programs...</option>
+                ) : (
+                  programs.map((program) => (
+                    <option key={program.id} value={program.name}>
+                      {program.name}
+                    </option>
+                  ))
+                )}
+              </select>
+            </div>
+
+            <div className="space-y-2">
               <Label htmlFor="stateProvince">State/Province *</Label>
               <select
                 id="stateProvince"
@@ -236,6 +289,18 @@ export default function StudentLeadModal({
                 <option value="Mumbai">Mumbai</option>
                 <option value="Other">Other</option>
               </select>
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="message">Message (Optional)</Label>
+              <textarea
+                id="message"
+                value={formData.message || ''}
+                onChange={(e) => handleInputChange('message', e.target.value)}
+                placeholder="Tell us about your goals and any specific questions you have..."
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 min-h-[80px] resize-y"
+                rows={3}
+              />
             </div>
 
             {error && (

@@ -248,6 +248,7 @@ export function transformProgramData(apiProgram: ProgramAPI): ProgramListItem {
     level: level,
     featured: apiProgram.featured,
     averageSalary: apiProgram.averageSalary,
+    image: apiProgram.image,
   };
 }
 

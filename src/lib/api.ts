@@ -106,29 +106,29 @@ export const coursesAPI = {
  */
 export const programsAPI = {
   /**
-   * Get all programs with category populated
+   * Get all programs with category and image populated
    */
-  getAll: () => fetchAPI<ProgramsAPIResponse>('/programs?populate=category'),
+  getAll: () => fetchAPI<ProgramsAPIResponse>('/programs?populate=*'),
   
   /**
    * Get featured programs
    */
-  getFeatured: () => fetchAPI<ProgramsAPIResponse>('/programs?featured=true&populate=category'),
+  getFeatured: () => fetchAPI<ProgramsAPIResponse>('/programs?featured=true&populate=*'),
   
   /**
    * Get programs by category
    */
-  getByCategory: (category: string) => fetchAPI<ProgramsAPIResponse>(`/programs?category=${category}`),
+  getByCategory: (category: string) => fetchAPI<ProgramsAPIResponse>(`/programs?category=${category}&populate=*`),
   
   /**
    * Get program by slug
    */
-  getBySlug: (slug: string) => fetchAPI<ProgramDetailAPIResponse>(`/programs/slug/${slug}`),
+  getBySlug: (slug: string) => fetchAPI<ProgramDetailAPIResponse>(`/programs/slug/${slug}?populate=*`),
   
   /**
    * Get program by ID
    */
-  getById: (id: string) => fetchAPI<ProgramDetailAPIResponse>(`/programs/${id}`),
+  getById: (id: string) => fetchAPI<ProgramDetailAPIResponse>(`/programs/${id}?populate=*`),
 };
 
 /**

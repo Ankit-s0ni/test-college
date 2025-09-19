@@ -1,6 +1,51 @@
 // Program-related types for the College Cosmos frontend
 
-// Program-related types for the College Cosmos frontend
+export interface ProgramImage {
+  id: number;
+  documentId: string;
+  name: string;
+  alternativeText?: string;
+  caption?: string;
+  width: number;
+  height: number;
+  formats?: {
+    xsmall?: {
+      ext: string;
+      url: string;
+      hash: string;
+      mime: string;
+      name: string;
+      path?: string;
+      size: number;
+      width: number;
+      height: number;
+      sizeInBytes: number;
+    };
+    thumbnail?: {
+      ext: string;
+      url: string;
+      hash: string;
+      mime: string;
+      name: string;
+      path?: string;
+      size: number;
+      width: number;
+      height: number;
+      sizeInBytes: number;
+    };
+  };
+  hash: string;
+  ext: string;
+  mime: string;
+  size: number;
+  url: string;
+  previewUrl?: string;
+  provider: string;
+  provider_metadata?: any;
+  createdAt: string;
+  updatedAt: string;
+  publishedAt: string;
+}
 
 export interface ProgramAPI {
   id: number;
@@ -18,6 +63,11 @@ export interface ProgramAPI {
   createdAt: string;
   updatedAt: string;
   publishedAt: string;
+  description?: string;
+  curriculum?: string;
+  totalFees?: number;
+  yearlyFees?: number;
+  image?: ProgramImage;
   syllabus?: string;
   specializations?: string;
   category?: {
@@ -73,6 +123,7 @@ export interface ProgramListItem {
   level: string;
   featured: boolean;
   averageSalary?: number;
+  image?: ProgramImage;
 }
 
 // Program categories

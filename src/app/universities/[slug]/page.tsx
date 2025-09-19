@@ -601,17 +601,6 @@ function HeroSection({
                 triggerClassName="border-green-600 text-green-700 hover:bg-green-50 w-[200px] bg-transparent"
               />
             </div>
-
-            {/* big CTA */}
-            <StudentLeadModal 
-              universityName={data.name}
-              triggerContent={
-                <>
-                  <GraduationCap className="mr-2 h-4 w-4" />
-                  Apply Now
-                </>
-              }
-            />
           </div>
 
           {/* RIGHT: ratings */}

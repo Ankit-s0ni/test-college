@@ -4,7 +4,6 @@ import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
 import { Menu } from 'lucide-react';
-import StudentLeadModal from '@/components/student-lead-modal';
 import { cn } from '@/lib/utils';
 import Link from 'next/link';
 
@@ -65,12 +64,17 @@ const Navbar = () => {
 
           {/* CTA Button - Desktop */}
           <div className="hidden md:block">
-            <StudentLeadModal
-              universityName="College Cosmos"
-              triggerContent="Get In Touch"
-              modalTitle="Get In Touch with College Cosmos"
-              triggerClassName="font-medium bg-[#0247D2] hover:bg-blue-700 text-white px-4 py-2 rounded-md"
-            />
+            <Button
+              className="font-medium bg-[#0247D2] hover:bg-blue-700 text-white px-4 py-2 rounded-md"
+              onClick={() => {
+                const contactSection = document.getElementById('contact');
+                if (contactSection) {
+                  contactSection.scrollIntoView({ behavior: 'smooth' });
+                }
+              }}
+            >
+              Get In Touch
+            </Button>
           </div>
 
           {/* Mobile menu sheet */}
@@ -121,12 +125,18 @@ const Navbar = () => {
 
                   {/* Footer CTA */}
                   <div className="p-6 border-t border-border">
-                    <StudentLeadModal
-                      universityName="College Cosmos"
-                      triggerContent="Get In Touch"
-                      modalTitle="Get In Touch with College Cosmos"
-                      triggerClassName="w-full font-medium bg-[#0247D2] hover:bg-blue-700 text-white px-4 py-2 rounded-md h-11"
-                    />
+                    <Button
+                      className="w-full font-medium bg-[#0247D2] hover:bg-blue-700 text-white px-4 py-2 rounded-md h-11"
+                      onClick={() => {
+                        const contactSection = document.getElementById('contact');
+                        if (contactSection) {
+                          contactSection.scrollIntoView({ behavior: 'smooth' });
+                        }
+                        setIsMenuOpen(false); // Close the mobile menu
+                      }}
+                    >
+                      Get In Touch
+                    </Button>
                   </div>
                 </div>
               </SheetContent>

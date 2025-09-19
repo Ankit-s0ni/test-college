@@ -2,7 +2,11 @@ export interface StudentLeadSubmission {
   name: string;
   email: string;
   phone: string;
+  program?: string;
   stateProvince: string;
+  status?: string;
+  message?: string;
+  leadSource?: string;
   locale: string;
 }
 

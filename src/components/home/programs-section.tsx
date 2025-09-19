@@ -122,21 +122,8 @@ const ProgramsSection = () => {
                 {/* Program Image */}
                 <div className="h-24 bg-gray-50 flex items-center justify-center overflow-hidden">
                   <img
-                    src={`https://images.unsplash.com/photo-${
-                      program.name.toLowerCase().includes('mba') ? '1513475382585-d06e58bcb0e0' :
-                      program.name.toLowerCase().includes('mca') ? '1513475382585-d06e58bcb0e0' :
-                      program.name.toLowerCase().includes('mcom') ? '1513475382585-d06e58bcb0e0' :
-                      program.name.toLowerCase().includes('computer') ? '1513475382585-d06e58bcb0e0' :
-                      program.name.toLowerCase().includes('business') ? '1513475382585-d06e58bcb0e0' :
-                      program.name.toLowerCase().includes('commerce') ? '1513475382585-d06e58bcb0e0' :
-                      program.name.toLowerCase().includes('education') ? '1513475382585-d06e58bcb0e0' :
-                      program.name.toLowerCase().includes('arts') ? '1513475382585-d06e58bcb0e0' :
-                      program.name.toLowerCase().includes('law') ? '1513475382585-d06e58bcb0e0' :
-                      program.name.toLowerCase().includes('technology') ? '1513475382585-d06e58bcb0e0' :
-                      program.name.toLowerCase().includes('science') ? '1513475382585-d06e58bcb0e0' :
-                      '1513475382585-d06e58bcb0e0'
-                    }?auto=format&fit=crop&w=200&h=120&q=80`}
-                    alt={program.name}
+                    src={program.image?.url ? `${(process.env.NEXT_PUBLIC_API_URL || 'http://localhost:1337').replace('/api', '')}${program.image.url}` : `https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?auto=format&fit=crop&w=200&h=120&q=80`}
+                    alt={program.image?.alternativeText || program.name}
                     className="w-full h-full object-cover"
                     onError={(e) => {
                       // Fallback to a colored background with icon
