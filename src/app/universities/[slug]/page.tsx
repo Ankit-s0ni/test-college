@@ -41,7 +41,7 @@ import SimilarUniversities from '@/components/university/similar-universities';
 import ReviewsSection from '@/components/university/reviews-section';
 import Stars from '@/components/custom/stars';
 import ReviewModal from '@/components/review-modal';
-import StudentLeadModal from '@/components/student-lead-modal';
+import TalkToExpertModal from '@/components/talk-to-expert-modal';
 
 /* -------------------------------------------------------------------------- */
 /*                                JSON TYPES                                  */
@@ -594,11 +594,12 @@ function HeroSection({
                 </Link>
               </Button>
 
-              <StudentLeadModal
+              <TalkToExpertModal
                 universityName={data.name}
                 triggerContent="Talk to our expert"
                 modalTitle={`Schedule a Call with ${data.name}`}
                 triggerClassName="border-green-600 text-green-700 hover:bg-green-50 w-[200px] bg-transparent"
+                calLink={data.scheduleLink || undefined}
               />
             </div>
           </div>

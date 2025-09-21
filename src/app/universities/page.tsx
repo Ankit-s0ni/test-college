@@ -52,9 +52,7 @@ const UniversitiesListingPage = async () => {
             <h2 className="text-2xl font-bold text-gray-900 mb-2">
               Universities ({universities.length})
             </h2>
-            <p className="text-gray-600">
-              {universities.length > 0 ? '✅ Data loaded from API' : '❌ No data found'}
-            </p>
+            {/* debug status removed */}
           </div>
           
           {universities.length === 0 ? (

@@ -6,7 +6,10 @@ import HeroImage from '../../../public/assets/images/hero-img.png';
 import HeroBg from '../../../public/assets/icons/hero-bg.svg';
 import ApplierIcon from '../../../public/assets/icons/applier-icon-group.svg';
 import { MoveRight } from 'lucide-react';
-import StudentLeadModal from '@/components/student-lead-modal';
+import TalkToExpertModal from '@/components/talk-to-expert-modal';
+
+// Default to env var for Cal.com scheduling URL
+const CAL_COM_DEFAULT = typeof process !== 'undefined' ? process.env.NEXT_PUBLIC_CAL_URL || 'https://cal.com/your-team/schedule' : 'https://cal.com/your-team/schedule';
 
 const HeroSection = () => {
   return (
@@ -23,27 +26,17 @@ const HeroSection = () => {
             Recruitment reimagined through intelligent conversations
           </p>
           <div className="flex flex-col sm:flex-row gap-4 mb-8">
-            <StudentLeadModal
+            <TalkToExpertModal
               universityName="College Cosmos"
               triggerContent={
                 <>
                   Talk To Our Expert
-                  <MoveRight className="ml-2 h-4 w-4" />
+                  <MoveRight className="ml-3 h-5 w-5" />
                 </>
               }
               modalTitle="Talk To Our Expert"
-              triggerClassName="font-semibold flex items-center gap-2 bg-[#0247D2] hover:bg-blue-700 text-white px-4 py-2 rounded-md"
-            />
-            <StudentLeadModal
-              universityName="College Cosmos"
-              triggerContent={
-                <>
-                  Talk to our expert
-                  <MoveRight className="ml-2 h-4 w-4" />
-                </>
-              }
-              modalTitle="Talk to our expert"
-              triggerClassName="font-semibold flex items-center gap-2 border border-gray-300 bg-transparent text-gray-700 hover:bg-gray-50 px-4 py-2 rounded-md"
+              triggerClassName="font-semibold flex items-center gap-3 bg-[#0247D2] hover:bg-blue-700 text-white px-6 py-3 rounded-md text-lg transition-transform duration-150 ease-in-out transform hover:scale-105 hover:shadow-lg"
+              calLink={CAL_COM_DEFAULT}
             />
           </div>
           <Image src={ApplierIcon} alt="trust us image" width={300} height={40} />

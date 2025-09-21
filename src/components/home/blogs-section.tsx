@@ -101,7 +101,7 @@ const BlogsSection = () => {
           {displayBlogs.map((blog, index) => (
             <div
               key={blog.id}
-              className="bg-card rounded-lg overflow-hidden border border-border hover:shadow-lg transition-shadow"
+              className="bg-card rounded-lg overflow-hidden border border-border transform transition duration-300 hover:shadow-lg hover:-translate-y-1 group relative bg-transparent"
             >
               <Image
                 src={blog.cover}
@@ -111,15 +111,32 @@ const BlogsSection = () => {
                 width={472}
                 height={306}
               />
-              <div className="p-6">
-                <h3 className="font-semibold mb-2">
+              <div className="p-6 transition-colors duration-300 relative z-30 overflow-hidden">
+                {/* overlay inside content only so image is not tinted */}
+                <div
+                  className="absolute left-0 right-0 bottom-0 h-full transform translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-in-out z-10"
+                  style={{ backgroundColor: 'var(--color-action)' }}
+                  aria-hidden
+                />
+                <div
+                  className="absolute left-0 right-0 bottom-0 h-full transform translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-in-out opacity-0 group-hover:opacity-40 z-10"
+                  style={{ backgroundImage: 'radial-gradient(rgba(255,255,255,0.03) 1px, transparent 1px)', backgroundSize: '20px 20px' }}
+                  aria-hidden
+                />
+
+                <h3 className="font-semibold mb-2 relative z-20 transition-colors duration-300 group-hover:text-white">
                   {blog.title}
                 </h3>
-                <p className="text-sm text-muted-foreground mb-4">
+                <p className="text-sm text-muted-foreground mb-4 relative z-20 transition-colors duration-300 group-hover:text-white/90">
                   {blog.excerpt}
                 </p>
-                <Button variant="outline" size="sm">
-                  <Link href={`/blog/${blog.slug}`}>See all details →</Link>
+                <Button variant="outline" size="sm" className="relative z-20">
+                  <Link href={`/blog/${blog.slug}`} className="inline-flex items-center gap-2 no-underline">
+                    <span>See all details</span>
+                    <span className="inline-block transform transition-transform duration-300 group-hover:translate-x-2 group-hover:rotate-12">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-current"><path d="M5 12h14M13 5l7 7-7 7" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                    </span>
+                  </Link>
                 </Button>
               </div>
             </div>

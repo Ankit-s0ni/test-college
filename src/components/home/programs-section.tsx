@@ -26,6 +26,13 @@ const ProgramsSection = () => {
 
         // Transform programs and map to categories based on degree type
         const transformedPrograms = transformProgramsData(progRes.data);
+        // debug: log API url and programs
+        try {
+          console.debug('Programs API URL:', (process.env.NEXT_PUBLIC_API_URL || 'http://localhost:1337') + '/api/programs');
+          console.debug('Transformed programs count:', transformedPrograms.length, transformedPrograms.slice(0,3));
+        } catch (e) {
+          console.debug('Debug log failed', e);
+        }
 
         // Remove duplicate categories based on label and key
         const uniqueCategories = catRes.data.filter((category, index, array) => 
@@ -74,6 +81,11 @@ const ProgramsSection = () => {
   const visiblePrograms =
     categories.find((category) => category.label === active)?.programs || [];
 
+  // debug visible programs
+  if (process.env.NODE_ENV !== 'production') {
+    console.debug('Visible programs for category', active, visiblePrograms.length, visiblePrograms.map(p => p.name).slice(0,5));
+  }
+
   return (
     <div id="programs" className="py-20 bg-muted/30">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -121,46 +133,8 @@ const ProgramsSection = () => {
               >
                 {/* Program Image */}
                 <div className="h-24 bg-gray-50 flex items-center justify-center overflow-hidden">
-                  <img
-                    src={program.image?.url ? `${(process.env.NEXT_PUBLIC_API_URL || 'http://localhost:1337').replace('/api', '')}${program.image.url}` : `https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?auto=format&fit=crop&w=200&h=120&q=80`}
-                    alt={program.image?.alternativeText || program.name}
-                    className="w-full h-full object-cover"
-                    onError={(e) => {
-                      // Fallback to a colored background with icon
-                      const target = e.currentTarget as HTMLImageElement;
-                      target.style.display = 'none';
-                      const parent = target.parentElement!;
-                      parent.innerHTML = `
-                        <div class="w-full h-full ${
-                          program.id % 5 === 0 ? 'bg-blue-100' :
-                          program.id % 5 === 1 ? 'bg-green-100' :
-                          program.id % 5 === 2 ? 'bg-purple-100' :
-                          program.id % 5 === 3 ? 'bg-orange-100' :
-                          'bg-teal-100'
-                        } flex items-center justify-center">
-                          <div class="text-2xl ${
-                            program.id % 5 === 0 ? 'text-blue-600' :
-                            program.id % 5 === 1 ? 'text-green-600' :
-                            program.id % 5 === 2 ? 'text-purple-600' :
-                            program.id % 5 === 3 ? 'text-orange-600' :
-                            'text-teal-600'
-                          }">
-                            ${program.name.toLowerCase().includes('mba') ? '🎓' :
-                              program.name.toLowerCase().includes('mca') ? '💻' :
-                              program.name.toLowerCase().includes('mcom') ? '📊' :
-                              program.name.toLowerCase().includes('computer') ? '💻' :
-                              program.name.toLowerCase().includes('business') ? '�' :
-                              program.name.toLowerCase().includes('commerce') ? '�' :
-                              program.name.toLowerCase().includes('education') ? '�‍🏫' :
-                              program.name.toLowerCase().includes('arts') ? '🎨' :
-                              program.name.toLowerCase().includes('law') ? '⚖️' :
-                              program.name.toLowerCase().includes('technology') ? '�' :
-                              program.name.toLowerCase().includes('science') ? '�' : '📚'}
-                          </div>
-                        </div>
-                      `;
-                    }}
-                  />
+                  {/* Prefer program image; fallback to a local placeholder image from public assets. Use React state to avoid DOM innerHTML hacks. */}
+                  <ProgramImageFallback program={program} />
                 </div>
                 
                 {/* Program Details */}
@@ -207,5 +181,58 @@ const ProgramsSection = () => {
     </div>
   );
 };
+
+// Small helper component to render program image with a safe fallback.
+function ProgramImageFallback({ program }: { program: any }) {
+  const [resolvedSrc, setResolvedSrc] = useState<string | null>(null);
+  const baseUrl = (process.env.NEXT_PUBLIC_API_URL || 'http://localhost:1337').replace('/api', '');
+  const externalStock = 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=800&q=80';
+  const localPlaceholder = '/assets/images/program-placeholder.svg';
+
+  useEffect(() => {
+    let mounted = true;
+
+    const sources: string[] = [];
+    if (program.image?.url) sources.push(`${baseUrl}${program.image.url}`);
+    sources.push(externalStock, localPlaceholder);
+
+    (async () => {
+      for (const s of sources) {
+        try {
+          await new Promise<void>((resolve, reject) => {
+            const img = new Image();
+            img.onload = () => resolve();
+            img.onerror = () => reject(new Error('load failed'));
+            img.src = s;
+          });
+          if (mounted) setResolvedSrc(s);
+          return;
+        } catch (e) {
+          // try next source
+        }
+      }
+      // none loaded -> resolvedSrc stays null
+    })();
+
+    return () => { mounted = false; };
+  }, [program]);
+
+  if (!resolvedSrc) {
+    const colorClass = program.id % 5 === 0 ? 'bg-blue-100 text-blue-600' :
+      program.id % 5 === 1 ? 'bg-green-100 text-green-600' :
+      program.id % 5 === 2 ? 'bg-purple-100 text-purple-600' :
+      program.id % 5 === 3 ? 'bg-orange-100 text-orange-600' : 'bg-teal-100 text-teal-600';
+
+    return (
+      <div className={`w-full h-full ${colorClass} flex items-center justify-center`}>
+        <div className="text-2xl">{program.name ? program.name.charAt(0).toUpperCase() : '📚'}</div>
+      </div>
+    );
+  }
+
+  return (
+    <img src={resolvedSrc} alt={program.image?.alternativeText || program.name} className="w-full h-full object-cover" />
+  );
+}
 
 export default ProgramsSection;

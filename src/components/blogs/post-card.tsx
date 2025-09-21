@@ -14,24 +14,22 @@ export default function PostCard({ post }: { post: BlogPost }) {
   });
 
   return (
-    <Card className="overflow-hidden rounded-xl shadow-sm border p-0 gap-4">
+    <Card className="overflow-hidden rounded-xl shadow-sm border p-0 gap-4 transition-transform duration-300 hover:scale-101 hover:shadow-md group relative bg-white">
+  {/* no color overlays here — keep hover lift and shadow only */}
       {/* HEADER (matches the reference) */}
-      <div className="relative h-[218px] w-full">
-        {/* right image */}
-        <div className="absolute inset-y-0 right-0 w-full rounded-tr-xl overflow-hidden">
-          <Image
-            src={post.cover || '/assets/images/blog-post.png'}
-            alt={post.title}
-            width={366}
-            height={218}
-            className="object-cover"
-            priority
-          />
-        </div>
+      <div className="relative h-[218px] w-full rounded-tr-xl overflow-hidden z-20 bg-white">
+        <Image
+          src={post.cover || '/assets/images/blog-post.png'}
+          alt={post.title}
+          width={366}
+          height={218}
+          className="object-cover w-full h-full"
+          priority
+        />
       </div>
 
       {/* BODY */}
-      <CardContent className="relative p-4 sm:p-5 pt-0 sm:pt-0">
+      <CardContent className="relative p-4 sm:p-5 pt-0 sm:pt-0 z-20">
         <Link href={`/blog/${post.slug}`}>
           <h3 className="text-[20px] sm:text-[22px] font-semibold leading-snug text-slate-900">
             {post.title}
@@ -55,9 +53,12 @@ export default function PostCard({ post }: { post: BlogPost }) {
         <div className="mt-6 flex items-center justify-between">
           <Link
             href={`/blog/${post.slug}`}
-            className="text-[#1d4ed8] font-medium underline underline-offset-4"
+            className="inline-flex items-center gap-2 text-[#1d4ed8] font-medium no-underline"
           >
-            Read More
+            <span className="underline underline-offset-4">Read More</span>
+            <span className="inline-block transform transition-transform duration-300 group-hover:translate-x-2 group-hover:rotate-12">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-[#1d4ed8]"><path d="M5 12h14M13 5l7 7-7 7" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/></svg>
+            </span>
           </Link>
 
           <button type="button" aria-label="Share" className="text-slate-600 hover:text-slate-900">

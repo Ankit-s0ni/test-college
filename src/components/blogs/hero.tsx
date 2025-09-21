@@ -53,7 +53,10 @@
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { ArrowRight } from 'lucide-react';
-import StudentLeadModal from '@/components/student-lead-modal';
+import TalkToExpertModal from '@/components/talk-to-expert-modal';
+
+// Default to env var for Cal.com scheduling URL
+const CAL_COM_DEFAULT = typeof process !== 'undefined' ? process.env.NEXT_PUBLIC_CAL_URL || 'https://cal.com/your-team/schedule' : 'https://cal.com/your-team/schedule';
 
 export default function BlogHero() {
   return (
@@ -90,7 +93,7 @@ export default function BlogHero() {
             </h1>
 
             <div className="mt-5 flex flex-wrap items-center gap-3">
-              <StudentLeadModal
+              <TalkToExpertModal
                 universityName="College Cosmos"
                 triggerContent={
                   <>
@@ -100,8 +103,9 @@ export default function BlogHero() {
                 }
                 modalTitle="Talk To Our Expert"
                 triggerClassName="h-9 rounded-md px-4 text-[13px] font-medium bg-[#0247D2] hover:bg-blue-700 text-white"
+                calLink={CAL_COM_DEFAULT}
               />
-              <StudentLeadModal
+              <TalkToExpertModal
                 universityName="College Cosmos"
                 triggerContent={
                   <>
@@ -111,6 +115,7 @@ export default function BlogHero() {
                 }
                 modalTitle="Talk to our expert"
                 triggerClassName="h-9 rounded-md px-4 text-[13px] font-medium border border-gray-300 bg-transparent text-gray-700 hover:bg-gray-50"
+                calLink={CAL_COM_DEFAULT}
               />
             </div>
           </div>

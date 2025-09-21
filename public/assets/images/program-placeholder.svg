@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800">
+  <defs>
+    <linearGradient id="g" x1="0" x2="1">
+      <stop offset="0" stop-color="#E6EEF9"/>
+      <stop offset="1" stop-color="#F7FAFC"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="800" fill="url(#g)"/>
+  <g transform="translate(120 100)">
+    <rect width="960" height="600" rx="18" fill="#FFFFFF" opacity="0.6"/>
+    <g transform="translate(80,60)" fill="#C6D8F8">
+      <rect width="400" height="320" rx="12"/>
+      <rect x="440" width="380" height="28" rx="6" y="6"/>
+      <rect x="440" width="300" height="18" rx="6" y="46"/>
+      <rect x="0" y="340" width="820" height="18" rx="6"/>
+    </g>
+    <g transform="translate(640,380)" fill="#9EB8F6">
+      <circle cx="40" cy="40" r="40"/>
+    </g>
+    <text x="520" y="520" font-size="34" fill="#6B7EA8" font-family="Arial, Helvetica, sans-serif" text-anchor="middle">Program placeholder</text>
+  </g>
+</svg>
