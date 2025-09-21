@@ -151,8 +151,9 @@ export default function AutoPopupModal({
                 <Button 
                   onClick={handleClose} 
                   className="mt-4 bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg"
+                  style={{ backgroundColor: '#0247D2', color: '#ffffff' }}
                 >
-                  Close
+                  <span className="text-white">Close</span>
                 </Button>
               </div>
             ) : (
@@ -295,14 +296,15 @@ export default function AutoPopupModal({
                         type="submit"
                         disabled={isSubmitting}
                         className="w-full h-12 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors"
+                        style={{ backgroundColor: '#0247D2', color: '#ffffff' }}
                       >
                         {isSubmitting ? (
                           <>
                             <Loader2 className="mr-2 h-5 w-5 animate-spin" />
-                            Submitting...
+                            <span className="text-white">Submitting...</span>
                           </>
                         ) : (
-                          'Get Free Consultation'
+                          <span className="text-white">Get Free Consultation</span>
                         )}
                       </Button>
                     </div>
