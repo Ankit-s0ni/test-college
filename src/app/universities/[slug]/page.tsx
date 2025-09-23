@@ -23,7 +23,6 @@ import {
 
 // lucide
 import { FileDown, Plus, GraduationCap, Check } from 'lucide-react';
-import ContactsSection from '@/components/home/contact-section';
 import FooterSection from '@/components/home/footer-section';
 import UniversitySidebar from '@/components/custom/university-sidebar';
 import AboutSection from '@/components/university/about-section';
@@ -831,7 +830,7 @@ export default function UniversitySlugPage({ params }: any) {
             <div id="contact" />
           </main>
         </div>
-        <ContactsSection />
+        
       </section>
 
       <FooterSection />

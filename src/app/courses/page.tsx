@@ -1,6 +1,5 @@
 import { coursesAPI } from '@/lib/api';
 import { transformCoursesData } from '@/lib/transformers';
-import ContactsSection from '@/components/home/contact-section';
 import FooterSection from '@/components/home/footer-section';
 import { CourseListItem } from '@/types/course';
 import Image from 'next/image';
@@ -175,7 +174,7 @@ const CoursesListingPage = async () => {
           )}
         </section>
 
-        <ContactsSection />
+        
       </main>
       <FooterSection />
     </>

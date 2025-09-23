@@ -158,44 +158,33 @@ export default function UniversityLogosSection() {
         </div>
 
         {/* University Grid */}
-        <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-3 sm:gap-4 mb-8 sm:mb-12">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6 mb-8 sm:mb-12">
           {displayUniversities.map((university) => (
             <Link
               key={university.id}
               href={`/universities/${university.slug}`}
               className="group block"
             >
-              <div className="
-                bg-white rounded-lg border border-gray-200 p-3 sm:p-4 
-                hover:shadow-md hover:border-orange-300
-                hover:scale-105 
-                transition-all duration-300 ease-out
-                flex flex-col items-center justify-center
-                min-h-[100px] sm:min-h-[120px]
-              ">
-                {/* University Logo */}
-                <div className="relative w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 mb-1 sm:mb-2">
-                  <Image
-                    src={university.logo}
-                    alt={`${university.name} logo`}
-                    fill
-                    className="object-contain"
-                    sizes="(max-width: 640px) 32px, (max-width: 1024px) 40px, 48px"
-                  />
-                </div>
-                
-                {/* University Name */}
-                <h3 className="
-                  text-xs sm:text-sm font-semibold text-gray-800 text-center 
-                  group-hover:text-orange-600 transition-colors duration-300
-                  line-clamp-2 leading-tight mb-1 sm:mb-2
-                ">
-                  {university.name}
-                </h3>
+              <div className="relative bg-white rounded-lg p-4 hover:shadow-xl transition-transform duration-300 transform-gpu hover:-translate-y-1">
+                {/* blue bottom accent (project primary blue) */}
+                <div className="absolute left-0 right-0 bottom-0 h-3 bg-[#2563EB] rounded-b-lg"></div>
 
-                {/* View Details Button */}
-                <div className="w-full text-xs font-medium py-1 px-2 text-center text-gray-600 group-hover:text-orange-600 transition-colors duration-300">
-                  View Details
+                <div className="flex flex-col items-center justify-center py-6 px-2">
+                  {/* University Logo */}
+                  <div className="relative w-14 h-14 sm:w-16 sm:h-16 lg:w-20 lg:h-20 mb-3">
+                    <Image
+                      src={university.logo}
+                      alt={`${university.name} logo`}
+                      fill
+                      className="object-contain"
+                      sizes="(max-width: 640px) 56px, (max-width: 1024px) 64px, 80px"
+                    />
+                  </div>
+
+                  {/* University Name */}
+                  <h3 className="text-sm sm:text-sm font-semibold text-center text-[#0B3650] group-hover:text-[#BD6C12] transition-colors duration-200">
+                    {university.name}
+                  </h3>
                 </div>
               </div>
             </Link>
@@ -204,10 +193,8 @@ export default function UniversityLogosSection() {
 
         {/* View All Button */}
         <div className="text-center">
-          <Link href="/universities">
-            <Button variant="outline" className="cursor-pointer">
-              View All Universities
-            </Button>
+          <Link href="/universities" className="inline-block bg-[#E9A22A] text-[#07283A] px-6 py-2 rounded-full font-semibold shadow-md hover:shadow-lg transition-shadow duration-200">
+            View All Universities
           </Link>
         </div>
 

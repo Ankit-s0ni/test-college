@@ -2,7 +2,6 @@
 
 import { universitiesAPI } from '@/lib/api';
 import { transformUniversitiesData } from '@/lib/transformers';
-import ContactsSection from '@/components/home/contact-section';
 import FooterSection from '@/components/home/footer-section';
 import FiltersBar from '@/components/university/filters-bar';
 import UniversityCard from '@/components/university/university-card';
@@ -158,7 +157,7 @@ const UniversitiesListingPage = () => {
           )}
         </section>
 
-        <ContactsSection />
+        
       </main>
       <FooterSection />
     </>

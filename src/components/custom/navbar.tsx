@@ -9,9 +9,9 @@ import Link from 'next/link';
 
 const navigationItems = [
   { name: 'Top Universities', href: '/universities' },
-  { name: 'About Us', href: '#about' },
+  { name: 'About Us', href: '/about' },
   { name: 'Blog', href: '/blog' },
-  { name: 'Contact Us', href: '#contact' },
+  { name: 'Contact Us', href: '/contact' },
 ];
 
 const Navbar = () => {
@@ -67,10 +67,7 @@ const Navbar = () => {
             <Button
               className="font-medium bg-[#0247D2] hover:bg-blue-700 text-white px-4 py-2 rounded-md"
               onClick={() => {
-                const contactSection = document.getElementById('contact');
-                if (contactSection) {
-                  contactSection.scrollIntoView({ behavior: 'smooth' });
-                }
+                window.location.href = '/contact';
               }}
             >
               Get In Touch
@@ -128,10 +125,7 @@ const Navbar = () => {
                     <Button
                       className="w-full font-medium bg-[#0247D2] hover:bg-blue-700 text-white px-4 py-2 rounded-md h-11"
                       onClick={() => {
-                        const contactSection = document.getElementById('contact');
-                        if (contactSection) {
-                          contactSection.scrollIntoView({ behavior: 'smooth' });
-                        }
+                        window.location.href = '/contact';
                         setIsMenuOpen(false); // Close the mobile menu
                       }}
                     >
