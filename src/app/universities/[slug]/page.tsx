@@ -9,6 +9,7 @@ import Link from 'next/link';
 
 // API imports
 import { universitiesAPI } from '@/lib/api';
+import { SITE_BASE_URL } from '@/lib/config';
 import { UniversityDetailAPIResponse } from '@/types/university';
 
 // shadcn/ui
@@ -249,7 +250,7 @@ const PAGE_DB: Record<string, UniversityPageData> = {};
 function convertAPIDataToPageData(apiResponse: UniversityDetailAPIResponse): UniversityPageDataAPI {
   // Cast to any for dynamic API data transformation with flexible properties
   const university = apiResponse.data as any;
-  const baseUrl = 'https://collegecosmos.manavkhadka.com.np';
+  const baseUrl = SITE_BASE_URL;
   
   const baseData = {
     name: university.name,
@@ -785,7 +786,7 @@ export default function UniversitySlugPage({ params }: any) {
                 items={pageData.courses || []} 
                 universityData={{
                   name: apiData?.data?.name || pageData.name,
-                  logo: apiData?.data?.logo?.url ? `https://collegecosmos.manavkhadka.com.np${apiData.data.logo.url}` : pageData.logo,
+                          logo: apiData?.data?.logo?.url ? `${SITE_BASE_URL}${apiData.data.logo.url}` : pageData.logo,
                   rating: apiData?.data?.rating,
                   courses: apiData?.data?.courses || []
                 }}

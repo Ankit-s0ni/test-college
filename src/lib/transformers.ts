@@ -2,6 +2,7 @@ import { UniversityAPI, UniversityListItem } from '@/types/university';
 import { CourseAPI, CourseListItem } from '@/types/course';
 import { BlogAPI, BlogPost } from '@/types/blog';
 import { ProgramAPI, ProgramListItem } from '@/types/program';
+import { SITE_BASE_URL } from '@/lib/config';
 
 /**
  * Transform API university data to frontend format
@@ -39,7 +40,7 @@ export function transformUniversityData(apiUniversity: UniversityAPI): Universit
   }
 
   // Ensure URLs are absolute
-  const baseUrl = 'https://collegecosmos.manavkhadka.com.np';
+  const baseUrl = SITE_BASE_URL;
   const fullLogoUrl = logoUrl.startsWith('http') ? logoUrl : `${baseUrl}${logoUrl}`;
   const fullImageUrl = imageUrl.startsWith('http') ? imageUrl : `${baseUrl}${imageUrl}`;
 

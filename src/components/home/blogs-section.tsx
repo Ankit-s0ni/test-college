@@ -5,6 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import React, { useState, useEffect } from 'react';
 import { blogsAPI } from '@/lib/api';
+import { SITE_BASE_URL } from '@/lib/config';
 import { BlogAPI } from '@/types/blog';
 
 // Fallback data for loading state or error
@@ -71,8 +72,8 @@ const BlogsSection = () => {
       return FALLBACK_BLOGS;
     }
 
-    // Base URL for the API
-    const API_BASE_URL = 'https://collegecosmos.manavkhadka.com.np';
+  // Base URL for the API / site (use env-configured value)
+  const API_BASE_URL = SITE_BASE_URL;
 
     return blogs.map(blog => ({
       id: blog.documentId || blog.id.toString(),

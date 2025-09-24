@@ -6,7 +6,10 @@ import { ProgramsAPIResponse, ProgramDetailAPIResponse } from '@/types/program';
 import { ReviewSubmission, ReviewSubmissionResponse, ReviewsAPIResponse } from '@/types/review';
 import { StudentLeadSubmission, StudentLeadResponse } from '@/types/student-lead';
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'https://collegecosmos.manavkhadka.com.np/api';
+import { API_BASE_URL as CONFIG_API_BASE_URL, SITE_BASE_URL } from './config';
+
+const API_BASE_URL = CONFIG_API_BASE_URL;
+export { API_BASE_URL, SITE_BASE_URL };
 
 /**
  * Generic API fetch function with error handling

@@ -8,6 +8,7 @@ import { Button } from '@/components/ui/button';
 import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area';
 import Image from 'next/image';
 import { universitiesAPI } from '@/lib/api';
+import { SITE_BASE_URL } from '@/lib/config';
 import { UniversityAPI } from '@/types/university';
 
 // Fallback data for loading state or error
@@ -87,8 +88,8 @@ export default function UniversitiesSection() {
       return FALLBACK_UNIVERSITIES;
     }
 
-    // Base URL for the API
-    const API_BASE_URL = 'https://collegecosmos.manavkhadka.com.np';
+  // Base URL for the API / site (use env-configured value)
+  const API_BASE_URL = SITE_BASE_URL;
 
     return universities.map(uni => ({
       college_img: uni.coverImage?.url 
