@@ -42,17 +42,25 @@ const ProgramsSection = () => {
         // Since programs don't have direct category relationships, map by degree type
         const categoriesWithPrograms = uniqueCategories.map((category) => {
           let associatedPrograms: ProgramListItem[] = [];
-          
-          // Map programs to categories based on category key and program degree
+
+          // Normalize degree value for robust matching
+          const normalizeDegree = (d?: string) => (d || '').toString().toLowerCase().trim();
+
+          // Map programs to categories based on category key and normalized program degree
           if (category.key === 'ug-program') {
-            associatedPrograms = transformedPrograms.filter(program => program.degree === 'Bachelor');
+            associatedPrograms = transformedPrograms.filter(program => normalizeDegree(program.degree) === 'bachelor');
           } else if (category.key === 'pg-program') {
-            associatedPrograms = transformedPrograms.filter(program => program.degree === 'Master');
-          } else if (category.key === 'diploma') {
-            associatedPrograms = transformedPrograms.filter(program => program.degree === 'Certificate' || program.degree === 'Diploma');
-          } else if (category.key === 'executive-program') {
-            // For executive programs, we can filter by a different criteria or leave empty for now
-            associatedPrograms = [];
+            associatedPrograms = transformedPrograms.filter(program => normalizeDegree(program.degree) === 'master');
+          } else if (category.key === 'executive-program' || category.key === 'executive' || (category.key || '').toString().toLowerCase().includes('executive')) {
+            // Treat executive programs as certificates/executive-level courses
+            associatedPrograms = transformedPrograms.filter(program => {
+              const deg = normalizeDegree(program.degree);
+              const name = (program.name || '').toString().toLowerCase();
+              const slug = (program.slug || '').toString().toLowerCase();
+              const isExecName = name.includes('executive') || name.includes('exec');
+              const isExecSlug = slug.includes('executive') || slug.includes('exec');
+              return deg === 'certificate' || deg === 'certification' || deg.includes('executive') || isExecName || isExecSlug;
+            });
           }
 
           return {

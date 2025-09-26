@@ -15,10 +15,12 @@ import { X, Loader2, GraduationCap, Phone, Mail, User, MapPin } from 'lucide-rea
 interface AutoPopupModalProps {
   delaySeconds?: number; // Delay before showing popup (5-10 seconds)
   universityName?: string;
+  forceOpen?: boolean; // if true, open immediately regardless of session
 }
 
 export default function AutoPopupModal({ 
   delaySeconds = 7, // Default 7 seconds
+  forceOpen = false,
 }: AutoPopupModalProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -34,8 +36,14 @@ export default function AutoPopupModal({
     locale: 'en'
   });
 
-  // Auto-show popup after delay
+  // Auto-show popup after delay or if forced open
   useEffect(() => {
+    if (forceOpen) {
+      setIsOpen(true);
+      setHasShown(true);
+      return;
+    }
+
     if (hasShown) return; // Don't show again if already shown
 
     const timer = setTimeout(() => {
@@ -44,15 +52,16 @@ export default function AutoPopupModal({
     }, delaySeconds * 1000);
 
     return () => clearTimeout(timer);
-  }, [delaySeconds, hasShown]);
+  }, [delaySeconds, hasShown, forceOpen]);
 
-  // Prevent popup from showing again in this session
+  // Prevent popup from showing again in this session unless forced open
   useEffect(() => {
+    if (forceOpen) return; // skip session check when forced
     const hasSeenPopup = sessionStorage.getItem('college-cosmos-popup-shown');
     if (hasSeenPopup) {
       setHasShown(true);
     }
-  }, []);
+  }, [forceOpen]);
 
   const handleInputChange = (field: keyof StudentLeadSubmission, value: string) => {
     setFormData(prev => ({
@@ -118,7 +127,7 @@ export default function AutoPopupModal({
     <>
       {/* Background Overlay with Blur */}
       {isOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+        <div className="fixed inset-0 flex items-center justify-center p-4" style={{ zIndex: 99999 }}>
           {/* Blurred Background */}
           <div 
             className="absolute inset-0 bg-black/50 backdrop-blur-sm"

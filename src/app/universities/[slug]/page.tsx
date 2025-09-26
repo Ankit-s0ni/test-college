@@ -33,9 +33,15 @@ import CertificateSection from '@/components/university/certificate-section';
 import FeesSection from '@/components/university/fees-section';
 import RankingSection from '@/components/university/ranking-section';
 import FinancialAidSection from '@/components/university/financial-aid-section';
+import AdmissionsSection from '@/components/university/admissions-section';
+import FacilitiesSection from '@/components/university/facilities-section';
+import PlacementsSection from '@/components/university/placements-section';
+import CourseDetailsSection from '@/components/university/course-details-section';
 import HiringPartnerSection from '@/components/home/hiring-partner-section';
 import ExaminationSection from '@/components/university/examination-section';
 import CampusSection from '@/components/university/campus-section';
+import GallerySection from '@/components/university/gallery-section';
+import ContactSection from '@/components/university/contact-section';
 import AdvantagesSection from '@/components/university/advantages-section';
 import SimilarUniversities from '@/components/university/similar-universities';
 import ReviewsSection from '@/components/university/reviews-section';
@@ -69,7 +75,8 @@ export type About = {
 export type Approvals = {
   title: string;
   description: string;
-  images: string[];
+  // items preserve original API objects (body, grade, logo url)
+  items: Array<{ body?: string; grade?: string; status?: string; logo?: string }>;
 };
 
 export type CoursesHero = {
@@ -118,6 +125,7 @@ export type HiringPartners = {
   title: string;
   description: string;
   images: string[];
+  names?: string[];
 };
 
 export type Examination = {
@@ -183,8 +191,8 @@ export type UniversityPageDataAPI = {
   prospectusLink: string;
   scheduleLink: string;
   applyLink: string;
-  headerImage: string;
-  logo: string;
+  headerImage: string | null;
+  logo: string | null;
   about?: About;
   approvals?: Approvals;
   courses?: CoursesHero[];
@@ -194,6 +202,25 @@ export type UniversityPageDataAPI = {
   partners?: HiringPartners;
   campus?: Campus;
   advantages?: Advantages;
+  gallery?: string[];
+  contact?: {
+    phone?: string | null;
+    email?: string | null;
+    fax?: string | null;
+    tollFree?: string | null;
+  };
+  admissions?: {
+    applicationStart?: string | null;
+    applicationEnd?: string | null;
+    examDate?: string | null;
+    resultDate?: string | null;
+    selectionProcess?: string | null;
+    applicationFee?: number | null;
+  };
+  facilities?: Array<{ id?: number; name?: string; description?: string; category?: string; availability?: boolean; capacity?: number }>;
+  placements?: Array<{ id?: number; year?: number | string; totalStudents?: number; studentsPlaced?: number; placementPercentage?: number | null; averagePackage?: number | null; highestPackage?: number | null; lowestPackage?: number | null; topRecruiters?: string[] }>;
+  placementRecords?: Array<any>;
+  courseDetails?: Array<{ id?: number; courseName?: string; duration?: string; fees?: string | number; mode?: string; eligibility?: string; syllabus?: string; specializations?: string[] }>;
   faq?: Faq;
   examination?: Examination;
   certificate?: Certificate;
@@ -227,6 +254,18 @@ export type UniversityPageData = {
   section13: Section13; // “Similar Programs/Universities” style block
   reviews: Reviews;
   fees?: Fees;
+  admissions?: {
+    applicationStart?: string | null;
+    applicationEnd?: string | null;
+    examDate?: string | null;
+    resultDate?: string | null;
+    selectionProcess?: string | null;
+    applicationFee?: number | null;
+  };
+  facilities?: Array<{ id?: number; name?: string; description?: string; category?: string; availability?: boolean; capacity?: number }>;
+  placements?: Array<{ id?: number; year?: number | string; totalStudents?: number; studentsPlaced?: number; placementPercentage?: number | null; averagePackage?: number | null; highestPackage?: number | null; lowestPackage?: number | null; topRecruiters?: string[] }>;
+  placementRecords?: Array<any>;
+  courseDetails?: Array<{ id?: number; courseName?: string; duration?: string; fees?: string | number; mode?: string; eligibility?: string; syllabus?: string; specializations?: string[] }>;
 };
 
 /* -------------------------------------------------------------------------- */
@@ -269,25 +308,45 @@ function convertAPIDataToPageData(apiResponse: UniversityDetailAPIResponse): Uni
       : '#',
     scheduleLink: '#',
     applyLink: '#',
-    headerImage: university.coverImage?.url ? `${baseUrl}${university.coverImage.url}` : 
-                 'https://images.unsplash.com/photo-1545048702-79362596cdc9?q=80&w=1400&auto=format&fit=crop',
-    logo: university.logo?.url ? `${baseUrl}${university.logo.url}` : 
-          '/assets/images/manipal-logo.jpg',
+  headerImage: university.coverImage?.url ? `${baseUrl}${university.coverImage.url}` : null,
+  logo: university.logo?.url ? `${baseUrl}${university.logo.url}` : null,
   };
 
   const conditionalData: Partial<UniversityPageDataAPI> = {};
 
   // Only add About section if we have description
   if (university.description) {
+    // Build courses list for About table. Prefer explicit university.courses, fall back to courseDetails or fees.
+    let aboutCourses: any[] = [];
+
+    if (university.courses && university.courses.length > 0) {
+      aboutCourses = university.courses.map((course: any) => ({
+        name: course.name,
+        perSem: course.feeRange || null,
+        total: course.feeRange || null,
+        online: course.mode ? String(course.mode).toLowerCase().includes('online') : false,
+      }));
+    } else if (university.courseDetails && university.courseDetails.length > 0) {
+      aboutCourses = university.courseDetails.map((c: any) => ({
+        name: c.courseName || c.title || 'Course',
+        perSem: c.fees || c.feeRange || null,
+        total: c.fees || c.feeRange || null,
+        online: c.mode ? String(c.mode).toLowerCase().includes('online') : false,
+      }));
+    } else if (university.fees && university.fees.length > 0) {
+      // fees array contains aggregated fee rows; map to a displayable course-like row
+      aboutCourses = university.fees.map((f: any) => ({
+        name: f.courseType || f.category || 'Program',
+        perSem: f.frequency && f.frequency.toLowerCase().includes('per year') ? f.totalFee : f.tuitionFee || f.totalFee || null,
+        total: f.totalFee || f.tuitionFee || null,
+        online: false,
+      }));
+    }
+
     conditionalData.about = {
       title: `About ${university.name}`,
       description: university.description,
-      courses: university.courses?.map((course: any) => ({
-        name: course.name,
-        perSem: course.feeRange || 'Contact for details',
-        total: course.feeRange || 'Contact for details',
-        online: course.mode.toLowerCase().includes('online')
-      })) || [],
+      courses: aboutCourses,
     };
   }
 
@@ -296,18 +355,23 @@ function convertAPIDataToPageData(apiResponse: UniversityDetailAPIResponse): Uni
     conditionalData.approvals = {
       title: 'Approvals & Accreditations',
       description: 'Recognized by top statutory bodies and accreditation councils.',
-      images: university.approvals.map((approval: any) =>
-        approval.logo?.url ? `${baseUrl}${approval.logo.url}` :
-        `https://dummyimage.com/100x60/edf2f7/333&text=${encodeURIComponent(approval.name || 'Approval')}`
-      ),
+      items: university.approvals.map((approval: any) => ({
+        body: approval.body || approval.name || undefined,
+        grade: approval.grade || undefined,
+        status: approval.status || undefined,
+        logo: approval.logo?.url ? `${baseUrl}${approval.logo.url}` : undefined,
+      })).filter(Boolean),
     };
-  } else if (university.accreditation && university.accreditation.length > 0) {
+    } else if (university.accreditation && university.accreditation.length > 0) {
     conditionalData.approvals = {
       title: 'Approvals & Accreditations',
       description: 'Recognized by top statutory bodies and accreditation councils.',
-      images: university.accreditation.map((acc: any) =>
-        `https://dummyimage.com/100x60/edf2f7/333&text=${encodeURIComponent(acc.body)}`
-      ),
+      items: university.accreditation.map((acc: any) => ({
+        body: acc.body || acc.name || undefined,
+        grade: acc.grade || undefined,
+        status: acc.status || undefined,
+        logo: acc.logo?.url ? `${baseUrl}${acc.logo.url}` : undefined,
+      })).filter(Boolean),
     };
   }
 
@@ -357,10 +421,10 @@ function convertAPIDataToPageData(apiResponse: UniversityDetailAPIResponse): Uni
             {
               mode: 'EMI',
               total: 'As per course fee',
-              loanAmount: 'Up to 100% of fees',
-              interest: 'Competitive rates',
-              tenure: 'Flexible',
-              emi: 'Contact for details',
+                loanAmount: 'Up to 100% of fees',
+                interest: 'Competitive rates',
+                tenure: 'Flexible',
+                emi: null,
             },
           ],
           title: '',
@@ -379,22 +443,63 @@ function convertAPIDataToPageData(apiResponse: UniversityDetailAPIResponse): Uni
     conditionalData.partners = {
       title: 'Hiring Partners',
       description: 'Trusted by leading companies for talent and internships.',
-      images: university.hiringPartners.map((partner: any) =>
-        partner.logo?.url ? `${baseUrl}${partner.logo.url}` :
-        `https://dummyimage.com/120x60/e2e8f0/333&text=${encodeURIComponent(partner.companyName)}`
-      ),
+  images: university.hiringPartners.map((partner: any) => partner.logo?.url ? `${baseUrl}${partner.logo.url}` : undefined).filter(Boolean) as string[],
+  names: university.hiringPartners.map((partner: any) => partner.companyName || partner.company || partner.name).filter(Boolean) as string[],
     };
   }
 
   // Add Campus section if we have real data
   if (university.campusGroups && university.campusGroups.length > 0) {
+    const normalizeLocations = (locations: any) => {
+      // If already an array of strings or numbers, stringify and trim
+      if (Array.isArray(locations)) {
+        return locations.map((loc: any) => String(loc).trim()).filter(Boolean);
+      }
+
+      // If a string (comma separated), split safely
+      if (typeof locations === 'string') {
+        return locations.split(',').map((loc: any) => String(loc).trim()).filter(Boolean);
+      }
+
+      // If it's an object (likely GeoJSON), try to summarize coordinates
+      if (locations && typeof locations === 'object') {
+        // Handle GeoJSON Polygon/Point types
+        try {
+          if (locations.type === 'Point' && Array.isArray(locations.coordinates)) {
+            const [lng, lat] = locations.coordinates;
+            return [`Point: ${lat.toFixed(5)}, ${lng.toFixed(5)}`];
+          }
+
+          if (locations.type === 'Polygon' && Array.isArray(locations.coordinates)) {
+            // summarize polygon as a few coordinate pairs
+            const coords = locations.coordinates[0] || [];
+            const sample = coords.slice(0, 3).map((c: any) => `${c[1].toFixed(5)}, ${c[0].toFixed(5)}`);
+            return [`Polygon with ${coords.length} points`, ...sample];
+          }
+
+          // fallback: stringify object keys
+          return [JSON.stringify(locations)];
+        } catch (e) {
+          return [];
+        }
+      }
+
+      // Default empty
+      return [];
+    };
+
     conditionalData.campus = {
       title: `${university.name} Campuses`,
-      groups: university.campusGroups.map((group: any) => ({
-        label: group.label,
-        color: group.color || '#FFF4BF',
-        locations: group.locations ? group.locations.split(',').map((loc: any) => loc.trim()) : [],
-      })),
+      groups: university.campusGroups.map((group: any) => {
+        // detect geo object in locations or explicit geo
+        const geo = group.geo || (group.locations && typeof group.locations === 'object' && group.locations.type ? group.locations : undefined);
+        return {
+          label: group.label,
+          color: group.color || '#FFF4BF',
+          locations: normalizeLocations(group.locations),
+          geo,
+        };
+      }),
     };
   }
 
@@ -435,6 +540,11 @@ function convertAPIDataToPageData(apiResponse: UniversityDetailAPIResponse): Uni
       title: 'Documents & Brochures',
       images: university.brochures.map((brochure: any) => `${baseUrl}${brochure.url}`),
     };
+  }
+
+  // Add gallery if available
+  if (university.gallery && university.gallery.length > 0) {
+    conditionalData['gallery'] = university.gallery.map((g: any) => `${baseUrl}${g.url}`);
   }
 
   // Only add Reviews section if we have rating data
@@ -478,6 +588,87 @@ function convertAPIDataToPageData(apiResponse: UniversityDetailAPIResponse): Uni
         totalFee: fee.totalFee,
         frequency: fee.frequency,
       })),
+    };
+  }
+
+  // Admissions
+  if (university.admissions) {
+    conditionalData['admissions'] = {
+      applicationStart: university.admissions.applicationStart || null,
+      applicationEnd: university.admissions.applicationEnd || null,
+      examDate: university.admissions.examDate || null,
+      resultDate: university.admissions.resultDate || null,
+      selectionProcess: university.admissions.selectionProcess || null,
+      applicationFee: university.admissions.applicationFee || null,
+    };
+  }
+
+  // Facilities
+  if (university.facilities && university.facilities.length > 0) {
+    conditionalData['facilities'] = university.facilities.map((f: any) => ({
+      id: f.id,
+      name: f.name,
+      description: f.description,
+      category: f.category,
+      availability: f.availability,
+      capacity: f.capacity,
+    }));
+  }
+
+  // Placements
+  if (university.placements && university.placements.length > 0) {
+    conditionalData['placements'] = university.placements.map((p: any) => ({
+      id: p.id,
+      year: p.year,
+      totalStudents: p.totalStudents,
+      studentsPlaced: p.studentsPlaced || p.placedStudents,
+      placementPercentage: p.placementPercentage || null,
+      averagePackage: p.averagePackage || null,
+      highestPackage: p.highestPackage || null,
+      lowestPackage: p.lowestPackage || null,
+      topRecruiters: p.topRecruiters || [],
+    }));
+  }
+
+  // Placement records (detailed yearly records that may use different field names)
+  if (university.placementRecords && university.placementRecords.length > 0) {
+    conditionalData['placementRecords'] = university.placementRecords.map((r: any) => ({
+      id: r.id,
+      year: r.year || r.academicYear || null,
+      totalStudents: r.totalStudents || null,
+      placedStudents: r.placedStudents || r.studentsPlaced || r.studentsPlacedCount || null,
+      placementRate: r.placementRate || r.placementPercentage || null,
+      averagePackage: r.averagePackage || r.averagePackageString || null,
+      highestPackage: r.highestPackage || null,
+      medianPackage: r.medianPackage || r.median || null,
+      lowestPackage: r.lowestPackage || null,
+      topRecruiters: r.topRecruiters || r.topRecruitersList || [],
+      sectorWiseBreakdown: r.sectorWiseBreakdown || r.sectorWiseData || r.sectorBreakdown || null,
+      raw: r,
+    }));
+  }
+
+  // Course details
+  if (university.courseDetails && university.courseDetails.length > 0) {
+    conditionalData['courseDetails'] = university.courseDetails.map((c: any) => ({
+      id: c.id,
+      courseName: c.courseName,
+      duration: c.duration,
+      fees: c.fees,
+      mode: c.mode,
+      eligibility: c.eligibility,
+      syllabus: c.syllabus,
+      specializations: c.specializations || [],
+    }));
+  }
+
+  // Add contact details
+  if (university.contact) {
+    conditionalData['contact'] = {
+      phone: university.contact.phone || null,
+      email: university.contact.email || null,
+      fax: university.contact.fax || null,
+      tollFree: university.contact.tollFree || null,
     };
   }
 
@@ -558,8 +749,14 @@ function HeroSection({
     <section className="relative">
       {/* banner */}
       <div className="relative h-[220px] sm:h-[280px] md:h-[340px] lg:h-[400px]">
-        <Image src={data.headerImage} alt={data.name} fill className="object-cover" priority />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
+        {data.headerImage ? (
+          <>
+            <Image src={data.headerImage} alt={data.name} fill className="object-cover" priority />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
+          </>
+        ) : (
+          <div className="h-full w-full bg-gray-100" />
+        )}
       </div>
 
       {/* content */}
@@ -782,19 +979,32 @@ export default function UniversitySlugPage({ params }: any) {
             {pageData.about && <AboutSection data={pageData.about} />}
             {pageData.approvals && <ApprovalsSection data={pageData.approvals} />}
             {(pageData.courses && pageData.courses.length > 0) || (apiData?.data?.courses && apiData.data.courses.length > 0) ? (
-              <CoursesSection 
-                items={pageData.courses || []} 
-                universityData={{
-                  name: apiData?.data?.name || pageData.name,
-                          logo: apiData?.data?.logo?.url ? `${SITE_BASE_URL}${apiData.data.logo.url}` : pageData.logo,
-                  rating: apiData?.data?.rating,
-                  courses: apiData?.data?.courses || []
-                }}
-              />
+              (() => {
+                const safeLogo: string | undefined = apiData?.data?.logo?.url ? `${SITE_BASE_URL}${apiData.data.logo.url}` : (pageData.logo ?? undefined) || undefined;
+                return (
+                  <CoursesSection 
+                    items={pageData.courses || []} 
+                    universityData={{
+                      name: apiData?.data?.name || pageData.name,
+                      logo: safeLogo,
+                      rating: apiData?.data?.rating,
+                      courses: apiData?.data?.courses || []
+                    }}
+                  />
+                );
+              })()
             ) : null}
-            {pageData.certificate && <CertificateSection data={pageData.certificate} />}
+            {pageData.certificate && (
+              (() => {
+                const safeLogo: string | undefined = apiData?.data?.logo?.url ? `${SITE_BASE_URL}${apiData.data.logo.url}` : (pageData.logo ?? undefined) || undefined;
+                return <CertificateSection data={pageData.certificate} logoUrl={safeLogo} />;
+              })()
+            )}
             {pageData.ranking && <RankingSection data={pageData.ranking} />}
+            {Array.isArray((pageData as any).gallery) && <GallerySection images={(pageData as any).gallery} />}
             {pageData.fees && <FeesSection data={pageData.fees} />}
+            {pageData.admissions && <AdmissionsSection admissions={(pageData as any).admissions} />}
+            {pageData.facilities && <FacilitiesSection facilities={(pageData as any).facilities} />}
             {pageData.examination?.title && pageData.examination?.description && (
               <ExaminationSection
                 title={pageData.examination.title}
@@ -803,9 +1013,14 @@ export default function UniversitySlugPage({ params }: any) {
             )}
             {pageData.financialAid && <FinancialAidSection data={pageData.financialAid} />}
             {!pageData.financialAid && <div id="financial-aid" />}
+            { (pageData.placements || pageData.placementRecords) && (
+              <PlacementsSection placements={(pageData as any).placements} placementRecords={(pageData as any).placementRecords} />
+            )}
+            {pageData.courseDetails && <CourseDetailsSection courses={(pageData as any).courseDetails} />}
             {pageData.partners && <HiringPartnerSection data={pageData.partners} />}
             {!pageData.partners && <div id="partners" />}
             {pageData.campus && <CampusSection data={pageData.campus} />}
+            {(pageData as any).contact && <ContactSection contact={(pageData as any).contact} />}
             {pageData.advantages && <AdvantagesSection data={pageData.advantages} />}
             
             {/* FAQ section */}

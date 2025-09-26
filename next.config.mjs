@@ -9,8 +9,9 @@ const nextConfig = {
     domains: [
       "res.cloudinary.com", 
       "images.unsplash.com", 
-      "dummyimage.com",
-      "collegecosmos.manavkhadka.com.np"
+  "dummyimage.com",
+  "collegecosmos.manavkhadka.com.np",
+  "admin.collegecosmos.in"
     ],
   },
 };

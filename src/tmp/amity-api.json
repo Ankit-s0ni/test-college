@@ -1,0 +1,619 @@
+{
+    "data": {
+        "id": 1,
+        "documentId": "her56m1at2sg5ma8hv7id5qe",
+        "name": "Amity University, Noida",
+        "slug": "amity-university-noida",
+        "description": "Amity University, Noida, is a leading private research university located in Uttar Pradesh, India. It is the flagship campus of Amity Education Group and is recognized for its extensive range of programs, global exposure, and strong industry connections. The university is committed to providing research-focused, industry-relevant education.",
+        "shortDescription": "A leading private research university in Noida, offering a wide array of UG, PG, and PhD programs with a focus on research and innovation.",
+        "website": "https://www.amity.edu/noida/",
+        "established": 2005,
+        "universityType": "Private",
+        "affiliation": "UGC Recognized, Member of AIU",
+        "rating": 4.5,
+        "totalRatings": 12500,
+        "highestPlacementPackage": 6175000,
+        "tagline": "Where Modernity Blends with Tradition",
+        "libraryBooks": 250000,
+        "hostelFacility": true,
+        "featured": true,
+        "collegeStatus": "active",
+        "studentStrength": 40000,
+        "facultyCount": 2500,
+        "campusSize": 85,
+        "order": 0,
+        "canonicalUrl": "https://collegecosmos.in/universities/amity-university-noida",
+        "dataQuality": "Draft",
+        "lastVerified": "2025-09-24T18:45:00.000Z",
+        "createdAt": "2025-09-25T21:45:08.555Z",
+        "updatedAt": "2025-09-25T21:45:08.555Z",
+        "publishedAt": null,
+        "locale": "en",
+        "logo": {
+            "id": 10,
+            "documentId": "vje63clty621ulme8cziq5v1",
+            "name": "Amity_University_logo.png",
+            "alternativeText": null,
+            "caption": null,
+            "width": 290,
+            "height": 343,
+            "formats": {
+                "xsmall": {
+                    "ext": ".png",
+                    "url": "/uploads/xsmall_Amity_University_logo_1cfd4219c2.png",
+                    "hash": "xsmall_Amity_University_logo_1cfd4219c2",
+                    "mime": "image/png",
+                    "name": "xsmall_Amity_University_logo.png",
+                    "path": null,
+                    "size": 6.45,
+                    "width": 54,
+                    "height": 64,
+                    "sizeInBytes": 6445
+                },
+                "thumbnail": {
+                    "ext": ".png",
+                    "url": "/uploads/thumbnail_Amity_University_logo_1cfd4219c2.png",
+                    "hash": "thumbnail_Amity_University_logo_1cfd4219c2",
+                    "mime": "image/png",
+                    "name": "thumbnail_Amity_University_logo.png",
+                    "path": null,
+                    "size": 22.46,
+                    "width": 132,
+                    "height": 156,
+                    "sizeInBytes": 22460
+                }
+            },
+            "hash": "Amity_University_logo_1cfd4219c2",
+            "ext": ".png",
+            "mime": "image/png",
+            "size": 13.38,
+            "url": "/uploads/Amity_University_logo_1cfd4219c2.png",
+            "previewUrl": null,
+            "provider": "local",
+            "provider_metadata": null,
+            "createdAt": "2025-09-25T20:49:35.455Z",
+            "updatedAt": "2025-09-25T20:49:35.455Z",
+            "publishedAt": "2025-09-25T20:49:35.455Z"
+        },
+        "coverImage": {
+            "id": 11,
+            "documentId": "nhbjwumbm48xl93avnuxcoqw",
+            "name": "1photo-gallery1.jpg",
+            "alternativeText": null,
+            "caption": null,
+            "width": 429,
+            "height": 164,
+            "formats": {
+                "xsmall": {
+                    "ext": ".jpg",
+                    "url": "/uploads/xsmall_1photo_gallery1_89ba26c823.jpg",
+                    "hash": "xsmall_1photo_gallery1_89ba26c823",
+                    "mime": "image/jpeg",
+                    "name": "xsmall_1photo-gallery1.jpg",
+                    "path": null,
+                    "size": 0.83,
+                    "width": 64,
+                    "height": 25,
+                    "sizeInBytes": 832
+                },
+                "thumbnail": {
+                    "ext": ".jpg",
+                    "url": "/uploads/thumbnail_1photo_gallery1_89ba26c823.jpg",
+                    "hash": "thumbnail_1photo_gallery1_89ba26c823",
+                    "mime": "image/jpeg",
+                    "name": "thumbnail_1photo-gallery1.jpg",
+                    "path": null,
+                    "size": 5.61,
+                    "width": 245,
+                    "height": 94,
+                    "sizeInBytes": 5610
+                }
+            },
+            "hash": "1photo_gallery1_89ba26c823",
+            "ext": ".jpg",
+            "mime": "image/jpeg",
+            "size": 14.83,
+            "url": "/uploads/1photo_gallery1_89ba26c823.jpg",
+            "previewUrl": null,
+            "provider": "local",
+            "provider_metadata": null,
+            "createdAt": "2025-09-25T20:49:52.433Z",
+            "updatedAt": "2025-09-25T20:49:52.433Z",
+            "publishedAt": "2025-09-25T20:49:52.433Z"
+        },
+        "gallery": [
+            {
+                "id": 11,
+                "documentId": "nhbjwumbm48xl93avnuxcoqw",
+                "name": "1photo-gallery1.jpg",
+                "alternativeText": null,
+                "caption": null,
+                "width": 429,
+                "height": 164,
+                "formats": {
+                    "xsmall": {
+                        "ext": ".jpg",
+                        "url": "/uploads/xsmall_1photo_gallery1_89ba26c823.jpg",
+                        "hash": "xsmall_1photo_gallery1_89ba26c823",
+                        "mime": "image/jpeg",
+                        "name": "xsmall_1photo-gallery1.jpg",
+                        "path": null,
+                        "size": 0.83,
+                        "width": 64,
+                        "height": 25,
+                        "sizeInBytes": 832
+                    },
+                    "thumbnail": {
+                        "ext": ".jpg",
+                        "url": "/uploads/thumbnail_1photo_gallery1_89ba26c823.jpg",
+                        "hash": "thumbnail_1photo_gallery1_89ba26c823",
+                        "mime": "image/jpeg",
+                        "name": "thumbnail_1photo-gallery1.jpg",
+                        "path": null,
+                        "size": 5.61,
+                        "width": 245,
+                        "height": 94,
+                        "sizeInBytes": 5610
+                    }
+                },
+                "hash": "1photo_gallery1_89ba26c823",
+                "ext": ".jpg",
+                "mime": "image/jpeg",
+                "size": 14.83,
+                "url": "/uploads/1photo_gallery1_89ba26c823.jpg",
+                "previewUrl": null,
+                "provider": "local",
+                "provider_metadata": null,
+                "createdAt": "2025-09-25T20:49:52.433Z",
+                "updatedAt": "2025-09-25T20:49:52.433Z",
+                "publishedAt": "2025-09-25T20:49:52.433Z"
+            },
+            {
+                "id": 12,
+                "documentId": "t8nnu3lgdq939ht9j23nasp7",
+                "name": "7album_photo-gallery7.jpg",
+                "alternativeText": null,
+                "caption": null,
+                "width": 205,
+                "height": 164,
+                "formats": {
+                    "xsmall": {
+                        "ext": ".jpg",
+                        "url": "/uploads/xsmall_7album_photo_gallery7_f138de37a2.jpg",
+                        "hash": "xsmall_7album_photo_gallery7_f138de37a2",
+                        "mime": "image/jpeg",
+                        "name": "xsmall_7album_photo-gallery7.jpg",
+                        "path": null,
+                        "size": 2.01,
+                        "width": 64,
+                        "height": 51,
+                        "sizeInBytes": 2014
+                    },
+                    "thumbnail": {
+                        "ext": ".jpg",
+                        "url": "/uploads/thumbnail_7album_photo_gallery7_f138de37a2.jpg",
+                        "hash": "thumbnail_7album_photo_gallery7_f138de37a2",
+                        "mime": "image/jpeg",
+                        "name": "thumbnail_7album_photo-gallery7.jpg",
+                        "path": null,
+                        "size": 11.28,
+                        "width": 195,
+                        "height": 156,
+                        "sizeInBytes": 11280
+                    }
+                },
+                "hash": "7album_photo_gallery7_f138de37a2",
+                "ext": ".jpg",
+                "mime": "image/jpeg",
+                "size": 12.52,
+                "url": "/uploads/7album_photo_gallery7_f138de37a2.jpg",
+                "previewUrl": null,
+                "provider": "local",
+                "provider_metadata": null,
+                "createdAt": "2025-09-25T20:49:52.488Z",
+                "updatedAt": "2025-09-25T20:49:52.488Z",
+                "publishedAt": "2025-09-25T20:49:52.489Z"
+            },
+            {
+                "id": 13,
+                "documentId": "h03i131tc6oggk9o6um1xrm5",
+                "name": "download (1).jpeg",
+                "alternativeText": null,
+                "caption": null,
+                "width": 225,
+                "height": 225,
+                "formats": {
+                    "xsmall": {
+                        "ext": ".jpeg",
+                        "url": "/uploads/xsmall_download_1_6c318e7b00.jpeg",
+                        "hash": "xsmall_download_1_6c318e7b00",
+                        "mime": "image/jpeg",
+                        "name": "xsmall_download (1).jpeg",
+                        "path": null,
+                        "size": 1.82,
+                        "width": 64,
+                        "height": 64,
+                        "sizeInBytes": 1822
+                    },
+                    "thumbnail": {
+                        "ext": ".jpeg",
+                        "url": "/uploads/thumbnail_download_1_6c318e7b00.jpeg",
+                        "hash": "thumbnail_download_1_6c318e7b00",
+                        "mime": "image/jpeg",
+                        "name": "thumbnail_download (1).jpeg",
+                        "path": null,
+                        "size": 7.56,
+                        "width": 156,
+                        "height": 156,
+                        "sizeInBytes": 7564
+                    }
+                },
+                "hash": "download_1_6c318e7b00",
+                "ext": ".jpeg",
+                "mime": "image/jpeg",
+                "size": 13.06,
+                "url": "/uploads/download_1_6c318e7b00.jpeg",
+                "previewUrl": null,
+                "provider": "local",
+                "provider_metadata": null,
+                "createdAt": "2025-09-25T20:49:52.512Z",
+                "updatedAt": "2025-09-25T20:49:52.512Z",
+                "publishedAt": "2025-09-25T20:49:52.512Z"
+            },
+            {
+                "id": 14,
+                "documentId": "ifmjtz8gle87jrugpqe8jcbr",
+                "name": "download.jpeg",
+                "alternativeText": null,
+                "caption": null,
+                "width": 275,
+                "height": 183,
+                "formats": {
+                    "xsmall": {
+                        "ext": ".jpeg",
+                        "url": "/uploads/xsmall_download_d2b8b0eba5.jpeg",
+                        "hash": "xsmall_download_d2b8b0eba5",
+                        "mime": "image/jpeg",
+                        "name": "xsmall_download.jpeg",
+                        "path": null,
+                        "size": 1.31,
+                        "width": 64,
+                        "height": 43,
+                        "sizeInBytes": 1305
+                    },
+                    "thumbnail": {
+                        "ext": ".jpeg",
+                        "url": "/uploads/thumbnail_download_d2b8b0eba5.jpeg",
+                        "hash": "thumbnail_download_d2b8b0eba5",
+                        "mime": "image/jpeg",
+                        "name": "thumbnail_download.jpeg",
+                        "path": null,
+                        "size": 10.66,
+                        "width": 234,
+                        "height": 156,
+                        "sizeInBytes": 10663
+                    }
+                },
+                "hash": "download_d2b8b0eba5",
+                "ext": ".jpeg",
+                "mime": "image/jpeg",
+                "size": 13.08,
+                "url": "/uploads/download_d2b8b0eba5.jpeg",
+                "previewUrl": null,
+                "provider": "local",
+                "provider_metadata": null,
+                "createdAt": "2025-09-25T20:49:52.524Z",
+                "updatedAt": "2025-09-25T20:49:52.524Z",
+                "publishedAt": "2025-09-25T20:49:52.524Z"
+            }
+        ],
+        "brochures": [
+            {
+                "id": 19,
+                "documentId": "sjx5s2qz0qidyr0cnem94nix",
+                "name": "gurgaon-brochure-2025.pdf",
+                "alternativeText": null,
+                "caption": null,
+                "width": null,
+                "height": null,
+                "formats": null,
+                "hash": "gurgaon_brochure_2025_347dbd6b9c",
+                "ext": ".pdf",
+                "mime": "application/pdf",
+                "size": 711.11,
+                "url": "/uploads/gurgaon_brochure_2025_347dbd6b9c.pdf",
+                "previewUrl": null,
+                "provider": "local",
+                "provider_metadata": null,
+                "createdAt": "2025-09-25T21:25:36.226Z",
+                "updatedAt": "2025-09-25T21:25:36.226Z",
+                "publishedAt": "2025-09-25T21:25:36.227Z"
+            }
+        ],
+        "location": {
+            "id": 1,
+            "address": "Sector 125",
+            "city": "Noida",
+            "state": "Uttar Pradesh",
+            "country": "India",
+            "pincode": "201313"
+        },
+        "contact": {
+            "id": 1,
+            "phone": "1204392000",
+            "email": "admissions@amity.edu",
+            "fax": "1204392290",
+            "tollFree": "1800-102-2244"
+        },
+        "ranking": [
+            {
+                "id": 1,
+                "organization": "NIRF",
+                "rank": 37,
+                "year": 2024,
+                "category": "Overall",
+                "score": 56.23
+            }
+        ],
+        "accreditation": [
+            {
+                "id": 1,
+                "body": "NAAC",
+                "grade": "A+",
+                "status": "Accredited",
+                "validFrom": "2022-01-01",
+                "validUntil": "2027-12-31",
+                "cgpa": 3.54
+            }
+        ],
+        "admissions": {
+            "id": 1,
+            "applicationStart": "2025-09-25",
+            "applicationEnd": "2026-05-29",
+            "examDate": "2026-11-26",
+            "resultDate": "2026-09-30",
+            "eligibilityCriteria": "As per course-specific eligibility mentioned on the university website.",
+            "selectionProcess": "Based on test score, followed by a personal interview. Some courses may have a Group Discussion round.",
+            "applicationFee": 1500
+        },
+        "fees": [
+            {
+                "id": 1,
+                "courseType": "UG",
+                "category": "General",
+                "tuitionFee": 450000,
+                "otherFees": 25000,
+                "hostelFee": 160000,
+                "messFee": 60000,
+                "transportFee": 40000,
+                "totalFee": 735000,
+                "frequency": "Per Year"
+            }
+        ],
+        "facilities": [
+            {
+                "id": 1,
+                "name": "Central Library",
+                "description": "A state-of-the-art library with access to thousands of books, journals, and digital resources.",
+                "category": "Academic",
+                "availability": true,
+                "capacity": 1500
+            }
+        ],
+        "placements": [
+            {
+                "id": 1,
+                "year": 2025,
+                "totalStudents": 5000,
+                "studentsPlaced": 4850,
+                "placementPercentage": 97,
+                "averagePackage": 650000,
+                "highestPackage": 6175000,
+                "lowestPackage": 350000,
+                "medianPackage": 550000,
+                "topRecruiters": [
+                    "Amazon",
+                    "Microsoft",
+                    "Google",
+                    "Deloitte",
+                    "EY",
+                    "Wipro",
+                    "Infosys"
+                ],
+                "sectorWiseData": {
+                    "BFSI": "15%",
+                    "Other": "10%",
+                    "IT/ITES": "45%",
+                    "Consulting": "20%",
+                    "Core Engineering": "10%"
+                }
+            }
+        ],
+        "placementRecords": [
+            {
+                "id": 1,
+                "year": "2024",
+                "totalStudents": 4800,
+                "placedStudents": 4600,
+                "placementRate": 95.8,
+                "averagePackage": "₹6.2 Lakhs per annum",
+                "highestPackage": "₹58 Lakhs per annum",
+                "medianPackage": "₹5.2 Lakhs per annum",
+                "topRecruiters": [
+                    "Accenture",
+                    "Capgemini",
+                    "Cognizant",
+                    "IBM"
+                ],
+                "sectorWiseBreakdown": {
+                    "IT": "50%",
+                    "Other": "10%",
+                    "Sales": "15%",
+                    "Finance": "10%",
+                    "Consulting": "15%"
+                }
+            }
+        ],
+        "financialAid": {
+            "id": 1,
+            "title": "Financial Aid & Scholarships",
+            "description": "Financial AId",
+            "emiAvailable": true,
+            "additionalInfo": null
+        },
+        "campusGroups": [
+            {
+                "id": 1,
+                "label": "Academic Blocks",
+                "color": "#F8F9FA",
+                "locations": {
+                    "type": "Polygon",
+                    "coordinates": [
+                        [
+                            [
+                                77.333,
+                                28.545
+                            ],
+                            [
+                                77.334,
+                                28.5455
+                            ],
+                            [
+                                77.3335,
+                                28.546
+                            ],
+                            [
+                                77.333,
+                                28.545
+                            ]
+                        ]
+                    ]
+                }
+            }
+        ],
+        "advantages": [
+            {
+                "id": 1,
+                "benefit": "Global Exposure",
+                "description": "Opportunity to participate in the Study Abroad Program (SAP) at Amity's global campuses in London, Dubai, Singapore, etc."
+            },
+            {
+                "id": 2,
+                "benefit": "Industry-Oriented Curriculum",
+                "description": "The curriculum is designed in consultation with industry experts to ensure graduates are job-ready."
+            }
+        ],
+        "hiringPartners": [
+            {
+                "id": 1,
+                "companyName": "Microsoft",
+                "category": "IT",
+                "isActive": true
+            },
+            {
+                "id": 2,
+                "companyName": "Google",
+                "category": "IT",
+                "isActive": true
+            }
+        ],
+        "examinationPatterns": [
+            {
+                "id": 1,
+                "title": ": Amity Common Admission Test (AMCAT)",
+                "description": "An online aptitude test for admission to various UG and PG programs. It assesses candidates on logical, quantitative, and language skills.",
+                "components": [
+                    {
+                        "marks": 30,
+                        "section": "English Language",
+                        "questions": 30
+                    },
+                    {
+                        "marks": 30,
+                        "section": "Logical Reasoning",
+                        "questions": 30
+                    },
+                    {
+                        "marks": 30,
+                        "section": "Quantitative Ability",
+                        "questions": 30
+                    },
+                    {
+                        "marks": 30,
+                        "section": "Subject Specific",
+                        "questions": 30
+                    }
+                ],
+                "mode": "Online",
+                "duration": "120 minutes"
+            }
+        ],
+        "courseDetails": [
+            {
+                "id": 1,
+                "courseName": "B.Tech in Computer Science & Engineering",
+                "duration": "4 Years",
+                "fees": "₹4,50,000 per year",
+                "mode": "Full-time",
+                "eligibility": "Minimum 60% in 10+2 with Physics, Chemistry & Mathematics. Admission through AMCAT or a valid JEE Main score.",
+                "syllabus": "Covers subjects like Data Structures, Algorithms, AI, Machine Learning, Cloud Computing, and Cybersecurity.",
+                "specializations": [
+                    "Artificial Intelligence & Machine Learning",
+                    "Data Science",
+                    "Cybersecurity",
+                    "Cloud Computing"
+                ]
+            },
+            {
+                "id": 2,
+                "courseName": "Master of Business Administration (MBA)",
+                "duration": "2 Years",
+                "fees": "₹6,00,000 per year",
+                "mode": "Full-time",
+                "eligibility": "Bachelor's Degree with minimum 50% marks. Admission through CAT/MAT/GMAT/XAT score followed by GD and PI.",
+                "syllabus": "Core subjects in first year, followed by dual specializations in second year.",
+                "specializations": [
+                    "Marketing & Sales",
+                    "Finance",
+                    "Human Resources",
+                    "International Business"
+                ]
+            }
+        ],
+        "faqs": [
+            {
+                "order": 1,
+                "id": 1,
+                "question": "What is the admission process for B.Tech at Amity University, Noida?",
+                "answer": "Admission to B.Tech is based on scores in the Amity Joint Entrance Examination (AMCAT) or a valid JEE Main score, followed by a personal interview.",
+                "category": "Admissions"
+            },
+            {
+                "order": 2,
+                "id": 2,
+                "question": "Are hostel facilities compulsory at Amity Noida?",
+                "answer": "No, hostel facilities are optional. However, it is recommended for outstation students. Rooms are available on a first-come, first-served basis.",
+                "category": "Other"
+            }
+        ],
+        "contactDetails": [
+            {
+                "id": 1,
+                "department": "Admissions Office (National)",
+                "contactPerson": "Dr. Alok Sharma",
+                "phone": "+91-9876543210",
+                "email": "dmissions@amity.edu",
+                "workingHours": "Mon-Sat, 9:00 AM - 5:30 PM"
+            },
+            {
+                "id": 2,
+                "department": "Amity School of Engineering & Technology",
+                "contactPerson": "Prof. Meenakshi Gupta",
+                "phone": "+91-120-4392456",
+                "email": "aset.info@amity.edu",
+                "workingHours": "Mon-Fri, 9:30 AM - 5:00 PM"
+            }
+        ]
+    },
+    "meta": {}
+}
