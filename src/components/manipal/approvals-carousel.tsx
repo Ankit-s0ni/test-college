@@ -56,66 +56,98 @@ export default function ApprovalsCarousel() {
           Approved & Recognized by
         </h2>
 
-        {/* Approval Logos */}
-        <div style={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          gap: '40px',
-          flexWrap: 'nowrap',
-          padding: '0 20px',
-          maxWidth: '1400px',
-          margin: '0 auto'
-        }}>
+        {/* Approval Logos (responsive) */}
+        <div className="approvals-row" style={{ maxWidth: '1400px', margin: '0 auto', padding: '0 20px' }}>
           {approvals.map((approval, index) => (
-            <div
-              key={index}
-              style={{
-                position: 'relative',
-                width: '140px',
-                height: '140px',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                flex: '1'
-              }}
-            >
-              {/* Outer Circle */}
-              <div style={{
-                position: 'absolute',
-                width: '140px',
-                height: '140px',
-                borderRadius: '50%',
-                border: '4px solid #ff6a00',
-                background: '#fff'
-              }} />
-              
-              {/* Inner Circle */}
-              <div style={{
-                position: 'absolute',
-                width: '128px',
-                height: '128px',
-                borderRadius: '50%',
-                border: '3px solid #ff6a00',
-                background: '#fff',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                padding: '16px'
-              }}>
-                <img
-                  src={approval.src}
-                  alt={approval.alt}
-                  style={{
-                    maxWidth: '100%',
-                    maxHeight: '100%',
-                    objectFit: 'contain'
-                  }}
-                />
+            <div key={index} className="approval-item" aria-hidden={false}>
+              <div className="approval-outer" />
+              <div className="approval-inner">
+                <img src={approval.src} alt={approval.alt} className="approval-img" />
               </div>
             </div>
           ))}
         </div>
+
+        {/* Inline responsive styles to keep this component self-contained */}
+        <style>{`
+          .approvals-row {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 24px;
+            flex-wrap: wrap;
+          }
+
+          .approval-item {
+            position: relative;
+            width: 140px;
+            height: 140px;
+            flex: 0 0 140px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+          }
+
+          .approval-outer {
+            position: absolute;
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            border: 4px solid #ff6a00;
+            background: #fff;
+            box-sizing: border-box;
+          }
+
+          .approval-inner {
+            position: absolute;
+            width: 128px;
+            height: 128px;
+            border-radius: 50%;
+            border: 3px solid #ff6a00;
+            background: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+            box-sizing: border-box;
+          }
+
+          .approval-img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            display: block;
+          }
+
+          /* Small screens: make badges smaller and wrap into rows */
+          @media (max-width: 768px) {
+            .approval-item {
+              width: 96px;
+              height: 96px;
+              flex: 0 0 96px;
+            }
+            .approval-outer {
+              width: 96px;
+              height: 96px;
+              border-width: 3px;
+            }
+            .approval-inner {
+              width: 84px;
+              height: 84px;
+              border-width: 2px;
+              padding: 8px;
+            }
+            h2 { font-size: 20px; }
+          }
+
+          @media (max-width: 420px) {
+            .approval-item { width: 72px; height: 72px; flex: 0 0 72px; }
+            .approval-outer { width: 72px; height: 72px; border-width: 2px; }
+            .approval-inner { width: 64px; height: 64px; border-width: 1.5px; padding: 6px; }
+            .approvals-row { gap: 12px; }
+            h2 { font-size: 18px; }
+          }
+        `}</style>
       </div>
     </section>
   )

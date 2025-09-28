@@ -1,5 +1,6 @@
 "use client"
-import React from 'react'
+import React, { useState } from 'react'
+import { studentLeadsAPI } from '@/lib/api'
 import PageNavbar from '@/components/manipal/page-navbar'
 import HardcodedProgramsClient from '@/components/manipal/hardcoded-programs'
 import ApprovalsCarousel from '@/components/manipal/approvals-carousel'
@@ -11,6 +12,50 @@ import FormSection from '@/components/manipal/form-section'
 import ButtonWithPopup from '@/components/manipal/button-with-popup'
 
 function Hero() {
+  const [name, setName] = useState('')
+  const [email, setEmail] = useState('')
+  const [phone, setPhone] = useState('')
+  const [course, setCourse] = useState('')
+  const [stateProvince, setStateProvince] = useState('')
+  const [loading, setLoading] = useState(false)
+  const [message, setMessage] = useState<string | null>(null)
+
+  async function submitLead(e: React.FormEvent) {
+    e.preventDefault()
+    setMessage(null)
+    if (!name || !email || !phone || !course || !stateProvince) {
+      setMessage('Please fill all fields.')
+      return
+    }
+    setLoading(true)
+    try {
+      const leadData = {
+        name,
+        email,
+        phone,
+        program: course,
+        stateProvince,
+        status: 'new',
+        message: `Interested in ${course} program`,
+        leadSource: 'manipal-online-hero',
+        locale: 'en'
+      }
+
+      const res = await studentLeadsAPI.submit(leadData)
+      if (!res.success) throw new Error(res.message || 'Submission failed')
+      setMessage('Thank you! We will contact you soon.')
+      setName('')
+      setEmail('')
+      setPhone('')
+      setCourse('')
+    } catch (err) {
+      console.error(err)
+      setMessage(err instanceof Error ? err.message : 'Submission failed. Please try again.')
+    } finally {
+      setLoading(false)
+    }
+  }
+
   return (
     <section style={{position:'relative',minHeight:520,overflow:'hidden'}}>
   {/* Background image with teal/blue left tint */}
@@ -41,8 +86,10 @@ function Hero() {
           <div style={{background:'#fff',padding:20,borderRadius:8,boxShadow:'0 8px 30px rgba(2,6,23,0.08)'}}>
             <div style={{textAlign:'center',fontSize:22,fontWeight:800,color:'#ff6a00',marginBottom:12}}>Free Counseling</div>
             <div style={{marginTop:8}}>
-              <form style={{display:'flex',flexDirection:'column',gap:'12px'}}>
+              <form onSubmit={submitLead} style={{display:'flex',flexDirection:'column',gap:'12px'}}>
                 <input 
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
                   type="text" 
                   placeholder="Full Name" 
                   style={{
@@ -54,6 +101,8 @@ function Hero() {
                   }}
                 />
                 <input 
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                   type="email" 
                   placeholder="Email Address" 
                   style={{
@@ -65,6 +114,8 @@ function Hero() {
                   }}
                 />
                 <input 
+                  value={phone}
+                  onChange={(e) => setPhone(e.target.value)}
                   type="tel" 
                   placeholder="Mobile Number" 
                   style={{
@@ -76,6 +127,8 @@ function Hero() {
                   }}
                 />
                 <select 
+                  value={course}
+                  onChange={(e) => setCourse(e.target.value)}
                   style={{
                     padding:'12px 16px',
                     border:'1px solid #d1d5db',
@@ -94,8 +147,61 @@ function Hero() {
                   <option value="MCOM">M.COM - Master of Commerce</option>
                   <option value="MA-JMC">MA-JMC - Master of Arts In Journalism & Mass Communication</option>
                 </select>
-                <ButtonWithPopup
-                  buttonStyle={{
+                <select
+                  value={stateProvince}
+                  onChange={(e) => setStateProvince(e.target.value)}
+                  style={{
+                    padding:'12px 16px',
+                    border:'1px solid #d1d5db',
+                    borderRadius:'6px',
+                    fontSize:'14px',
+                    outline:'none',
+                    background:'#fff',
+                    marginTop:8
+                  }}
+                >
+                  <option value="">Select State</option>
+                  <option value="Andhra Pradesh">Andhra Pradesh</option>
+                  <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+                  <option value="Assam">Assam</option>
+                  <option value="Bihar">Bihar</option>
+                  <option value="Chhattisgarh">Chhattisgarh</option>
+                  <option value="Goa">Goa</option>
+                  <option value="Gujarat">Gujarat</option>
+                  <option value="Haryana">Haryana</option>
+                  <option value="Himachal Pradesh">Himachal Pradesh</option>
+                  <option value="Jharkhand">Jharkhand</option>
+                  <option value="Karnataka">Karnataka</option>
+                  <option value="Kerala">Kerala</option>
+                  <option value="Madhya Pradesh">Madhya Pradesh</option>
+                  <option value="Maharashtra">Maharashtra</option>
+                  <option value="Manipur">Manipur</option>
+                  <option value="Meghalaya">Meghalaya</option>
+                  <option value="Mizoram">Mizoram</option>
+                  <option value="Nagaland">Nagaland</option>
+                  <option value="Odisha">Odisha</option>
+                  <option value="Punjab">Punjab</option>
+                  <option value="Rajasthan">Rajasthan</option>
+                  <option value="Sikkim">Sikkim</option>
+                  <option value="Tamil Nadu">Tamil Nadu</option>
+                  <option value="Telangana">Telangana</option>
+                  <option value="Tripura">Tripura</option>
+                  <option value="Uttar Pradesh">Uttar Pradesh</option>
+                  <option value="Uttarakhand">Uttarakhand</option>
+                  <option value="West Bengal">West Bengal</option>
+                  <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
+                  <option value="Chandigarh">Chandigarh</option>
+                  <option value="Dadra and Nagar Haveli and Daman and Diu">Dadra and Nagar Haveli and Daman and Diu</option>
+                  <option value="Delhi">Delhi</option>
+                  <option value="Jammu and Kashmir">Jammu and Kashmir</option>
+                  <option value="Ladakh">Ladakh</option>
+                  <option value="Lakshadweep">Lakshadweep</option>
+                  <option value="Puducherry">Puducherry</option>
+                </select>
+                <button
+                  type="submit"
+                  disabled={loading}
+                  style={{
                     background:'#ff6a00',
                     color:'#fff',
                     border:'none',
@@ -103,23 +209,15 @@ function Hero() {
                     borderRadius:'6px',
                     fontSize:'14px',
                     fontWeight:600,
-                    cursor:'pointer',
+                    cursor: loading ? 'not-allowed' : 'pointer',
                     marginTop:'8px',
                     transition: 'all 0.3s ease'
                   }}
-                  onMouseEnter={(e) => {
-                    if (e.currentTarget) {
-                      e.currentTarget.style.background = '#e55a00'
-                    }
-                  }}
-                  onMouseLeave={(e) => {
-                    if (e.currentTarget) {
-                      e.currentTarget.style.background = '#ff6a00'
-                    }
-                  }}
                 >
-                  Get Free Counseling
-                </ButtonWithPopup>
+                  {loading ? 'Submitting...' : 'Get Free Counseling'}
+                </button>
+
+                {message && <div style={{fontSize:13,color:'#374151',paddingTop:6}}>{message}</div>}
               </form>
             </div>
           </div>

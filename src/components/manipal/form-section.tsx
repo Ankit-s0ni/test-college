@@ -1,5 +1,6 @@
 "use client"
 import React, { useState } from 'react'
+import { studentLeadsAPI } from '@/lib/api'
 
 export default function FormSection() {
   const [formData, setFormData] = useState({
@@ -9,6 +10,8 @@ export default function FormSection() {
     state: '',
     mobile: ''
   })
+  const [loading, setLoading] = useState(false)
+  const [message, setMessage] = useState<string | null>(null)
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target
@@ -29,6 +32,40 @@ export default function FormSection() {
     if (e.currentTarget) {
       e.currentTarget.style.background = '#ff6a00'
       e.currentTarget.style.color = '#fff'
+    }
+  }
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setMessage(null)
+    const { name, email, mobile, course } = formData
+    if (!name || !email || !mobile || !course) {
+      setMessage('Please fill all required fields.')
+      return
+    }
+    setLoading(true)
+    try {
+      const leadData = {
+        name: formData.name,
+        email: formData.email,
+        phone: formData.mobile,
+        program: formData.course,
+        stateProvince: formData.state || '',
+        status: 'new',
+        message: `Interested in ${formData.course} program`,
+        leadSource: 'manipal-online-form-section',
+        locale: 'en'
+      }
+
+      const res = await studentLeadsAPI.submit(leadData)
+      if (!res.success) throw new Error(res.message || 'Submission failed')
+      setMessage('Thank you! We will contact you soon.')
+      setFormData({ name: '', email: '', course: '', state: '', mobile: '' })
+    } catch (err) {
+      console.error(err)
+      setMessage('Submission failed. Please try again.')
+    } finally {
+      setLoading(false)
     }
   }
 
@@ -90,7 +127,7 @@ export default function FormSection() {
             Fill out the form below and our academic counselors will get in touch with you to guide you through the admission process.
           </p>
 
-          <form style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+          <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
             <div>
               <input
                 type="text"
@@ -263,8 +300,9 @@ export default function FormSection() {
               onMouseEnter={handleMouseEnter}
               onMouseLeave={handleMouseLeave}
             >
-              Submit
+              {loading ? 'Submitting...' : 'Submit'}
             </button>
+            {message && <div style={{marginTop:12,color:'#374151'}}>{message}</div>}
           </form>
         </div>
       </div>
