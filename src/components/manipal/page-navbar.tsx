@@ -7,6 +7,14 @@ import AmityModalHost from '@/components/amity/amity-modal-host';
 export default function ManipalPageNavbar(){
   const navHeight = 72;
 
+  const scrollToId = (id: string) => (e: React.MouseEvent) => {
+    e.preventDefault()
+    const el = document.getElementById(id)
+    if (!el) return
+    const y = el.getBoundingClientRect().top + window.scrollY - navHeight + 8
+    window.scrollTo({ top: y, behavior: 'smooth' })
+  }
+
   return (
     <>
       <header style={{position:'fixed',top:0,left:0,right:0,background:'#fff',borderBottom:'1px solid #eef2f7',zIndex:60,height:navHeight}} className="w-full">
@@ -16,10 +24,11 @@ export default function ManipalPageNavbar(){
           </div>
 
           <nav style={{display:'flex',alignItems:'center',gap:20}}>
-            <a href="#" style={{color:'#111827'}}>Home</a>
-            <a href="#" style={{color:'#111827'}}>About</a>
-            <a href="#" style={{color:'#111827'}}>Approvals</a>
-            <a href="#" style={{color:'#111827'}}>Courses</a>
+            <a href="#" onClick={scrollToId('top')} style={{color:'#111827'}}>Home</a>
+            <a href="#about" onClick={scrollToId('about')} style={{color:'#111827'}}>About</a>
+            <a href="#approvals" onClick={scrollToId('approvals')} style={{color:'#111827'}}>Approvals</a>
+            <a href="#courses" onClick={scrollToId('courses')} style={{color:'#111827'}}>Courses</a>
+            <a href="#contact" onClick={scrollToId('contact')} style={{color:'#111827'}}>Contact</a>
           </nav>
         </div>
 

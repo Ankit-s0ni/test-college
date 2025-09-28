@@ -232,13 +232,32 @@ export default function Page(){
   return (
     <main>
       <PageNavbar />
+      <div id="top" />
       <Hero />
-      <HardcodedProgramsClient />
-      <ApprovalsCarousel />
-      <CertificateSection />
-      <AboutSection />
-      <AdvantagesSection />
-      <FormSection />
+
+      <section id="courses">
+        <HardcodedProgramsClient />
+      </section>
+
+      <section id="approvals">
+        <ApprovalsCarousel />
+      </section>
+
+      <section id="certificates">
+        <CertificateSection />
+      </section>
+
+      <section id="about">
+        <AboutSection />
+      </section>
+
+      <section id="advantages">
+        <AdvantagesSection />
+      </section>
+
+      <section id="contact">
+        <FormSection />
+      </section>
       <ManipalFooter />
     </main>
   )
