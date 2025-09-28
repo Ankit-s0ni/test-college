@@ -1,6 +1,7 @@
 "use client";
 
 import React from 'react';
+import { usePathname } from 'next/navigation';
 import ApplyNowButton from './apply-now-button';
 import AmityModalHost from './amity-modal-host';
 
@@ -14,7 +15,10 @@ export default function PageNavbar() {
       <header style={{position:'fixed',top:0,left:0,right:0,background:'#fff',borderBottom:'1px solid #eef2f7',zIndex:60,height:navHeight}} className="w-full">
         <div style={{maxWidth:1200,height:'100%',margin:'0 auto',display:'flex',alignItems:'center',justifyContent:'space-between',padding:'8px 12px'}} className="px-4">
           <div style={{display:'flex',alignItems:'center',gap:12}}>
-            <img src="/assets/images/amity online logo.png" alt="Amity Online" style={{height:40}} className="h-10 md:h-12" />
+            {/* Show Manipal logo on manipal page, otherwise Amity logo */}
+            <img src={
+              (usePathname() || '').startsWith('/manipalonline') ? '/assets/images/manipal-logo.jpg' : '/assets/images/amity online logo.png'
+            } alt="Site Logo" style={{height:40}} className="h-10 md:h-12" />
           </div>
 
           <div>
