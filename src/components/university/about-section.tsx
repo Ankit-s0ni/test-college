@@ -2,58 +2,39 @@ import { About } from '@/app/universities/[slug]/page';
 import React from 'react';
 
 const AboutSection = ({ data }: { data: About & { courses: Array<any> } }) => {
+  // Clean the description: remove content reference tags and fix newlines
+  const cleanDescription = (html: string) => {
+    if (!html) return '';
+    
+    // Remove content reference tags like :contentReference[oaicite:0]{index=0}
+    let cleaned = html.replace(/:contentReference\[oaicite:\d+\]\{index=\d+\}/g, '');
+    
+    // Replace literal \n with actual line breaks
+    cleaned = cleaned.replace(/\\n/g, '\n');
+    
+    // Convert plain text newlines to HTML breaks if not already in tags
+    cleaned = cleaned.replace(/\n/g, '<br/>');
+    
+    return cleaned;
+  };
+
   return (
     <section id="about" className="space-y-4 max-w-full">
       <h2 className="text-xl font-semibold">{data.title}</h2>
 
-      <p className="text-sm">{data.description}</p>
-
-      {/* Mobile: card list */}
-      <div className="md:hidden space-y-3">
-        {data.courses.map((c) => (
-          <div key={c.name} className="border border-black rounded-none">
-              <div className="bg-[#1E4BFF] text-white px-4 py-2 font-medium">{c.name}</div>
-            <dl className="grid grid-cols-2 gap-x-4 gap-y-2 px-4 py-3 text-sm">
-              <dt className="text-muted-foreground">Per Semester</dt>
-              <dd className="text-right font-medium">{(c as any).perSem || (c as any).feeRange || (c as any).fees || '—'}</dd>
-
-              <dt className="text-muted-foreground">Total Fees</dt>
-              <dd className="text-right font-medium">{(c as any).total || (c as any).fees || (c as any).feeRange || '—'}</dd>
-
-              {c.online !== undefined && (
-                <>
-                  <dt className="text-muted-foreground">Online</dt>
-                  <dd className="text-right">{c.online ? 'Yes' : 'No'}</dd>
-                </>
-              )}
-            </dl>
-          </div>
-        ))}
-      </div>
-
-      {/* Tablet/Desktop: table */}
-      <div className="hidden md:block overflow-x-auto rounded-none border border-black">
-        <table className="min-w-full text-sm">
-          <thead>
-            <tr className="bg-[#1E4BFF] text-white border-black">
-              <th className="px-4 py-4 text-left font-medium">Course</th>
-              <th className="px-4 py-4 text-center font-medium">Per Semester</th>
-              <th className="px-4 py-4 text-center font-medium">Total Fees</th>
-              <th className="px-4 py-4 text-center font-medium">Online</th>
-            </tr>
-          </thead>
-          <tbody className="[&>tr:not(:last-child)]:border-b [&>tr:not(:last-child)]:border-border">
-            {data.courses.map((c) => (
-              <tr key={c.name} className="border-black">
-                <td className="px-4 py-4 border-black">{c.name}</td>
-                <td className="px-4 py-4 text-center font-medium border-black">{(c as any).perSem || (c as any).feeRange || (c as any).fees || '—'}</td>
-                <td className="px-4 py-4 text-center font-medium border-black">{(c as any).total || (c as any).fees || (c as any).feeRange || '—'}</td>
-                <td className="px-4 py-4 text-center border-black">{c.online !== undefined ? (c.online ? 'Yes' : 'No') : ''}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+      {/* Render HTML content properly */}
+      <div 
+        className="prose prose-sm max-w-none text-gray-700 
+          prose-headings:text-gray-900 prose-headings:font-semibold
+          prose-h2:text-xl prose-h2:mt-6 prose-h2:mb-3
+          prose-h3:text-lg prose-h3:mt-4 prose-h3:mb-2
+          prose-p:my-2 prose-p:leading-relaxed
+          prose-ul:my-2 prose-ul:list-disc prose-ul:pl-5
+          prose-li:my-1
+          prose-a:text-[#0247D2] prose-a:no-underline hover:prose-a:underline
+          [&>br]:hidden [&_br]:my-1"
+        dangerouslySetInnerHTML={{ __html: cleanDescription(data.description) }}
+      />
     </section>
   );
 };

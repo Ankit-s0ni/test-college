@@ -19,8 +19,9 @@ import {
 import React, { useEffect, useState } from 'react';
 
 const UniversitySidebar = () => {
-  const sections = [
+  const allSections = [
     ['about', 'About', Info],
+    ['programs', 'Programs & Fees', School],
     ['approvals', 'Approvals', BadgeCheck],
     ['courses', 'Courses', Book],
     ['certificate', 'Certificate', ScrollText],
@@ -28,6 +29,7 @@ const UniversitySidebar = () => {
     ['fees', 'Fee Structure', Calculator],
     ['examination', 'Examination', FileSignature],
     ['financial-aid', 'Financial Aid', Wallet],
+    ['placements', 'Placements', Trophy],
     ['partners', 'Hiring Partners', Handshake],
     ['campus', 'Campus', MapPin],
     ['advantages', 'Advantages', Sparkles],
@@ -39,14 +41,35 @@ const UniversitySidebar = () => {
 
   const [activeSection, setActiveSection] = useState<string>('about');
   const [userClicked, setUserClicked] = useState<boolean>(false);
+  const [availableSections, setAvailableSections] = useState<Array<readonly [string, string, any]>>([]);
+
+  // Detect which sections actually exist on the page
+  useEffect(() => {
+    const checkSections = () => {
+      const existing = allSections.filter(([id]) => {
+        const element = document.getElementById(id);
+        // Check if element exists and has content (not just a placeholder div)
+        return element && (element.children.length > 0 || element.textContent?.trim());
+      });
+      setAvailableSections(existing);
+    };
+
+    // Initial check
+    checkSections();
+
+    // Recheck after a delay for dynamic content
+    const timeoutId = setTimeout(checkSections, 1000);
+
+    return () => clearTimeout(timeoutId);
+  }, []);
 
   // Handle initial URL hash
   useEffect(() => {
     const hash = window.location.hash.slice(1);
-    if (hash && sections.some(([id]) => id === hash)) {
+    if (hash && availableSections.some(([id]) => id === hash)) {
       setActiveSection(hash);
     }
-  }, []);
+  }, [availableSections]);
 
   const handleSectionClick = (sectionId: string) => {
     setActiveSection(sectionId);
@@ -57,7 +80,7 @@ const UniversitySidebar = () => {
 
   useEffect(() => {
     const setupObservers = () => {
-      const ids = sections.map(([id]) => id);
+      const ids = availableSections.map(([id]) => id);
       const observers: IntersectionObserver[] = [];
       const existingElements = new Map<string, Element>();
 
@@ -129,14 +152,23 @@ const UniversitySidebar = () => {
       observers.forEach((o) => o.disconnect());
       clearTimeout(timeoutId);
     };
-  }, [userClicked]);
+  }, [userClicked, availableSections]);
+
+  // Don't render sidebar if no sections are available yet
+  if (availableSections.length === 0) {
+    return (
+      <CardContent className="space-y-2 px-0">
+        <div className="px-4 py-2 text-sm text-muted-foreground">Loading...</div>
+      </CardContent>
+    );
+  }
 
   return (
     <CardContent className="space-y-2 px-0">
       {(() => {
         return (
           <>
-            {sections.map(([id, label, Icon]) => (
+            {availableSections.map(([id, label, Icon]) => (
               <a
                 key={id}
                 href={`#${id}`}

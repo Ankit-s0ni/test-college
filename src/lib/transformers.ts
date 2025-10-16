@@ -242,7 +242,7 @@ export function transformProgramData(apiProgram: ProgramAPI): ProgramListItem {
     id: apiProgram.id,
     name: apiProgram.name,
     slug: apiProgram.slug,
-    duration: apiProgram.duration,
+    duration: apiProgram.standardDuration || apiProgram.duration || 'N/A', // Use standardDuration from API
     category: category,
     icon: icon,
     degree: apiProgram.degree,

@@ -45,6 +45,7 @@ import ContactSection from '@/components/university/contact-section';
 import AdvantagesSection from '@/components/university/advantages-section';
 import SimilarUniversities from '@/components/university/similar-universities';
 import ReviewsSection from '@/components/university/reviews-section';
+import ProgramsSection from '@/components/university/programs-section';
 import Stars from '@/components/custom/stars';
 import ReviewModal from '@/components/review-modal';
 import TalkToExpertModal from '@/components/talk-to-expert-modal';
@@ -352,27 +353,35 @@ function convertAPIDataToPageData(apiResponse: UniversityDetailAPIResponse): Uni
 
   // Use real approvals data if available, fallback to accreditation
   if (university.approvals && university.approvals.length > 0) {
-    conditionalData.approvals = {
-      title: 'Approvals & Accreditations',
-      description: 'Recognized by top statutory bodies and accreditation councils.',
-      items: university.approvals.map((approval: any) => ({
-        body: approval.body || approval.name || undefined,
-        grade: approval.grade || undefined,
-        status: approval.status || undefined,
-        logo: approval.logo?.url ? `${baseUrl}${approval.logo.url}` : undefined,
-      })).filter(Boolean),
-    };
-    } else if (university.accreditation && university.accreditation.length > 0) {
-    conditionalData.approvals = {
-      title: 'Approvals & Accreditations',
-      description: 'Recognized by top statutory bodies and accreditation councils.',
-      items: university.accreditation.map((acc: any) => ({
-        body: acc.body || acc.name || undefined,
-        grade: acc.grade || undefined,
-        status: acc.status || undefined,
-        logo: acc.logo?.url ? `${baseUrl}${acc.logo.url}` : undefined,
-      })).filter(Boolean),
-    };
+    const approvalItems = university.approvals.map((approval: any) => ({
+      body: approval.body || approval.name || undefined,
+      grade: approval.grade || undefined,
+      status: approval.status || undefined,
+      logo: approval.logo?.url ? `${baseUrl}${approval.logo.url}` : undefined,
+    })).filter((item: any) => item.body || item.status);
+    
+    if (approvalItems.length > 0) {
+      conditionalData.approvals = {
+        title: 'Approvals & Accreditations',
+        description: 'Recognized by top statutory bodies and accreditation councils.',
+        items: approvalItems,
+      };
+    }
+  } else if (university.accreditation && university.accreditation.length > 0) {
+    const accreditationItems = university.accreditation.map((acc: any) => ({
+      body: acc.body || acc.name || undefined,
+      grade: acc.grade || undefined,
+      status: acc.status || undefined,
+      logo: acc.logo?.url ? `${baseUrl}${acc.logo.url}` : undefined,
+    })).filter((item: any) => item.body || item.status);
+    
+    if (accreditationItems.length > 0) {
+      conditionalData.approvals = {
+        title: 'Approvals & Accreditations',
+        description: 'Recognized by top statutory bodies and accreditation councils.',
+        items: accreditationItems,
+      };
+    }
   }
 
   // Only add Courses section if we have real courses data
@@ -977,6 +986,15 @@ export default function UniversitySlugPage({ params }: any) {
           <main className="space-y-8 lg:space-y-10">
             {/* Only show sections where we have real API data */}
             {pageData.about && <AboutSection data={pageData.about} />}
+            
+            {/* Programs Section - Show programs with fees */}
+            {apiData?.data?.programs && apiData.data.programs.length > 0 && (
+              <ProgramsSection 
+                programs={apiData.data.programs} 
+                universityName={apiData.data.name || pageData.name}
+              />
+            )}
+            
             {pageData.approvals && <ApprovalsSection data={pageData.approvals} />}
             {(pageData.courses && pageData.courses.length > 0) || (apiData?.data?.courses && apiData.data.courses.length > 0) ? (
               (() => {
@@ -1014,7 +1032,9 @@ export default function UniversitySlugPage({ params }: any) {
             {pageData.financialAid && <FinancialAidSection data={pageData.financialAid} />}
             {!pageData.financialAid && <div id="financial-aid" />}
             { (pageData.placements || pageData.placementRecords) && (
-              <PlacementsSection placements={(pageData as any).placements} placementRecords={(pageData as any).placementRecords} />
+              <div id="placements">
+                <PlacementsSection placements={(pageData as any).placements} placementRecords={(pageData as any).placementRecords} />
+              </div>
             )}
             {pageData.courseDetails && <CourseDetailsSection courses={(pageData as any).courseDetails} />}
             {pageData.partners && <HiringPartnerSection data={pageData.partners} />}

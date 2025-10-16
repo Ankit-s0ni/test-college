@@ -53,18 +53,23 @@ export interface ProgramAPI {
   name: string;
   slug: string;
   degree: 'Certificate' | 'Bachelor' | 'Master' | 'Doctorate';
-  mode: 'Full-time' | 'Part-time' | 'Online' | 'Hybrid';
-  duration: string;
-  eligibility: string;
-  averageSalary: number;
-  placementRate: number;
+  mode?: 'Full-time' | 'Part-time' | 'Online' | 'Hybrid';
+  standardDuration: string; // API uses standardDuration
+  duration?: string; // Keep for backward compatibility
+  standardEligibility?: string; // API uses standardEligibility
+  eligibility?: string; // Keep for backward compatibility
+  standardCurriculum?: string; // API uses standardCurriculum
+  curriculum?: string; // Keep for backward compatibility
+  averageSalary?: number;
+  placementRate?: number;
   featured: boolean;
   isActive: boolean;
   createdAt: string;
   updatedAt: string;
-  publishedAt: string;
+  publishedAt: string | null;
+  locale: string | null;
   description?: string;
-  curriculum?: string;
+  shortDescription?: string;
   totalFees?: number;
   yearlyFees?: number;
   image?: ProgramImage;
@@ -77,7 +82,7 @@ export interface ProgramAPI {
     key: string;
     order: number;
     programs?: any[];
-  };
+  } | null;
   entranceExams?: any[];
   universities?: any[];
   fees?: Array<{

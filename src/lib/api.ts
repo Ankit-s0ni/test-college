@@ -19,14 +19,19 @@ export async function fetchAPI<T>(endpoint: string): Promise<T> {
   
   try {
     const response = await fetch(url, {
+      method: 'GET',
       headers: {
         'Content-Type': 'application/json',
+        'Accept': 'application/json',
       },
       cache: 'no-store', // Force fresh data for now, can be optimized later
+      credentials: 'omit', // Don't send cookies for CORS
     });
 
     if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
+      const errorText = await response.text();
+      console.error(`API Error (${response.status}): ${errorText}`);
+      throw new Error(`HTTP error! status: ${response.status} - ${errorText}`);
     }
 
     const data = await response.json();
@@ -124,9 +129,46 @@ export const programsAPI = {
   getByCategory: (category: string) => fetchAPI<ProgramsAPIResponse>(`/programs?category=${category}&populate=*`),
   
   /**
-   * Get program by slug
+   * Get program by slug - first finds by slug filter, then returns the full data
    */
-  getBySlug: (slug: string) => fetchAPI<ProgramDetailAPIResponse>(`/programs/slug/${slug}?populate=*`),
+  getBySlug: async (slug: string): Promise<ProgramDetailAPIResponse> => {
+    try {
+      // Encode the slug for URL
+      const encodedSlug = encodeURIComponent(slug);
+      const url = `/programs?filters[slug][$eq]=${encodedSlug}&populate=*`;
+      
+      console.log('Fetching program with URL:', `${API_BASE_URL}${url}`);
+      
+      // Query programs with slug filter
+      const response = await fetchAPI<ProgramsAPIResponse>(url);
+      
+      console.log('API Response:', response);
+      console.log('Total programs returned:', response.data?.length);
+      
+      if (!response.data || response.data.length === 0) {
+        throw new Error(`Program with slug "${slug}" not found`);
+      }
+      
+      // Find the matching program by slug (in case filter didn't work)
+      const matchingProgram = response.data.find(p => p.slug === slug);
+      
+      if (!matchingProgram) {
+        console.warn(`Slug filter didn't work. Returned programs:`, response.data.map(p => p.slug));
+        throw new Error(`Program with slug "${slug}" not found in results`);
+      }
+      
+      console.log('Found matching program:', matchingProgram.name);
+      
+      // Return the first matching program in the expected format
+      return {
+        data: matchingProgram,
+        meta: response.meta,
+      };
+    } catch (error) {
+      console.error(`Error fetching program by slug "${slug}":`, error);
+      throw error;
+    }
+  },
   
   /**
    * Get program by ID

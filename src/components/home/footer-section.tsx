@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from 'next/link';
 
 const FooterSection = () => {
   return (
@@ -8,62 +9,58 @@ const FooterSection = () => {
           {/* Company Info */}
           <div className="col-span-2">
             <div className="flex items-center gap-2 mb-4">
-              <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center">
-                <span className="text-black font-bold text-sm">L</span>
+              <div className="w-8 h-8 bg-gradient-to-br from-brand-primary to-brand-primary/80 rounded-md flex items-center justify-center">
+                <span className="text-white font-bold text-sm">C</span>
               </div>
-              <span className="font-bold text-lg">Lorem ipsum</span>
+              <span className="font-bold text-lg">College Cosmos</span>
             </div>
             <p className="text-gray-400 text-sm mb-6">
-              Connect with Lorem ipsum and start your career transformation. We enable everyone to
-              create professional videos without experience or staff skills.
+              Your trusted guide to exploring top universities and online degree programs across India. 
+              We help students discover the perfect educational path for their career aspirations.
             </p>
             <p className="text-gray-400 text-sm mb-4">
-              Using AI, we&apos;re radically changing the process of content creation, making it
-              scalable and affordable while maintaining high quality.
+              From prestigious institutions like Amity Online and Manipal Online to comprehensive 
+              program guides, we provide all the information you need to make informed decisions 
+              about your future.
             </p>
             <div className="flex items-center gap-4">
-              <div className="w-10 h-10 bg-blue-600 rounded-full"></div>
+              <div className="w-10 h-10 bg-brand-primary rounded-full flex items-center justify-center">
+                <span className="text-white font-bold">CC</span>
+              </div>
               <div>
-                <p className="text-sm font-medium">Synthesis Ltd, Synthesis, Kent House,</p>
+                <p className="text-sm font-medium">College Cosmos</p>
                 <p className="text-sm text-gray-400">
-                  14-17 Market Place, London, W1W 8AJ, United Kingdom
+                  Your Education Journey Starts Here
                 </p>
               </div>
             </div>
           </div>
 
-          {/* Home */}
+          {/* Quick Links */}
           <div>
-            <h4 className="font-semibold mb-4">Home</h4>
+            <h4 className="font-semibold mb-4">Quick Links</h4>
             <ul className="space-y-2 text-sm text-gray-400">
-              <li>160+ Video Avatars</li>
-              <li>140+ Languages</li>
-              <li>60+ Video Templates</li>
-              <li>Custom Avatars</li>
-              <li>Free AI Video Generator</li>
-              <li>AI Video Editor</li>
-              <li>AI Video Maker</li>
-              <li>AI Voice Generator</li>
-              <li>Text To Video</li>
-              <li>Text To Speech</li>
-              <li>Script to Video</li>
+              <li><Link href="/" className="hover:text-white transition-colors">Home</Link></li>
+              <li><Link href="/universities" className="hover:text-white transition-colors">Top Universities</Link></li>
+              <li><Link href="/courses" className="hover:text-white transition-colors">Courses</Link></li>
+              <li><Link href="/about" className="hover:text-white transition-colors">About Us</Link></li>
+              <li><Link href="/blog" className="hover:text-white transition-colors">Blog</Link></li>
+              <li><Link href="/contact" className="hover:text-white transition-colors">Contact Us</Link></li>
             </ul>
           </div>
 
-          {/* Lorem ipsum */}
+          {/* Popular Programs */}
           <div>
-            <h4 className="font-semibold mb-4">Lorem ipsum</h4>
+            <h4 className="font-semibold mb-4">Popular Programs</h4>
             <ul className="space-y-2 text-sm text-gray-400">
-              <li>Learning & Development</li>
-              <li>Sales Enablement</li>
-              <li>Information Technology</li>
-              <li>Customer Service</li>
-              <li>Marketing</li>
-              <li>Training Videos</li>
-              <li>Educational Videos</li>
-              <li>Employee Training Videos</li>
-              <li>Instructional Videos</li>
-              <li>Video Production</li>
+              <li><Link href="/courses" className="hover:text-white transition-colors">MBA Programs</Link></li>
+              <li><Link href="/courses" className="hover:text-white transition-colors">BBA Programs</Link></li>
+              <li><Link href="/courses" className="hover:text-white transition-colors">MCA Programs</Link></li>
+              <li><Link href="/courses" className="hover:text-white transition-colors">BCA Programs</Link></li>
+              <li><Link href="/courses" className="hover:text-white transition-colors">B.Tech Programs</Link></li>
+              <li><Link href="/courses" className="hover:text-white transition-colors">M.Tech Programs</Link></li>
+              <li><Link href="/courses" className="hover:text-white transition-colors">BA Programs</Link></li>
+              <li><Link href="/courses" className="hover:text-white transition-colors">MA Programs</Link></li>
             </ul>
           </div>
 
@@ -71,33 +68,27 @@ const FooterSection = () => {
           <div>
             <h4 className="font-semibold mb-4">Universities</h4>
             <ul className="space-y-2 text-sm text-gray-400">
-              <li>Pricing</li>
-              <li>Enterprise</li>
-              <li>Case Studies</li>
-              <li>Video Examples</li>
-              <li>Academy</li>
-              <li>Webinars</li>
-              <li>Help Center</li>
-              <li>Product Updates</li>
-              <li>Synthesis Automations</li>
-              <li>Integrations</li>
-              <li>Blog</li>
+              <li><Link href="/amityonline" className="hover:text-white transition-colors">Amity Online University</Link></li>
+              <li><Link href="/manipalonline" className="hover:text-white transition-colors">Manipal Online University</Link></li>
+              <li><Link href="/universities" className="hover:text-white transition-colors">View All Universities</Link></li>
+              <li><Link href="/universities" className="hover:text-white transition-colors">UGC Approved</Link></li>
+              <li><Link href="/universities" className="hover:text-white transition-colors">NAAC Accredited</Link></li>
+              <li><Link href="/universities" className="hover:text-white transition-colors">Distance Learning</Link></li>
+              <li><Link href="/universities" className="hover:text-white transition-colors">Online Degrees</Link></li>
             </ul>
           </div>
 
-          {/* Other */}
+          {/* Resources */}
           <div>
-            <h4 className="font-semibold mb-4">Other</h4>
+            <h4 className="font-semibold mb-4">Resources</h4>
             <ul className="space-y-2 text-sm text-gray-400">
-              <li>About Us</li>
-              <li>Ethics Guidelines</li>
-              <li>AI Research</li>
-              <li>Jobs</li>
-              <li>Press</li>
-              <li>Security</li>
-              <li>Legal</li>
-              <li>Contact Sales</li>
-              <li>Affiliates</li>
+              <li><Link href="/blog" className="hover:text-white transition-colors">Education Blog</Link></li>
+              <li><Link href="/about" className="hover:text-white transition-colors">Career Guidance</Link></li>
+              <li><Link href="/contact" className="hover:text-white transition-colors">Admission Support</Link></li>
+              <li><Link href="/contact" className="hover:text-white transition-colors">Talk to Expert</Link></li>
+              <li><Link href="/universities" className="hover:text-white transition-colors">Compare Universities</Link></li>
+              <li><Link href="/courses" className="hover:text-white transition-colors">Program Finder</Link></li>
+              <li><Link href="/about" className="hover:text-white transition-colors">FAQs</Link></li>
             </ul>
           </div>
         </div>
@@ -105,12 +96,21 @@ const FooterSection = () => {
         <div className="border-t border-gray-800 mt-12 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <p className="text-sm text-gray-400">
-              © 2024 product space Limited. All rights reserved.
+              © {new Date().getFullYear()} College Cosmos. All rights reserved.
             </p>
-            <div className="flex gap-4 mt-4 md:mt-0">
-              <span className="text-gray-400">𝕏</span>
-              <span className="text-gray-400">in</span>
-              <span className="text-gray-400">📧</span>
+            <div className="flex gap-6 mt-4 md:mt-0">
+              <a href="#" className="text-gray-400 hover:text-white transition-colors" aria-label="Twitter">
+                <i className="fab fa-twitter"></i>
+              </a>
+              <a href="#" className="text-gray-400 hover:text-white transition-colors" aria-label="LinkedIn">
+                <i className="fab fa-linkedin"></i>
+              </a>
+              <a href="#" className="text-gray-400 hover:text-white transition-colors" aria-label="Facebook">
+                <i className="fab fa-facebook"></i>
+              </a>
+              <a href="#" className="text-gray-400 hover:text-white transition-colors" aria-label="Instagram">
+                <i className="fab fa-instagram"></i>
+              </a>
             </div>
           </div>
         </div>
