@@ -49,6 +49,8 @@ import ProgramsSection from '@/components/university/programs-section';
 import Stars from '@/components/custom/stars';
 import ReviewModal from '@/components/review-modal';
 import TalkToExpertModal from '@/components/talk-to-expert-modal';
+import UniversityStats from '@/components/university/university-stats';
+import EnhancedContactSection from '@/components/university/enhanced-contact-section';
 
 /* -------------------------------------------------------------------------- */
 /*                                JSON TYPES                                  */
@@ -76,8 +78,18 @@ export type About = {
 export type Approvals = {
   title: string;
   description: string;
-  // items preserve original API objects (body, grade, logo url)
-  items: Array<{ body?: string; grade?: string; status?: string; logo?: string }>;
+  // items preserve original API objects (body, grade, logo url, plus new fields)
+  items: Array<{ 
+    body?: string; 
+    grade?: string; 
+    status?: string; 
+    logo?: string;
+    fullName?: string;
+    website?: string;
+    description?: string;
+    validFrom?: string;
+    validUntil?: string;
+  }>;
 };
 
 export type CoursesHero = {
@@ -194,6 +206,15 @@ export type UniversityPageDataAPI = {
   applyLink: string;
   headerImage: string | null;
   logo: string | null;
+  website?: string;
+  universityType?: string;
+  affiliation?: string;
+  studentStrength?: number;
+  facultyCount?: number;
+  campusSize?: number;
+  libraryBooks?: number;
+  hostelFacility?: boolean;
+  lastVerified?: string;
   about?: About;
   approvals?: Approvals;
   courses?: CoursesHero[];
@@ -210,6 +231,14 @@ export type UniversityPageDataAPI = {
     fax?: string | null;
     tollFree?: string | null;
   };
+  contactDetails?: Array<{
+    id: number;
+    department: string;
+    contactPerson?: string;
+    phone?: string;
+    email?: string;
+    workingHours?: string;
+  }>;
   admissions?: {
     applicationStart?: string | null;
     applicationEnd?: string | null;
@@ -226,6 +255,12 @@ export type UniversityPageDataAPI = {
   examination?: Examination;
   certificate?: Certificate;
   fees?: Fees;
+  seo?: {
+    metaTitle?: string;
+    metaDescription?: string;
+    metaKeywords?: string;
+    canonicalURL?: string;
+  };
 };
 
 export type UniversityPageData = {
@@ -309,8 +344,18 @@ function convertAPIDataToPageData(apiResponse: UniversityDetailAPIResponse): Uni
       : '#',
     scheduleLink: '#',
     applyLink: '#',
-  headerImage: university.coverImage?.url ? `${baseUrl}${university.coverImage.url}` : null,
-  logo: university.logo?.url ? `${baseUrl}${university.logo.url}` : null,
+    headerImage: university.coverImage?.url ? `${baseUrl}${university.coverImage.url}` : null,
+    logo: university.logo?.url ? `${baseUrl}${university.logo.url}` : null,
+    // New fields
+    website: university.website || undefined,
+    universityType: university.universityType || undefined,
+    affiliation: university.affiliation || undefined,
+    studentStrength: university.studentStrength || undefined,
+    facultyCount: university.facultyCount || undefined,
+    campusSize: university.campusSize || undefined,
+    libraryBooks: university.libraryBooks || undefined,
+    hostelFacility: university.hostelFacility !== undefined ? university.hostelFacility : undefined,
+    lastVerified: university.lastVerified || undefined,
   };
 
   const conditionalData: Partial<UniversityPageDataAPI> = {};
@@ -358,6 +403,11 @@ function convertAPIDataToPageData(apiResponse: UniversityDetailAPIResponse): Uni
       grade: approval.grade || undefined,
       status: approval.status || undefined,
       logo: approval.logo?.url ? `${baseUrl}${approval.logo.url}` : undefined,
+      fullName: approval.fullName || undefined,
+      website: approval.website || undefined,
+      description: approval.description || undefined,
+      validFrom: approval.validFrom || undefined,
+      validUntil: approval.validUntil || undefined,
     })).filter((item: any) => item.body || item.status);
     
     if (approvalItems.length > 0) {
@@ -373,6 +423,11 @@ function convertAPIDataToPageData(apiResponse: UniversityDetailAPIResponse): Uni
       grade: acc.grade || undefined,
       status: acc.status || undefined,
       logo: acc.logo?.url ? `${baseUrl}${acc.logo.url}` : undefined,
+      fullName: acc.fullName || undefined,
+      website: acc.website || undefined,
+      description: acc.description || undefined,
+      validFrom: acc.validFrom || undefined,
+      validUntil: acc.validUntil || undefined,
     })).filter((item: any) => item.body || item.status);
     
     if (accreditationItems.length > 0) {
@@ -681,6 +736,28 @@ function convertAPIDataToPageData(apiResponse: UniversityDetailAPIResponse): Uni
     };
   }
 
+  // Add enhanced contact details (department-specific)
+  if (university.contactDetails && university.contactDetails.length > 0) {
+    conditionalData['contactDetails'] = university.contactDetails.map((c: any) => ({
+      id: c.id,
+      department: c.department,
+      contactPerson: c.contactPerson || undefined,
+      phone: c.phone || undefined,
+      email: c.email || undefined,
+      workingHours: c.workingHours || undefined,
+    }));
+  }
+
+  // Add SEO metadata
+  if (university.seo) {
+    conditionalData['seo'] = {
+      metaTitle: university.seo.metaTitle || undefined,
+      metaDescription: university.seo.metaDescription || undefined,
+      metaKeywords: university.seo.metaKeywords || undefined,
+      canonicalURL: university.seo.canonicalURL || undefined,
+    };
+  }
+
   return { ...baseData, ...conditionalData };
 }
 
@@ -773,7 +850,14 @@ function HeroSection({
         <div className="grid gap-8 lg:grid-cols-2">
           {/* LEFT */}
           <div>
-            <h1 className="text-3xl md:text-4xl font-extrabold tracking-tight">{data.name}</h1>
+            <div className="flex items-center gap-3 flex-wrap mb-3">
+              <h1 className="text-3xl md:text-4xl font-extrabold tracking-tight">{data.name}</h1>
+              {(data as UniversityPageDataAPI).universityType && (
+                <span className="px-3 py-1 text-xs font-semibold bg-blue-100 text-blue-700 rounded-full">
+                  {(data as UniversityPageDataAPI).universityType}
+                </span>
+              )}
+            </div>
             
             <p className="mt-3 text-lg text-muted-foreground">{data.details}</p>
 
@@ -789,7 +873,19 @@ function HeroSection({
                   ⭐ {data.ratings.overall.toFixed(1)} Rating
                 </span>
               )}
+              {(data as UniversityPageDataAPI).affiliation && (
+                <span className="flex items-center gap-2">
+                  ✓ {(data as UniversityPageDataAPI).affiliation}
+                </span>
+              )}
             </div>
+
+            {/* Last verified badge */}
+            {(data as UniversityPageDataAPI).lastVerified && (
+              <div className="mt-3 text-xs text-muted-foreground">
+                ℹ️ Information last verified on {new Date((data as UniversityPageDataAPI).lastVerified!).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+              </div>
+            )}
 
             {/* small CTAs */}
             <div className="mt-6 flex flex-wrap gap-3">
@@ -799,6 +895,17 @@ function HeroSection({
                   Download Prospectus
                 </Link>
               </Button>
+
+              {(data as UniversityPageDataAPI).website && (
+                <Button asChild variant="outline" className="border-blue-600 text-blue-700 hover:bg-blue-50">
+                  <Link href={(data as UniversityPageDataAPI).website!} target="_blank" rel="noopener noreferrer">
+                    <svg className="mr-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                    </svg>
+                    Visit Website
+                  </Link>
+                </Button>
+              )}
 
               <TalkToExpertModal
                 universityName={data.name}
@@ -984,6 +1091,18 @@ export default function UniversitySlugPage({ params }: any) {
 
           {/* Main column */}
           <main className="space-y-8 lg:space-y-10">
+            {/* University Stats Section - NEW */}
+            {(pageData as UniversityPageDataAPI) && (
+              <UniversityStats
+                studentStrength={(pageData as UniversityPageDataAPI).studentStrength}
+                facultyCount={(pageData as UniversityPageDataAPI).facultyCount}
+                campusSize={(pageData as UniversityPageDataAPI).campusSize}
+                libraryBooks={(pageData as UniversityPageDataAPI).libraryBooks}
+                hostelFacility={(pageData as UniversityPageDataAPI).hostelFacility}
+                universityType={(pageData as UniversityPageDataAPI).universityType}
+              />
+            )}
+
             {/* Only show sections where we have real API data */}
             {pageData.about && <AboutSection data={pageData.about} />}
             
@@ -1040,7 +1159,13 @@ export default function UniversitySlugPage({ params }: any) {
             {pageData.partners && <HiringPartnerSection data={pageData.partners} />}
             {!pageData.partners && <div id="partners" />}
             {pageData.campus && <CampusSection data={pageData.campus} />}
-            {(pageData as any).contact && <ContactSection contact={(pageData as any).contact} />}
+            
+            {/* Enhanced Contact Section - NEW */}
+            <EnhancedContactSection
+              contactDetails={(pageData as UniversityPageDataAPI).contactDetails}
+              generalContact={(pageData as any).contact}
+            />
+            
             {pageData.advantages && <AdvantagesSection data={pageData.advantages} />}
             
             {/* FAQ section */}

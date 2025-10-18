@@ -192,8 +192,21 @@ export default function ProgramsSection({ programs, universityName }: ProgramsSe
                       <span className="bg-gray-100 px-2 py-1 rounded">
                         📚 {programCategory}
                       </span>
+                      {program.programCode && (
+                        <span className="bg-blue-50 text-blue-700 px-2 py-1 rounded font-mono">
+                          {program.programCode}
+                        </span>
+                      )}
                     </div>
                   </div>
+
+                  {/* Intake Period - NEW */}
+                  {program.intakePeriod && (
+                    <div className="mb-4 p-3 bg-orange-50 border-l-4 border-orange-500 rounded">
+                      <p className="text-xs font-semibold text-orange-800 mb-1">📅 Admission Period</p>
+                      <p className="text-xs text-orange-700">{program.intakePeriod}</p>
+                    </div>
+                  )}
 
                   {/* Fee Display */}
                   {program.totalFee && (
@@ -207,6 +220,30 @@ export default function ProgramsSection({ programs, universityName }: ProgramsSe
                       </div>
                       {program.feeFrequency && (
                         <p className="text-xs text-gray-500 mt-1">{program.feeFrequency}</p>
+                      )}
+                      
+                      {/* Fee Breakdown - NEW */}
+                      {(program.tuitionFee || program.hostelFee || program.otherFees) && (
+                        <div className="mt-3 pt-3 border-t border-gray-200 space-y-1">
+                          {program.tuitionFee && (
+                            <div className="flex justify-between text-xs text-gray-600">
+                              <span>Tuition Fee:</span>
+                              <span className="font-medium">{formatCurrency(program.tuitionFee)}</span>
+                            </div>
+                          )}
+                          {program.hostelFee && (
+                            <div className="flex justify-between text-xs text-gray-600">
+                              <span>Hostel Fee:</span>
+                              <span className="font-medium">{formatCurrency(program.hostelFee)}</span>
+                            </div>
+                          )}
+                          {program.otherFees && (
+                            <div className="flex justify-between text-xs text-gray-600">
+                              <span>Other Fees:</span>
+                              <span className="font-medium">{formatCurrency(program.otherFees)}</span>
+                            </div>
+                          )}
+                        </div>
                       )}
                     </div>
                   )}

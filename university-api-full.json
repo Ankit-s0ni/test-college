@@ -1,0 +1,1033 @@
+﻿{
+    "data":  {
+                 "id":  26,
+                 "documentId":  "b1j8u8v9sg69mfh1rcsdvs03",
+                 "name":  "Amity University",
+                 "slug":  "amity-university-noida",
+                 "description":  "\u003ch2\u003eAbout Amity University\u003c/h2\u003e\\n\u003cp\u003eAmity University, Noida (Amity University Uttar Pradesh) is a private university located in Noida, Uttar Pradesh, India. It was established in 2005 by an Act of the Uttar Pradesh Legislature. The university offers a wide range of programs across engineering, management, law, liberal arts, and more.\u003c/p\u003e\\n\\n\u003ch3\u003eHighlights\u003c/h3\u003e\\n\u003cul\u003e\\n\u003cli\u003eCampus in Sector-125, Noida\u003c/li\u003e\\n\u003cli\u003eRecognized by UGC, accredited by NAAC with grade \u0027A+\u0027 :contentReference[oaicite:0]{index=0}\u003c/li\u003e\\n\u003cli\u003eInternational accreditations: WASC, IET for certain programmes :contentReference[oaicite:1]{index=1}\u003c/li\u003e\\n\u003cli\u003eLarge student body; multiple campuses across India and abroad :contentReference[oaicite:2]{index=2}\u003c/li\u003e\\n\u003cli\u003eStrong emphasis on research, innovation and industry collaborations :contentReference[oaicite:3]{index=3}\u003c/li\u003e\\n\u003c/ul\u003e",
+                 "shortDescription":  "Amity University is a private university in Noida, India, offering diverse professional and non-professional programs with international accreditation and strong research focus.",
+                 "website":  "https://www.amity.edu",
+                 "established":  2005,
+                 "universityType":  "Private",
+                 "affiliation":  "UGC Approved, NAAC A+ Grade",
+                 "rating":  4.5,
+                 "totalRatings":  8547,
+                 "highestPlacementPackage":  64,
+                 "tagline":  null,
+                 "libraryBooks":  50000,
+                 "hostelFacility":  true,
+                 "featured":  true,
+                 "collegeStatus":  "active",
+                 "studentStrength":  40000,
+                 "facultyCount":  2500,
+                 "campusSize":  25.5,
+                 "order":  1,
+                 "canonicalUrl":  "amity.edu",
+                 "dataQuality":  "Complete",
+                 "lastVerified":  "2025-10-16T13:00:00.000Z",
+                 "internalNotes":  "ALL GOOD",
+                 "createdAt":  "2025-10-15T12:18:24.425Z",
+                 "updatedAt":  "2025-10-18T19:33:58.982Z",
+                 "publishedAt":  "2025-10-18T19:38:00.417Z",
+                 "locale":  "en",
+                 "logo":  {
+                              "id":  1,
+                              "documentId":  "zm5air3ufzot0jduz08y1u5d",
+                              "name":  "Amity_University_logo.png",
+                              "alternativeText":  null,
+                              "caption":  null,
+                              "width":  290,
+                              "height":  343,
+                              "formats":  {
+                                              "xsmall":  {
+                                                             "ext":  ".png",
+                                                             "url":  "/uploads/xsmall_Amity_University_logo_dd85611c05.png",
+                                                             "hash":  "xsmall_Amity_University_logo_dd85611c05",
+                                                             "mime":  "image/png",
+                                                             "name":  "xsmall_Amity_University_logo.png",
+                                                             "path":  null,
+                                                             "size":  6.45,
+                                                             "width":  54,
+                                                             "height":  64,
+                                                             "sizeInBytes":  6445
+                                                         },
+                                              "thumbnail":  {
+                                                                "ext":  ".png",
+                                                                "url":  "/uploads/thumbnail_Amity_University_logo_dd85611c05.png",
+                                                                "hash":  "thumbnail_Amity_University_logo_dd85611c05",
+                                                                "mime":  "image/png",
+                                                                "name":  "thumbnail_Amity_University_logo.png",
+                                                                "path":  null,
+                                                                "size":  22.46,
+                                                                "width":  132,
+                                                                "height":  156,
+                                                                "sizeInBytes":  22460
+                                                            }
+                                          },
+                              "hash":  "Amity_University_logo_dd85611c05",
+                              "ext":  ".png",
+                              "mime":  "image/png",
+                              "size":  13.38,
+                              "url":  "/uploads/Amity_University_logo_dd85611c05.png",
+                              "previewUrl":  null,
+                              "provider":  "local",
+                              "provider_metadata":  null,
+                              "folderPath":  "/",
+                              "createdAt":  "2025-10-15T12:06:50.533Z",
+                              "updatedAt":  "2025-10-15T14:14:27.942Z",
+                              "publishedAt":  "2025-10-15T12:06:50.534Z",
+                              "locale":  null
+                          },
+                 "coverImage":  {
+                                    "id":  3,
+                                    "documentId":  "eb9ft6b9bj7v3p497pmwxekv",
+                                    "name":  "amity.jpg",
+                                    "alternativeText":  null,
+                                    "caption":  null,
+                                    "width":  429,
+                                    "height":  164,
+                                    "formats":  {
+                                                    "xsmall":  {
+                                                                   "ext":  ".jpg",
+                                                                   "url":  "/uploads/xsmall_amity_eeac6235c6.jpg",
+                                                                   "hash":  "xsmall_amity_eeac6235c6",
+                                                                   "mime":  "image/jpeg",
+                                                                   "name":  "xsmall_amity.jpg",
+                                                                   "path":  null,
+                                                                   "size":  0.83,
+                                                                   "width":  64,
+                                                                   "height":  25,
+                                                                   "sizeInBytes":  832
+                                                               },
+                                                    "thumbnail":  {
+                                                                      "ext":  ".jpg",
+                                                                      "url":  "/uploads/thumbnail_amity_eeac6235c6.jpg",
+                                                                      "hash":  "thumbnail_amity_eeac6235c6",
+                                                                      "mime":  "image/jpeg",
+                                                                      "name":  "thumbnail_amity.jpg",
+                                                                      "path":  null,
+                                                                      "size":  5.61,
+                                                                      "width":  245,
+                                                                      "height":  94,
+                                                                      "sizeInBytes":  5610
+                                                                  }
+                                                },
+                                    "hash":  "amity_eeac6235c6",
+                                    "ext":  ".jpg",
+                                    "mime":  "image/jpeg",
+                                    "size":  14.83,
+                                    "url":  "/uploads/amity_eeac6235c6.jpg",
+                                    "previewUrl":  null,
+                                    "provider":  "local",
+                                    "provider_metadata":  null,
+                                    "folderPath":  "/",
+                                    "createdAt":  "2025-10-15T12:07:11.361Z",
+                                    "updatedAt":  "2025-10-15T12:07:11.361Z",
+                                    "publishedAt":  "2025-10-15T12:07:11.362Z",
+                                    "locale":  null
+                                },
+                 "gallery":  [
+                                 {
+                                     "id":  2,
+                                     "documentId":  "k8gejlqhtorn7tdefdshotit",
+                                     "name":  "7album_photo-gallery7.jpg",
+                                     "alternativeText":  null,
+                                     "caption":  null,
+                                     "width":  205,
+                                     "height":  164,
+                                     "formats":  {
+                                                     "xsmall":  {
+                                                                    "ext":  ".jpg",
+                                                                    "url":  "/uploads/xsmall_7album_photo_gallery7_b72173dddc.jpg",
+                                                                    "hash":  "xsmall_7album_photo_gallery7_b72173dddc",
+                                                                    "mime":  "image/jpeg",
+                                                                    "name":  "xsmall_7album_photo-gallery7.jpg",
+                                                                    "path":  null,
+                                                                    "size":  2.01,
+                                                                    "width":  64,
+                                                                    "height":  51,
+                                                                    "sizeInBytes":  2014
+                                                                },
+                                                     "thumbnail":  {
+                                                                       "ext":  ".jpg",
+                                                                       "url":  "/uploads/thumbnail_7album_photo_gallery7_b72173dddc.jpg",
+                                                                       "hash":  "thumbnail_7album_photo_gallery7_b72173dddc",
+                                                                       "mime":  "image/jpeg",
+                                                                       "name":  "thumbnail_7album_photo-gallery7.jpg",
+                                                                       "path":  null,
+                                                                       "size":  11.28,
+                                                                       "width":  195,
+                                                                       "height":  156,
+                                                                       "sizeInBytes":  11280
+                                                                   }
+                                                 },
+                                     "hash":  "7album_photo_gallery7_b72173dddc",
+                                     "ext":  ".jpg",
+                                     "mime":  "image/jpeg",
+                                     "size":  12.52,
+                                     "url":  "/uploads/7album_photo_gallery7_b72173dddc.jpg",
+                                     "previewUrl":  null,
+                                     "provider":  "local",
+                                     "provider_metadata":  null,
+                                     "folderPath":  "/",
+                                     "createdAt":  "2025-10-15T12:07:11.351Z",
+                                     "updatedAt":  "2025-10-15T12:07:11.351Z",
+                                     "publishedAt":  "2025-10-15T12:07:11.352Z",
+                                     "locale":  null
+                                 },
+                                 {
+                                     "id":  3,
+                                     "documentId":  "eb9ft6b9bj7v3p497pmwxekv",
+                                     "name":  "amity.jpg",
+                                     "alternativeText":  null,
+                                     "caption":  null,
+                                     "width":  429,
+                                     "height":  164,
+                                     "formats":  {
+                                                     "xsmall":  {
+                                                                    "ext":  ".jpg",
+                                                                    "url":  "/uploads/xsmall_amity_eeac6235c6.jpg",
+                                                                    "hash":  "xsmall_amity_eeac6235c6",
+                                                                    "mime":  "image/jpeg",
+                                                                    "name":  "xsmall_amity.jpg",
+                                                                    "path":  null,
+                                                                    "size":  0.83,
+                                                                    "width":  64,
+                                                                    "height":  25,
+                                                                    "sizeInBytes":  832
+                                                                },
+                                                     "thumbnail":  {
+                                                                       "ext":  ".jpg",
+                                                                       "url":  "/uploads/thumbnail_amity_eeac6235c6.jpg",
+                                                                       "hash":  "thumbnail_amity_eeac6235c6",
+                                                                       "mime":  "image/jpeg",
+                                                                       "name":  "thumbnail_amity.jpg",
+                                                                       "path":  null,
+                                                                       "size":  5.61,
+                                                                       "width":  245,
+                                                                       "height":  94,
+                                                                       "sizeInBytes":  5610
+                                                                   }
+                                                 },
+                                     "hash":  "amity_eeac6235c6",
+                                     "ext":  ".jpg",
+                                     "mime":  "image/jpeg",
+                                     "size":  14.83,
+                                     "url":  "/uploads/amity_eeac6235c6.jpg",
+                                     "previewUrl":  null,
+                                     "provider":  "local",
+                                     "provider_metadata":  null,
+                                     "folderPath":  "/",
+                                     "createdAt":  "2025-10-15T12:07:11.361Z",
+                                     "updatedAt":  "2025-10-15T12:07:11.361Z",
+                                     "publishedAt":  "2025-10-15T12:07:11.362Z",
+                                     "locale":  null
+                                 },
+                                 {
+                                     "id":  4,
+                                     "documentId":  "ne0k0da7kup3v63fdrayklv9",
+                                     "name":  "download (5).jpeg",
+                                     "alternativeText":  null,
+                                     "caption":  null,
+                                     "width":  368,
+                                     "height":  137,
+                                     "formats":  {
+                                                     "xsmall":  {
+                                                                    "ext":  ".jpeg",
+                                                                    "url":  "/uploads/xsmall_download_5_fbb3190a78.jpeg",
+                                                                    "hash":  "xsmall_download_5_fbb3190a78",
+                                                                    "mime":  "image/jpeg",
+                                                                    "name":  "xsmall_download (5).jpeg",
+                                                                    "path":  null,
+                                                                    "size":  0.97,
+                                                                    "width":  64,
+                                                                    "height":  24,
+                                                                    "sizeInBytes":  973
+                                                                },
+                                                     "thumbnail":  {
+                                                                       "ext":  ".jpeg",
+                                                                       "url":  "/uploads/thumbnail_download_5_fbb3190a78.jpeg",
+                                                                       "hash":  "thumbnail_download_5_fbb3190a78",
+                                                                       "mime":  "image/jpeg",
+                                                                       "name":  "thumbnail_download (5).jpeg",
+                                                                       "path":  null,
+                                                                       "size":  8.35,
+                                                                       "width":  245,
+                                                                       "height":  91,
+                                                                       "sizeInBytes":  8352
+                                                                   }
+                                                 },
+                                     "hash":  "download_5_fbb3190a78",
+                                     "ext":  ".jpeg",
+                                     "mime":  "image/jpeg",
+                                     "size":  16.6,
+                                     "url":  "/uploads/download_5_fbb3190a78.jpeg",
+                                     "previewUrl":  null,
+                                     "provider":  "local",
+                                     "provider_metadata":  null,
+                                     "folderPath":  "/",
+                                     "createdAt":  "2025-10-15T12:07:11.388Z",
+                                     "updatedAt":  "2025-10-15T12:07:11.388Z",
+                                     "publishedAt":  "2025-10-15T12:07:11.388Z",
+                                     "locale":  null
+                                 }
+                             ],
+                 "brochures":  [
+                                   {
+                                       "id":  12,
+                                       "documentId":  "y8dnhfizeuzhq0mgwi3fk7uo",
+                                       "name":  "gurgaon-brochure-2025.pdf",
+                                       "alternativeText":  null,
+                                       "caption":  null,
+                                       "width":  null,
+                                       "height":  null,
+                                       "formats":  null,
+                                       "hash":  "gurgaon_brochure_2025_ff7be44def",
+                                       "ext":  ".pdf",
+                                       "mime":  "application/pdf",
+                                       "size":  711.11,
+                                       "url":  "/uploads/gurgaon_brochure_2025_ff7be44def.pdf",
+                                       "previewUrl":  null,
+                                       "provider":  "local",
+                                       "provider_metadata":  null,
+                                       "folderPath":  "/",
+                                       "createdAt":  "2025-10-15T14:10:28.686Z",
+                                       "updatedAt":  "2025-10-15T14:10:28.686Z",
+                                       "publishedAt":  "2025-10-15T14:10:28.686Z",
+                                       "locale":  null
+                                   }
+                               ],
+                 "location":  {
+                                  "id":  26,
+                                  "address":  "Sector 125, Noida",
+                                  "city":  "Noida",
+                                  "state":  "Uttar Pradesh",
+                                  "country":  "India",
+                                  "pincode":  "201303"
+                              },
+                 "contact":  {
+                                 "id":  26,
+                                 "phone":  "01202445252",
+                                 "email":  "admissions@amity.edu",
+                                 "fax":  null,
+                                 "tollFree":  null
+                             },
+                 "ranking":  [
+                                 {
+                                     "id":  24,
+                                     "organization":  "NIRF",
+                                     "rank":  28,
+                                     "year":  2024,
+                                     "category":  "Overall",
+                                     "score":  null
+                                 },
+                                 {
+                                     "id":  25,
+                                     "organization":  "QS World",
+                                     "rank":  801,
+                                     "year":  2024,
+                                     "category":  "Overall",
+                                     "score":  null
+                                 },
+                                 {
+                                     "id":  26,
+                                     "organization":  "Times Higher Education",
+                                     "rank":  601,
+                                     "year":  2024,
+                                     "category":  "Overall",
+                                     "score":  null
+                                 },
+                                 {
+                                     "id":  27,
+                                     "organization":  "India Today",
+                                     "rank":  15,
+                                     "year":  2024,
+                                     "category":  "Overall",
+                                     "score":  null
+                                 }
+                             ],
+                 "accreditation":  [
+                                       {
+                                           "id":  5,
+                                           "body":  "NAAC",
+                                           "grade":  "A+",
+                                           "status":  "Accredited",
+                                           "validFrom":  "2022-01-02",
+                                           "validUntil":  "2028-12-31",
+                                           "cgpa":  null
+                                       }
+                                   ],
+                 "facilities":  [
+                                    {
+                                        "id":  5,
+                                        "name":  "Ankit Soni",
+                                        "description":  "asdASDFasfSD",
+                                        "category":  "Academic",
+                                        "availability":  true,
+                                        "capacity":  null
+                                    }
+                                ],
+                 "placements":  [
+                                    {
+                                        "id":  5,
+                                        "year":  2025,
+                                        "totalStudents":  500,
+                                        "studentsPlaced":  400,
+                                        "placementPercentage":  80,
+                                        "averagePackage":  85555,
+                                        "highestPackage":  999999,
+                                        "lowestPackage":  6500,
+                                        "medianPackage":  6845465,
+                                        "topRecruiters":  null,
+                                        "sectorWiseData":  null
+                                    }
+                                ],
+                 "placementRecords":  [
+                                          {
+                                              "id":  5,
+                                              "year":  "2024",
+                                              "totalStudents":  4800,
+                                              "placedStudents":  4600,
+                                              "placementRate":  95.8,
+                                              "averagePackage":  "₹6.2 Lakhs per annum",
+                                              "highestPackage":  "₹58 Lakhs per annum",
+                                              "medianPackage":  "₹5.2 Lakhs per annum",
+                                              "topRecruiters":  null,
+                                              "sectorWiseBreakdown":  null
+                                          }
+                                      ],
+                 "financialAid":  {
+                                      "id":  5,
+                                      "title":  "Financial Aid \u0026 Scholarships",
+                                      "description":  "fincial aid upto 60 % based on merit",
+                                      "emiAvailable":  true,
+                                      "additionalInfo":  "get complete loan benifits"
+                                  },
+                 "campusGroups":  [
+                                      {
+                                          "id":  5,
+                                          "label":  "Amity Coding Club",
+                                          "color":  "#F8F9FA",
+                                          "locations":  {
+                                                            "city":  "Noida",
+                                                            "state":  "Uttar Pradesh",
+                                                            "address":  "Sector 125, Amity Campus",
+                                                            "country":  "India",
+                                                            "zipCode":  "201313"
+                                                        }
+                                      }
+                                  ],
+                 "advantages":  [
+                                    {
+                                        "id":  13,
+                                        "benefit":  "NAAC A+ Accreditation",
+                                        "description":  "Amity University holds the prestigious NAAC A+ grade, reflecting our commitment to academic excellence, quality infrastructure, and overall institutional performance. This accreditation ensures students receive education that meets the highest national standards."
+                                    },
+                                    {
+                                        "id":  14,
+                                        "benefit":  "1000+ Acre Green Campus",
+                                        "description":  "Sprawling eco-friendly campus spread across 1000+ acres featuring state-of-the-art infrastructure, smart classrooms, advanced laboratories, modern libraries, sports complexes, and dedicated zones for academics, recreation, and residential facilities."
+                                    },
+                                    {
+                                        "id":  15,
+                                        "benefit":  "95%+ Placement Rate",
+                                        "description":  "Outstanding placement record with 95%+ students placed annually. Highest package of ₹64 LPA and average package of ₹6.8 LPA. Over 5000+ companies including Google, Microsoft, Amazon, Deloitte, and top MNCs recruit from campus."
+                                    }
+                                ],
+                 "hiringPartners":  [
+                                        {
+                                            "id":  13,
+                                            "companyName":  "Google",
+                                            "category":  "IT",
+                                            "isActive":  true
+                                        },
+                                        {
+                                            "id":  14,
+                                            "companyName":  "Microsoft",
+                                            "category":  "IT",
+                                            "isActive":  true
+                                        },
+                                        {
+                                            "id":  15,
+                                            "companyName":  "Adobe",
+                                            "category":  "IT",
+                                            "isActive":  true
+                                        }
+                                    ],
+                 "faqs":  [
+                              {
+                                  "order":  1,
+                                  "id":  21,
+                                  "question":  "What is the admission process for Amity University?",
+                                  "answer":  "Admission process varies by program. For UG programs, candidates need to qualify in Amity JEE or accept JEE Main scores. For PG programs, candidates need to appear for Amity entrance exam or have valid GATE/CAT scores. Application can be done online through the official website.",
+                                  "category":  "Admissions"
+                              },
+                              {
+                                  "order":  2,
+                                  "id":  22,
+                                  "question":  "Does Amity University provide scholarships?",
+                                  "answer":  "Yes, Amity offers multiple scholarship programs including merit-based scholarships (up to 100% tuition waiver), need-based scholarships, sports scholarships, and scholarships for children of armed forces personnel.",
+                                  "category":  "Fees"
+                              },
+                              {
+                                  "order":  3,
+                                  "id":  23,
+                                  "question":  "What is the placement record of Amity University?",
+                                  "answer":  "Amity has an excellent placement record with 95%+ placement rate. The highest package offered is ₹64 LPA and average package is ₹6.8 LPA. Over 5000 companies including Google, Microsoft, Amazon, Deloitte recruit from campus.",
+                                  "category":  "Placement"
+                              },
+                              {
+                                  "order":  4,
+                                  "id":  24,
+                                  "question":  "Are hostel facilities available?",
+                                  "answer":  "Yes, Amity provides separate hostel facilities for boys and girls with modern amenities including Wi-Fi, mess, laundry, gym, recreation room, and 24/7 security. Hostel rooms are available in single, double, and triple occupancy.",
+                                  "category":  "Other"
+                              },
+                              {
+                                  "order":  5,
+                                  "id":  25,
+                                  "question":  "Does Amity have international collaborations?",
+                                  "answer":  "Yes, Amity has partnerships with 200+ universities worldwide offering student exchange programs, dual degree programs, international internships, and study abroad opportunities.",
+                                  "category":  "General"
+                              }
+                          ],
+                 "contactDetails":  [
+                                        {
+                                            "id":  9,
+                                            "department":  "Admissions Office",
+                                            "contactPerson":  "Ramesh",
+                                            "phone":  "1204392000",
+                                            "email":  "rita@lnct.com",
+                                            "workingHours":  "6 hours "
+                                        },
+                                        {
+                                            "id":  10,
+                                            "department":  "Placement Cell",
+                                            "contactPerson":  "Ankit Soni ",
+                                            "phone":  "911204392100",
+                                            "email":  "placements@amity.edu",
+                                            "workingHours":  "Mon-Fri, 9:30 AM - 5:00 PM"
+                                        }
+                                    ],
+                 "seo":  {
+                             "id":  5,
+                             "metaTitle":  "Amity University Noida",
+                             "metaDescription":  "Amity University Noida offers 300+ programs with 95%+ placement rate.",
+                             "metaKeywords":  "Amity University\",       \"Amity Noida\",       \"Best Private University India\",       \"B.Tech Admission\",       \"MBA Admission\",       \"Engineering College Noida\",       \"Amity Placement\",       \"NAAC A+ University",
+                             "structuredData":  null,
+                             "canonicalURL":  "https://collegecosmos.com/universities/amity-university-noida"
+                         },
+                 "contentManager":  {
+                                        "id":  1,
+                                        "documentId":  "q2uv5jxum7k8rz7qtfnnlrip",
+                                        "firstname":  "Ankit",
+                                        "lastname":  "Soni",
+                                        "username":  null,
+                                        "email":  "ankitks1515@gmail.com",
+                                        "password":  "$2a$10$v6zc2bFBf4DjTcYzkNW0U.1thGAok3trHGi07o7/Vhi4UG3rfC7JK",
+                                        "resetPasswordToken":  null,
+                                        "registrationToken":  null,
+                                        "isActive":  true,
+                                        "blocked":  false,
+                                        "preferedLanguage":  null,
+                                        "createdAt":  "2025-10-15T11:49:03.159Z",
+                                        "updatedAt":  "2025-10-15T11:49:03.159Z",
+                                        "publishedAt":  "2025-10-15T11:49:03.164Z",
+                                        "locale":  null
+                                    },
+                 "programs":  [
+                                  {
+                                      "id":  30,
+                                      "programCode":  "BBA",
+                                      "availableSeats":  300,
+                                      "tuitionFee":  220000,
+                                      "otherFees":  20000,
+                                      "hostelFee":  150000,
+                                      "totalFee":  240000,
+                                      "feeFrequency":  "Per Year",
+                                      "applicationDeadline":  "2025-10-16",
+                                      "intakePeriod":  "Admissions for Fall 2025 Intake (July-August Session)",
+                                      "eligibilityCriteria":  "Minimum 50% in 10+2 in any stream. Admission is based on the university\u0027s entrance test and interview.",
+                                      "admissionProcess":  "Based on performance in the university\u0027s entrance test, followed by an English language test and a personal interview.",
+                                      "specializations":  [
+                                                              "Finance \u0026 Accounting",
+                                                              "Marketing Management",
+                                                              "Human Resource Management",
+                                                              "International Business"
+                                                          ],
+                                      "isActive":  true,
+                                      "program":  {
+                                                      "id":  4,
+                                                      "documentId":  "qx1tbvhr1uv88q0cyets9x6w",
+                                                      "name":  "BBA",
+                                                      "slug":  "bachelor-business-administration",
+                                                      "description":  "\u003ch2\u003eBachelor of Business Administration (BBA)\u003c/h2\u003e\\n\u003cp\u003eBBA is a three-year undergraduate program that provides foundational knowledge in business management, preparing students for leadership roles in various industries.\u003c/p\u003e\\n\\n\u003ch3\u003eProgram Features\u003c/h3\u003e\\n\u003cul\u003e\\n\u003cli\u003eHolistic business education\u003c/li\u003e\\n\u003cli\u003eCase study methodology\u003c/li\u003e\\n\u003cli\u003eIndustry internships\u003c/li\u003e\\n\u003cli\u003eSoft skills development\u003c/li\u003e\\n\u003cli\u003eEntrepreneurship support\u003c/li\u003e\\n\u003c/ul\u003e\\n\\n\u003ch3\u003eSpecializations Available\u003c/h3\u003e\\n\u003cul\u003e\\n\u003cli\u003eFinance \u0026 Accounting\u003c/li\u003e\\n\u003cli\u003eMarketing Management\u003c/li\u003e\\n\u003cli\u003eHuman Resource Management\u003c/li\u003e\\n\u003cli\u003eInternational Business\u003c/li\u003e\\n\u003cli\u003eOperations Management\u003c/li\u003e\\n\u003cli\u003eBusiness Analytics\u003c/li\u003e\\n\u003c/ul\u003e\\n\\n\u003ch3\u003eCareer Paths\u003c/h3\u003e\\n\u003cp\u003eManagement Trainee, Business Analyst, Marketing Executive, HR Executive, Financial Analyst, Entrepreneur\u003c/p\u003e\"",
+                                                      "shortDescription":  "Comprehensive undergraduate business program covering management, finance, marketing, and entrepreneurship fundamentals.",
+                                                      "degree":  "Bachelor",
+                                                      "standardDuration":  "3 Years",
+                                                      "standardEligibility":  "\u003cp\u003e\u003cstrong\u003eMinimum Qualification:\u003c/strong\u003e 10+2 in any stream\u003c/p\u003e\\n\u003cp\u003e\u003cstrong\u003eMinimum Percentage:\u003c/strong\u003e 50% in 12th\u003c/p\u003e\\n\u003cp\u003e\u003cstrong\u003eRequired Exams:\u003c/strong\u003e University Entrance Test / Merit-based\u003c/p\u003e",
+                                                      "standardCurriculum":  "\u003ch3\u003eCore Subjects\u003c/h3\u003e\\n\u003cul\u003e\\n\u003cli\u003ePrinciples of Management\u003c/li\u003e\\n\u003cli\u003eFinancial Accounting\u003c/li\u003e\\n\u003cli\u003eBusiness Economics\u003c/li\u003e\\n\u003cli\u003eMarketing Management\u003c/li\u003e\\n\u003cli\u003eHuman Resource Management\u003c/li\u003e\\n\u003cli\u003eOperations Management\u003c/li\u003e\\n\u003cli\u003eBusiness Law\u003c/li\u003e\\n\u003cli\u003eOrganizational Behavior\u003c/li\u003e\\n\u003cli\u003eBusiness Communication\u003c/li\u003e\\n\u003cli\u003eEntrepreneurship Development\u003c/li\u003e\\n\u003c/ul\u003e",
+                                                      "featured":  true,
+                                                      "isActive":  true,
+                                                      "createdAt":  "2025-10-15T12:36:51.981Z",
+                                                      "updatedAt":  "2025-10-15T12:36:51.981Z",
+                                                      "publishedAt":  "2025-10-15T12:36:52.016Z",
+                                                      "locale":  null,
+                                                      "category":  {
+                                                                       "id":  7,
+                                                                       "documentId":  "mecsxgbcqutvafjnjdpd6crs",
+                                                                       "label":  "UG Program",
+                                                                       "key":  "ug-program",
+                                                                       "order":  1,
+                                                                       "createdAt":  "2025-10-15T12:20:09.299Z",
+                                                                       "updatedAt":  "2025-10-15T12:20:09.299Z",
+                                                                       "publishedAt":  "2025-10-15T12:20:09.311Z",
+                                                                       "locale":  null
+                                                                   }
+                                                  }
+                                  },
+                                  {
+                                      "id":  31,
+                                      "programCode":  "BTECH-CSE",
+                                      "availableSeats":  480,
+                                      "tuitionFee":  285000,
+                                      "otherFees":  25000,
+                                      "hostelFee":  150000,
+                                      "totalFee":  310000,
+                                      "feeFrequency":  "Per Year",
+                                      "applicationDeadline":  "2025-10-17",
+                                      "intakePeriod":  "Admissions for Fall 2025 Intake (July-August Session)",
+                                      "eligibilityCriteria":  "Minimum 60% in 10+2 with Physics, Chemistry, and Mathematics. JEE Main / State CET / Amity JEE scores required",
+                                      "admissionProcess":  "Based on national/state level entrance exam scores or Amity JEE, followed by a personal interview.",
+                                      "specializations":  [
+                                                              "Artificial Intelligence \u0026 Machine Learning",
+                                                              "Data Science",
+                                                              "Cybersecurity",
+                                                              "Cloud Computing"
+                                                          ],
+                                      "isActive":  true,
+                                      "program":  {
+                                                      "id":  2,
+                                                      "documentId":  "rkrrl2amp89cro7d03uajy0q",
+                                                      "name":  "Btech",
+                                                      "slug":  "btech-computer-science-engineering",
+                                                      "description":  "\u003ch2\u003eB.Tech in Computer Science \u0026 Engineering\u003c/h2\u003e\\n\u003cp\u003eOur B.Tech CSE program is designed to provide students with a strong foundation in computer science principles and practical skills needed for the modern tech industry.\u003c/p\u003e\\n\\n\u003ch3\u003eProgram Highlights\u003c/h3\u003e\\n\u003cul\u003e\\n\u003cli\u003eComprehensive curriculum covering core CS concepts\u003c/li\u003e\\n\u003cli\u003eHands-on labs and practical projects\u003c/li\u003e\\n\u003cli\u003eIndustry-relevant specializations\u003c/li\u003e\\n\u003cli\u003eInternship opportunities with top tech companies\u003c/li\u003e\\n\u003cli\u003ePlacement assistance and career guidance\u003c/li\u003e\\n\u003c/ul\u003e\\n\\n\u003ch3\u003eKey Areas of Study\u003c/h3\u003e\\n\u003cul\u003e\\n\u003cli\u003eProgramming Languages (C, C++, Java, Python)\u003c/li\u003e\\n\u003cli\u003eData Structures \u0026 Algorithms\u003c/li\u003e\\n\u003cli\u003eDatabase Management Systems\u003c/li\u003e\\n\u003cli\u003eComputer Networks\u003c/li\u003e\\n\u003cli\u003eOperating Systems\u003c/li\u003e\\n\u003cli\u003eSoftware Engineering\u003c/li\u003e\\n\u003cli\u003eArtificial Intelligence \u0026 Machine Learning\u003c/li\u003e\\n\u003cli\u003eWeb Development\u003c/li\u003e\\n\u003cli\u003eMobile App Development\u003c/li\u003e\\n\u003cli\u003eCybersecurity\u003c/li\u003e\\n\u003c/ul\u003e\\n\\n\u003ch3\u003eCareer Opportunities\u003c/h3\u003e\\n\u003cp\u003eGraduates can work as Software Engineers, Data Scientists, System Architects, DevOps Engineers, Full-Stack Developers, and more in leading tech companies.\u003c/p\u003e",
+                                                      "shortDescription":  "Comprehensive undergraduate program in computer science covering programming, algorithms, data structures, AI, and software engineering.",
+                                                      "degree":  "Bachelor",
+                                                      "standardDuration":  "4 Years",
+                                                      "standardEligibility":  "\u003cp\u003e\u003cstrong\u003eMinimum Qualification:\u003c/strong\u003e 10+2 with Physics, Chemistry, and Mathematics\u003c/p\u003e\\n\u003cp\u003e\u003cstrong\u003eMinimum Percentage:\u003c/strong\u003e 60% in PCM\u003c/p\u003e\\n\u003cp\u003e\u003cstrong\u003eRequired Exams:\u003c/strong\u003e JEE Main / State CET / University Entrance Exam\u003c/p\u003e\\n\u003cp\u003e\u003cstrong\u003eAge Limit:\u003c/strong\u003e No age limit\u003c/p\u003e",
+                                                      "standardCurriculum":  "\u003ch3\u003eSemester-wise Curriculum\u003c/h3\u003e\\n\\n\u003ch4\u003eYear 1\u003c/h4\u003e\\n\u003cul\u003e\\n\u003cli\u003eEngineering Mathematics-I \u0026 II\u003c/li\u003e\\n\u003cli\u003eEngineering Physics \u0026 Chemistry\u003c/li\u003e\\n\u003cli\u003eProgramming for Problem Solving (C)\u003c/li\u003e\\n\u003cli\u003eIntroduction to Computer Science\u003c/li\u003e\\n\u003cli\u003eDigital Logic Design\u003c/li\u003e\\n\u003cli\u003eCommunication Skills\u003c/li\u003e\\n\u003c/ul\u003e\\n\\n\u003ch4\u003eYear 2\u003c/h4\u003e\\n\u003cul\u003e\\n\u003cli\u003eData Structures\u003c/li\u003e\\n\u003cli\u003eObject-Oriented Programming (Java)\u003c/li\u003e\\n\u003cli\u003eComputer Organization \u0026 Architecture\u003c/li\u003e\\n\u003cli\u003eDiscrete Mathematics\u003c/li\u003e\\n\u003cli\u003eDatabase Management Systems\u003c/li\u003e\\n\u003cli\u003eOperating Systems\u003c/li\u003e\\n\u003c/ul\u003e\\n\\n\u003ch4\u003eYear 3\u003c/h4\u003e\\n\u003cul\u003e\\n\u003cli\u003eDesign \u0026 Analysis of Algorithms\u003c/li\u003e\\n\u003cli\u003eComputer Networks\u003c/li\u003e\\n\u003cli\u003eSoftware Engineering\u003c/li\u003e\\n\u003cli\u003eTheory of Computation\u003c/li\u003e\\n\u003cli\u003eWeb Technologies\u003c/li\u003e\\n\u003cli\u003eElective Subjects (AI/ML, Cloud Computing, etc.)\u003c/li\u003e\\n\u003c/ul\u003e\\n\\n\u003ch4\u003eYear 4\u003c/h4\u003e\\n\u003cul\u003e\\n\u003cli\u003eCompiler Design\u003c/li\u003e\\n\u003cli\u003eCryptography \u0026 Network Security\u003c/li\u003e\\n\u003cli\u003eSpecialization Electives\u003c/li\u003e\\n\u003cli\u003eMajor Project\u003c/li\u003e\\n\u003cli\u003eIndustry Internship\u003c/li\u003e\\n\u003c/ul\u003e",
+                                                      "featured":  true,
+                                                      "isActive":  true,
+                                                      "createdAt":  "2025-10-15T12:33:56.555Z",
+                                                      "updatedAt":  "2025-10-15T12:33:56.555Z",
+                                                      "publishedAt":  "2025-10-15T12:33:56.630Z",
+                                                      "locale":  null,
+                                                      "category":  {
+                                                                       "id":  7,
+                                                                       "documentId":  "mecsxgbcqutvafjnjdpd6crs",
+                                                                       "label":  "UG Program",
+                                                                       "key":  "ug-program",
+                                                                       "order":  1,
+                                                                       "createdAt":  "2025-10-15T12:20:09.299Z",
+                                                                       "updatedAt":  "2025-10-15T12:20:09.299Z",
+                                                                       "publishedAt":  "2025-10-15T12:20:09.311Z",
+                                                                       "locale":  null
+                                                                   }
+                                                  }
+                                  }
+                              ],
+                 "approvals":  [
+                                   {
+                                       "id":  1,
+                                       "documentId":  "wlndetv1nou6mc1n3e3hcoa2",
+                                       "name":  "ACU",
+                                       "fullName":  "The Association Of Commonwealth Universities",
+                                       "website":  "https://www.acu.ac.uk/",
+                                       "description":  "The ACU is an international association dedicated to supporting and strengthening cooperation among its member universities across the Commonwealth. It promotes higher education as a force for good.",
+                                       "createdAt":  "2025-10-16T01:06:13.784Z",
+                                       "updatedAt":  "2025-10-16T01:06:13.784Z",
+                                       "publishedAt":  "2025-10-16T01:06:13.776Z",
+                                       "locale":  null,
+                                       "logo":  {
+                                                    "id":  13,
+                                                    "documentId":  "vitontilv07p4ihvb3ckg192",
+                                                    "name":  "acu.png",
+                                                    "alternativeText":  null,
+                                                    "caption":  null,
+                                                    "width":  373,
+                                                    "height":  135,
+                                                    "formats":  {
+                                                                    "xsmall":  {
+                                                                                   "ext":  ".png",
+                                                                                   "url":  "/uploads/xsmall_acu_2726673662.png",
+                                                                                   "hash":  "xsmall_acu_2726673662",
+                                                                                   "mime":  "image/png",
+                                                                                   "name":  "xsmall_acu.png",
+                                                                                   "path":  null,
+                                                                                   "size":  2.03,
+                                                                                   "width":  64,
+                                                                                   "height":  23,
+                                                                                   "sizeInBytes":  2031
+                                                                               },
+                                                                    "thumbnail":  {
+                                                                                      "ext":  ".png",
+                                                                                      "url":  "/uploads/thumbnail_acu_2726673662.png",
+                                                                                      "hash":  "thumbnail_acu_2726673662",
+                                                                                      "mime":  "image/png",
+                                                                                      "name":  "thumbnail_acu.png",
+                                                                                      "path":  null,
+                                                                                      "size":  15.72,
+                                                                                      "width":  245,
+                                                                                      "height":  89,
+                                                                                      "sizeInBytes":  15718
+                                                                                  }
+                                                                },
+                                                    "hash":  "acu_2726673662",
+                                                    "ext":  ".png",
+                                                    "mime":  "image/png",
+                                                    "size":  6.32,
+                                                    "url":  "/uploads/acu_2726673662.png",
+                                                    "previewUrl":  null,
+                                                    "provider":  "local",
+                                                    "provider_metadata":  null,
+                                                    "folderPath":  "/",
+                                                    "createdAt":  "2025-10-16T01:03:06.043Z",
+                                                    "updatedAt":  "2025-10-16T01:03:06.043Z",
+                                                    "publishedAt":  "2025-10-16T01:03:06.046Z",
+                                                    "locale":  null
+                                                }
+                                   },
+                                   {
+                                       "id":  2,
+                                       "documentId":  "rpd2zzu5fbjuopxrmqljm14w",
+                                       "name":  "AICTE",
+                                       "fullName":  "All India Council for Technical Education",
+                                       "website":  "https://www.aicte-india.org/",
+                                       "description":  "AICTE is the statutory body for proper planning and coordinated development of technical education and management education system throughout India. Approval is mandatory for technical courses like B.Tech and MBA.",
+                                       "createdAt":  "2025-10-16T01:07:06.167Z",
+                                       "updatedAt":  "2025-10-16T01:07:06.167Z",
+                                       "publishedAt":  "2025-10-16T01:07:06.154Z",
+                                       "locale":  null,
+                                       "logo":  {
+                                                    "id":  14,
+                                                    "documentId":  "w7re8hcp5gveyjgl724v2siu",
+                                                    "name":  "download (7).jpeg",
+                                                    "alternativeText":  null,
+                                                    "caption":  null,
+                                                    "width":  225,
+                                                    "height":  225,
+                                                    "formats":  {
+                                                                    "xsmall":  {
+                                                                                   "ext":  ".jpeg",
+                                                                                   "url":  "/uploads/xsmall_download_7_9e526d6751.jpeg",
+                                                                                   "hash":  "xsmall_download_7_9e526d6751",
+                                                                                   "mime":  "image/jpeg",
+                                                                                   "name":  "xsmall_download (7).jpeg",
+                                                                                   "path":  null,
+                                                                                   "size":  2.47,
+                                                                                   "width":  64,
+                                                                                   "height":  64,
+                                                                                   "sizeInBytes":  2467
+                                                                               },
+                                                                    "thumbnail":  {
+                                                                                      "ext":  ".jpeg",
+                                                                                      "url":  "/uploads/thumbnail_download_7_9e526d6751.jpeg",
+                                                                                      "hash":  "thumbnail_download_7_9e526d6751",
+                                                                                      "mime":  "image/jpeg",
+                                                                                      "name":  "thumbnail_download (7).jpeg",
+                                                                                      "path":  null,
+                                                                                      "size":  10.09,
+                                                                                      "width":  156,
+                                                                                      "height":  156,
+                                                                                      "sizeInBytes":  10094
+                                                                                  }
+                                                                },
+                                                    "hash":  "download_7_9e526d6751",
+                                                    "ext":  ".jpeg",
+                                                    "mime":  "image/jpeg",
+                                                    "size":  16.07,
+                                                    "url":  "/uploads/download_7_9e526d6751.jpeg",
+                                                    "previewUrl":  null,
+                                                    "provider":  "local",
+                                                    "provider_metadata":  null,
+                                                    "folderPath":  "/",
+                                                    "createdAt":  "2025-10-16T01:06:42.414Z",
+                                                    "updatedAt":  "2025-10-16T01:06:42.414Z",
+                                                    "publishedAt":  "2025-10-16T01:06:42.414Z",
+                                                    "locale":  null
+                                                }
+                                   },
+                                   {
+                                       "id":  3,
+                                       "documentId":  "up23sjreuoaj786wy4c6rdoh",
+                                       "name":  "UGC",
+                                       "fullName":  "University Grants Commission",
+                                       "website":  "https://www.ugc.gov.in/",
+                                       "description":  "UGC is the statutory body in India responsible for determining and maintaining standards of university education. It provides grants to universities and maintains overall quality control.",
+                                       "createdAt":  "2025-10-16T01:08:07.314Z",
+                                       "updatedAt":  "2025-10-16T01:08:07.314Z",
+                                       "publishedAt":  "2025-10-16T01:08:07.307Z",
+                                       "locale":  null,
+                                       "logo":  {
+                                                    "id":  15,
+                                                    "documentId":  "qstfcba3b4hvcpsmv108sjd7",
+                                                    "name":  "ugc.png",
+                                                    "alternativeText":  null,
+                                                    "caption":  null,
+                                                    "width":  215,
+                                                    "height":  234,
+                                                    "formats":  {
+                                                                    "xsmall":  {
+                                                                                   "ext":  ".png",
+                                                                                   "url":  "/uploads/xsmall_ugc_c4428f00bd.png",
+                                                                                   "hash":  "xsmall_ugc_c4428f00bd",
+                                                                                   "mime":  "image/png",
+                                                                                   "name":  "xsmall_ugc.png",
+                                                                                   "path":  null,
+                                                                                   "size":  6.86,
+                                                                                   "width":  59,
+                                                                                   "height":  64,
+                                                                                   "sizeInBytes":  6861
+                                                                               },
+                                                                    "thumbnail":  {
+                                                                                      "ext":  ".png",
+                                                                                      "url":  "/uploads/thumbnail_ugc_c4428f00bd.png",
+                                                                                      "hash":  "thumbnail_ugc_c4428f00bd",
+                                                                                      "mime":  "image/png",
+                                                                                      "name":  "thumbnail_ugc.png",
+                                                                                      "path":  null,
+                                                                                      "size":  28.01,
+                                                                                      "width":  143,
+                                                                                      "height":  156,
+                                                                                      "sizeInBytes":  28010
+                                                                                  }
+                                                                },
+                                                    "hash":  "ugc_c4428f00bd",
+                                                    "ext":  ".png",
+                                                    "mime":  "image/png",
+                                                    "size":  10.36,
+                                                    "url":  "/uploads/ugc_c4428f00bd.png",
+                                                    "previewUrl":  null,
+                                                    "provider":  "local",
+                                                    "provider_metadata":  null,
+                                                    "folderPath":  "/",
+                                                    "createdAt":  "2025-10-16T01:07:40.991Z",
+                                                    "updatedAt":  "2025-10-16T01:07:40.991Z",
+                                                    "publishedAt":  "2025-10-16T01:07:40.991Z",
+                                                    "locale":  null
+                                                }
+                                   },
+                                   {
+                                       "id":  4,
+                                       "documentId":  "faf5adg707ddolx5nr65njpq",
+                                       "name":  "NAAC",
+                                       "fullName":  "National Assessment and Accreditation Council",
+                                       "website":  "https://www.naac.gov.in/",
+                                       "description":  "NAAC is an autonomous body that assesses and accredits Higher Education Institutions (HEIs) in India based on criteria like curriculum, research, and teaching quality. Provides grades like A++, A+, A, etc.",
+                                       "createdAt":  "2025-10-16T01:09:02.928Z",
+                                       "updatedAt":  "2025-10-16T01:09:21.176Z",
+                                       "publishedAt":  "2025-10-16T01:09:21.125Z",
+                                       "locale":  null,
+                                       "logo":  {
+                                                    "id":  16,
+                                                    "documentId":  "wvvpv42v0d1bwkuynxj4dzoz",
+                                                    "name":  "naac.jpeg",
+                                                    "alternativeText":  null,
+                                                    "caption":  null,
+                                                    "width":  222,
+                                                    "height":  160,
+                                                    "formats":  {
+                                                                    "xsmall":  {
+                                                                                   "ext":  ".jpeg",
+                                                                                   "url":  "/uploads/xsmall_naac_793767b8e2.jpeg",
+                                                                                   "hash":  "xsmall_naac_793767b8e2",
+                                                                                   "mime":  "image/jpeg",
+                                                                                   "name":  "xsmall_naac.jpeg",
+                                                                                   "path":  null,
+                                                                                   "size":  1.4,
+                                                                                   "width":  64,
+                                                                                   "height":  46,
+                                                                                   "sizeInBytes":  1397
+                                                                               },
+                                                                    "thumbnail":  {
+                                                                                      "ext":  ".jpeg",
+                                                                                      "url":  "/uploads/thumbnail_naac_793767b8e2.jpeg",
+                                                                                      "hash":  "thumbnail_naac_793767b8e2",
+                                                                                      "mime":  "image/jpeg",
+                                                                                      "name":  "thumbnail_naac.jpeg",
+                                                                                      "path":  null,
+                                                                                      "size":  7.93,
+                                                                                      "width":  216,
+                                                                                      "height":  156,
+                                                                                      "sizeInBytes":  7933
+                                                                                  }
+                                                                },
+                                                    "hash":  "naac_793767b8e2",
+                                                    "ext":  ".jpeg",
+                                                    "mime":  "image/jpeg",
+                                                    "size":  8.22,
+                                                    "url":  "/uploads/naac_793767b8e2.jpeg",
+                                                    "previewUrl":  null,
+                                                    "provider":  "local",
+                                                    "provider_metadata":  null,
+                                                    "folderPath":  "/",
+                                                    "createdAt":  "2025-10-16T01:09:17.610Z",
+                                                    "updatedAt":  "2025-10-16T01:09:17.610Z",
+                                                    "publishedAt":  "2025-10-16T01:09:17.610Z",
+                                                    "locale":  null
+                                                }
+                                   },
+                                   {
+                                       "id":  5,
+                                       "documentId":  "x3wmbu0ddp4gv1c9ep05h1wx",
+                                       "name":  "WES",
+                                       "fullName":  "World Education Services",
+                                       "website":  "https://www.wes.org/",
+                                       "description":  "A non-profit organization that provides credential evaluations for international students and immigrants seeking to study or work in the U.S. or Canada. WES evaluation helps foreign degrees gain recognition.",
+                                       "createdAt":  "2025-10-16T01:10:43.753Z",
+                                       "updatedAt":  "2025-10-16T01:10:43.753Z",
+                                       "publishedAt":  "2025-10-16T01:10:43.743Z",
+                                       "locale":  null,
+                                       "logo":  {
+                                                    "id":  17,
+                                                    "documentId":  "nmdoyio81wiohttukpww3eze",
+                                                    "name":  "wes.png",
+                                                    "alternativeText":  null,
+                                                    "caption":  null,
+                                                    "width":  225,
+                                                    "height":  225,
+                                                    "formats":  {
+                                                                    "xsmall":  {
+                                                                                   "ext":  ".png",
+                                                                                   "url":  "/uploads/xsmall_wes_fa0bde0c50.png",
+                                                                                   "hash":  "xsmall_wes_fa0bde0c50",
+                                                                                   "mime":  "image/png",
+                                                                                   "name":  "xsmall_wes.png",
+                                                                                   "path":  null,
+                                                                                   "size":  3.82,
+                                                                                   "width":  64,
+                                                                                   "height":  64,
+                                                                                   "sizeInBytes":  3816
+                                                                               },
+                                                                    "thumbnail":  {
+                                                                                      "ext":  ".png",
+                                                                                      "url":  "/uploads/thumbnail_wes_fa0bde0c50.png",
+                                                                                      "hash":  "thumbnail_wes_fa0bde0c50",
+                                                                                      "mime":  "image/png",
+                                                                                      "name":  "thumbnail_wes.png",
+                                                                                      "path":  null,
+                                                                                      "size":  11.59,
+                                                                                      "width":  156,
+                                                                                      "height":  156,
+                                                                                      "sizeInBytes":  11587
+                                                                                  }
+                                                                },
+                                                    "hash":  "wes_fa0bde0c50",
+                                                    "ext":  ".png",
+                                                    "mime":  "image/png",
+                                                    "size":  3.99,
+                                                    "url":  "/uploads/wes_fa0bde0c50.png",
+                                                    "previewUrl":  null,
+                                                    "provider":  "local",
+                                                    "provider_metadata":  null,
+                                                    "folderPath":  "/",
+                                                    "createdAt":  "2025-10-16T01:10:11.498Z",
+                                                    "updatedAt":  "2025-10-16T01:10:11.498Z",
+                                                    "publishedAt":  "2025-10-16T01:10:11.498Z",
+                                                    "locale":  null
+                                                }
+                                   },
+                                   {
+                                       "id":  6,
+                                       "documentId":  "sb245ltedc0t5k7d82ly7pqb",
+                                       "name":  "ICAS",
+                                       "fullName":  "International Credential Assessment Service of Canada",
+                                       "website":  "https://www.icascanada.ca/",
+                                       "description":  "A credential evaluation service providing assessment reports for educational credentials earned outside of Canada, often used for employment, professional licensing, and academic purposes in Canada.",
+                                       "createdAt":  "2025-10-16T01:11:39.251Z",
+                                       "updatedAt":  "2025-10-16T01:11:55.135Z",
+                                       "publishedAt":  "2025-10-16T01:11:55.107Z",
+                                       "locale":  null,
+                                       "logo":  {
+                                                    "id":  18,
+                                                    "documentId":  "qe9o3lfiv5lpa0gxaf3unezf",
+                                                    "name":  "icas.png",
+                                                    "alternativeText":  null,
+                                                    "caption":  null,
+                                                    "width":  240,
+                                                    "height":  180,
+                                                    "formats":  {
+                                                                    "xsmall":  {
+                                                                                   "ext":  ".png",
+                                                                                   "url":  "/uploads/xsmall_icas_d12b4df410.png",
+                                                                                   "hash":  "xsmall_icas_d12b4df410",
+                                                                                   "mime":  "image/png",
+                                                                                   "name":  "xsmall_icas.png",
+                                                                                   "path":  null,
+                                                                                   "size":  3.65,
+                                                                                   "width":  64,
+                                                                                   "height":  48,
+                                                                                   "sizeInBytes":  3646
+                                                                               },
+                                                                    "thumbnail":  {
+                                                                                      "ext":  ".png",
+                                                                                      "url":  "/uploads/thumbnail_icas_d12b4df410.png",
+                                                                                      "hash":  "thumbnail_icas_d12b4df410",
+                                                                                      "mime":  "image/png",
+                                                                                      "name":  "thumbnail_icas.png",
+                                                                                      "path":  null,
+                                                                                      "size":  18.29,
+                                                                                      "width":  208,
+                                                                                      "height":  156,
+                                                                                      "sizeInBytes":  18292
+                                                                                  }
+                                                                },
+                                                    "hash":  "icas_d12b4df410",
+                                                    "ext":  ".png",
+                                                    "mime":  "image/png",
+                                                    "size":  4.14,
+                                                    "url":  "/uploads/icas_d12b4df410.png",
+                                                    "previewUrl":  null,
+                                                    "provider":  "local",
+                                                    "provider_metadata":  null,
+                                                    "folderPath":  "/",
+                                                    "createdAt":  "2025-10-16T01:11:35.014Z",
+                                                    "updatedAt":  "2025-10-16T01:11:35.014Z",
+                                                    "publishedAt":  "2025-10-16T01:11:35.014Z",
+                                                    "locale":  null
+                                                }
+                                   }
+                               ],
+                 "departments":  [
+
+                                 ],
+                 "reviews":  [
+                                 {
+                                     "id":  1,
+                                     "documentId":  "y2l2d9pfio8fe3y4wctjumq6",
+                                     "reviewerName":  "Ankit Soni",
+                                     "reviewerType":  "Current Student",
+                                     "overallRating":  5,
+                                     "digitalInfrastructureRating":  5,
+                                     "curriculumRating":  5,
+                                     "valueForMoneyRating":  5,
+                                     "title":  "very good",
+                                     "review":  "the college is very good",
+                                     "isApproved":  true,
+                                     "reviewDate":  "2025-10-15T13:15:28.134Z",
+                                     "helpfulCount":  84,
+                                     "createdAt":  "2025-10-15T13:40:32.025Z",
+                                     "updatedAt":  "2025-10-15T13:40:32.025Z",
+                                     "publishedAt":  "2025-10-15T13:40:32.013Z",
+                                     "locale":  null
+                                 }
+                             ],
+                 "similarUniversities":  [
+
+                                         ]
+             },
+    "meta":  {
+
+             }
+}

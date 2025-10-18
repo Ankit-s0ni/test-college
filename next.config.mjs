@@ -6,12 +6,32 @@ const nextConfig = {
     ignoreDuringBuilds: true,
   },
   images: {
-    domains: [
-      "res.cloudinary.com", 
-      "images.unsplash.com", 
-  "dummyimage.com",
-  "collegecosmos.manavkhadka.com.np",
-  "admin.collegecosmos.in"
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'res.cloudinary.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'images.unsplash.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'dummyimage.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'collegecosmos.manavkhadka.com.np',
+      },
+      {
+        protocol: 'https',
+        hostname: 'admin.collegecosmos.in',
+      },
+      {
+        protocol: 'http',
+        hostname: 'localhost',
+        port: '1337',
+      },
     ],
   },
 };
