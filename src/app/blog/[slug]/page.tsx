@@ -4,13 +4,16 @@ import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import { blogsAPI } from '@/lib/api';
 import { BlogAPI } from '@/types/blog';
+import { transformBlogData } from '@/lib/transformers';
+import type { BlogPost } from '@/types/blog';
 
-import { ArrowLeft, Calendar, Clock } from 'lucide-react';
+import { ArrowLeft, Calendar, Clock, User, Tag } from 'lucide-react';
 import BlogDetailsHero from '@/components/blogs/blog-details-hero';
 import FooterSection from '@/components/home/footer-section';
 
 export default function BlogPage({ params }: { params: { slug: string } }) {
   const [blog, setBlog] = useState<BlogAPI | null>(null);
+  const [transformedBlog, setTransformedBlog] = useState<BlogPost | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -31,6 +34,10 @@ export default function BlogPage({ params }: { params: { slug: string } }) {
         // Now get the full blog content by ID
         const blogDetailResponse = await blogsAPI.getById(matchingBlog.id.toString());
         setBlog(blogDetailResponse.data);
+        
+        // Transform the blog data
+        const transformed = transformBlogData(blogDetailResponse.data);
+        setTransformedBlog(transformed);
         
       } catch (err) {
         console.error('Error fetching blog:', err);
@@ -107,8 +114,12 @@ export default function BlogPage({ params }: { params: { slug: string } }) {
 
   return (
     <div className="bg-background">
-      {/* Hero */}
-      <BlogDetailsHero />
+      {/* Hero with real data */}
+      <BlogDetailsHero 
+        title={blog.title}
+        excerpt={blog.excerpt || undefined}
+        coverImage={transformedBlog?.cover || undefined}
+      />
 
       {/* Blog Content */}
       <div className="container mx-auto px-4 py-16 max-w-4xl">
@@ -137,18 +148,39 @@ export default function BlogPage({ params }: { params: { slug: string } }) {
 
           {/* Meta information */}
           <div className="flex flex-wrap items-center gap-6 text-sm text-gray-500 border-b border-gray-200 pb-6">
+            {/* Author */}
+            {transformedBlog?.author && (
+              <div className="flex items-center gap-2">
+                <User className="h-4 w-4" />
+                <span>{transformedBlog.author}</span>
+              </div>
+            )}
+
+            {/* Date */}
             <div className="flex items-center gap-2">
               <Calendar className="h-4 w-4" />
               <span>{formatDate(blog.publishedAt)}</span>
             </div>
             
+            {/* Read time */}
             <div className="flex items-center gap-2">
               <Clock className="h-4 w-4" />
               <span>{blog.readTimeMin} min read</span>
             </div>
 
+            {/* Primary Tag */}
+            {transformedBlog?.tag && (
+              <div className="flex items-center gap-2">
+                <Tag className="h-4 w-4" />
+                <span className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-xs font-medium">
+                  {transformedBlog.tag.label}
+                </span>
+              </div>
+            )}
+
+            {/* Featured badge */}
             {blog.featured && (
-              <span className="bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-xs font-medium">
+              <span className="bg-green-100 text-green-800 px-3 py-1 rounded-full text-xs font-medium">
                 Featured
               </span>
             )}

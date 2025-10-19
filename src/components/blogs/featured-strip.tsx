@@ -21,6 +21,16 @@ export default function FeaturedStrip({ blogs = [] }: FeaturedStripProps) {
     year: 'numeric',
   });
 
+  // Build cover image URL from API
+  const baseUrl = process.env.NEXT_PUBLIC_API_URL?.replace('/api', '') || 'https://admin.collegecosmos.in';
+  let coverImage = '/assets/images/featured-blog.png'; // fallback
+  
+  if (featured.coverImage?.url) {
+    coverImage = featured.coverImage.url.startsWith('http')
+      ? featured.coverImage.url
+      : `${baseUrl}${featured.coverImage.url}`;
+  }
+
   return (
     <div className="bg-[#F7EEFD]">
       <div className="container max-w-7xl mx-auto px-4 py-8 md:py-10">
@@ -40,7 +50,7 @@ export default function FeaturedStrip({ blogs = [] }: FeaturedStripProps) {
                     href={(featured as any).authorHref || '#'}
                     className="text-[#1d4ed8] font-medium hover:underline underline-offset-4"
                   >
-                    {(featured as any).author || featured.author?.name || 'College Cosmos Team'}
+                    {typeof featured.author === 'string' ? featured.author : featured.author?.name || 'College Cosmos Team'}
                   </Link>
                   <span className="text-muted-foreground"> - {pub}</span>
                 </div>
@@ -85,8 +95,8 @@ export default function FeaturedStrip({ blogs = [] }: FeaturedStripProps) {
               <div className="relative">
                 <div className="aspect-[4/3] w-full overflow-hidden rounded-md">
                   <Image
-                    src="/assets/images/featured-blog.png"
-                    alt="UGC poster"
+                    src={coverImage}
+                    alt={featured.title}
                     fill
                     priority
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 45vw, 540px"

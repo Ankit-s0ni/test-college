@@ -34,7 +34,23 @@ const BlogListingPage = () => {
 
   // Transform API data to frontend format
   const blogs = transformBlogsData(apiBlogs);
-  const latest = blogs.filter((p) => !p.featured);
+  
+  // Remove duplicates based on slug (in case of duplicate entries in DB)
+  const uniqueBlogs = blogs.reduce((acc, current) => {
+    const exists = acc.find(item => item.slug === current.slug);
+    if (!exists) {
+      acc.push(current);
+    }
+    return acc;
+  }, [] as typeof blogs);
+  
+  // Filter out featured posts from the latest section to avoid duplication
+  const latest = uniqueBlogs.filter((p) => !p.featured);
+
+  console.log('API blogs:', apiBlogs.length);
+  console.log('Unique blogs after dedup:', uniqueBlogs.length);
+  console.log('Featured blogs:', uniqueBlogs.filter(b => b.featured).length);
+  console.log('Latest (non-featured) blogs:', latest.length);
 
   if (loading) {
     return (

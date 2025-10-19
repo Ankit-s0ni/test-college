@@ -142,16 +142,38 @@ export function transformCoursesData(apiCourses: CourseAPI[]): CourseListItem[] 
  * Transform API blog data to frontend format
  */
 export function transformBlogData(apiBlog: BlogAPI): BlogPost {
-  // Generate a category based on the title or content
-  let category = 'General';
-  if (apiBlog.title.toLowerCase().includes('mba')) {
-    category = 'MBA';
-  } else if (apiBlog.title.toLowerCase().includes('engineering')) {
-    category = 'Engineering';
-  } else if (apiBlog.title.toLowerCase().includes('scholarship')) {
-    category = 'Scholarships';
-  } else if (apiBlog.title.toLowerCase().includes('distance') || apiBlog.title.toLowerCase().includes('online')) {
-    category = 'Online Learning';
+  const baseUrl = SITE_BASE_URL;
+  
+  // Handle cover image from API
+  let coverUrl: string | null = null;
+  if (apiBlog.coverImage?.url) {
+    coverUrl = apiBlog.coverImage.url.startsWith('http') 
+      ? apiBlog.coverImage.url 
+      : `${baseUrl}${apiBlog.coverImage.url}`;
+  }
+  
+  // Use primary tag from API, fallback to deriving from title
+  let tag = {
+    id: 'general',
+    label: 'General',
+  };
+  
+  if (apiBlog.primaryTag) {
+    tag = {
+      id: apiBlog.primaryTag.slug || apiBlog.primaryTag.label.toLowerCase().replace(/\s+/g, '-'),
+      label: apiBlog.primaryTag.label,
+    };
+  } else {
+    // Fallback: derive from title if no primary tag
+    if (apiBlog.title.toLowerCase().includes('mba')) {
+      tag = { id: 'mba', label: 'MBA' };
+    } else if (apiBlog.title.toLowerCase().includes('engineering')) {
+      tag = { id: 'engineering', label: 'Engineering' };
+    } else if (apiBlog.title.toLowerCase().includes('scholarship')) {
+      tag = { id: 'scholarships', label: 'Scholarships' };
+    } else if (apiBlog.title.toLowerCase().includes('distance') || apiBlog.title.toLowerCase().includes('online')) {
+      tag = { id: 'online-learning', label: 'Online Learning' };
+    }
   }
 
   return {
@@ -159,16 +181,13 @@ export function transformBlogData(apiBlog: BlogAPI): BlogPost {
     slug: apiBlog.slug,
     title: apiBlog.title,
     excerpt: apiBlog.excerpt,
-    author: 'College Cosmos Team', // Default author
+    author: apiBlog.author?.name || 'College Cosmos Team',
     authorHref: '#',
     publishedAt: apiBlog.publishedAt,
     readTimeMin: apiBlog.readTimeMin,
-    tag: {
-      id: category.toLowerCase().replace(' ', '-'),
-      label: category,
-    },
+    tag: tag,
     badges: [],
-    cover: null, // You can add cover images from API if available
+    cover: coverUrl,
     featured: apiBlog.featured,
   };
 }
