@@ -44,8 +44,17 @@ const BlogsSection = () => {
         setLoading(true);
         const response = await blogsAPI.getAll();
         
-        // Get first 3 blogs for the home page, prioritize featured ones
-        const displayBlogs = response.data
+        // Remove duplicates based on slug
+        const uniqueBlogs = response.data.reduce((acc: BlogAPI[], current: BlogAPI) => {
+          const exists = acc.find(item => item.slug === current.slug);
+          if (!exists) {
+            acc.push(current);
+          }
+          return acc;
+        }, []);
+        
+        // Get up to 3 unique blogs for the home page, prioritize featured ones
+        const displayBlogs = uniqueBlogs
           .sort((a, b) => {
             // Sort by featured first, then by publishedAt (newest first)
             if (a.featured && !b.featured) return -1;
@@ -68,25 +77,45 @@ const BlogsSection = () => {
 
   // Transform API data to display format
   const getDisplayBlogs = () => {
-    if (loading || error || blogs.length === 0) {
+    // Only show fallback if loading or error
+    if (loading || error) {
       return FALLBACK_BLOGS;
     }
 
-  // Base URL for the API / site (use env-configured value)
-  const API_BASE_URL = SITE_BASE_URL;
+    // If no blogs from API, show empty array (don't force fallback)
+    if (blogs.length === 0) {
+      return [];
+    }
 
-    return blogs.map(blog => ({
-      id: blog.documentId || blog.id.toString(),
-      title: blog.title,
-      excerpt: blog.excerpt || 'Read this interesting article to learn more.',
-      slug: blog.slug,
-      cover: blog.cover?.url 
-        ? `${API_BASE_URL}${blog.cover.url}` 
-        : FALLBACK_BLOGS[0].cover,
-    }));
+    // Base URL for the API / site (use env-configured value)
+    const API_BASE_URL = SITE_BASE_URL;
+
+    return blogs.map(blog => {
+      // Build cover image URL properly
+      let coverUrl = FALLBACK_BLOGS[0].cover; // default fallback
+      
+      if (blog.coverImage?.url) {
+        coverUrl = blog.coverImage.url.startsWith('http')
+          ? blog.coverImage.url
+          : `${API_BASE_URL}${blog.coverImage.url}`;
+      }
+
+      return {
+        id: blog.documentId || blog.id.toString(),
+        title: blog.title,
+        excerpt: blog.excerpt || 'Read this interesting article to learn more.',
+        slug: blog.slug,
+        cover: coverUrl,
+      };
+    });
   };
 
   const displayBlogs = getDisplayBlogs();
+
+  // Don't render the section if no blogs available
+  if (!loading && !error && displayBlogs.length === 0) {
+    return null;
+  }
 
   return (
     <div id="blog" className="py-20 bg-muted/30">
