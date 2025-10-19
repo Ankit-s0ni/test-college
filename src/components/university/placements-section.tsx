@@ -1,4 +1,5 @@
 import React from 'react';
+import { InfiniteCarousel } from '@/components/ui/infinite-carousel';
 
 function formatCurrency(value: any) {
   if (value == null) return 'N/A';
@@ -49,13 +50,13 @@ const PlacementsSection = ({ placements, placementRecords }: { placements?: any[
           {Array.from(recruiters).length === 0 ? (
             <div className="text-sm text-gray-500">No recruiter data available.</div>
           ) : (
-            <ul className="flex flex-wrap gap-2">
+            <InfiniteCarousel speed={40} pauseOnHover={true} gap={8}>
               {Array.from(recruiters).map((r) => (
-                <li key={r} className="px-3 py-1 bg-white border rounded text-sm">
+                <div key={r} className="px-3 py-1 bg-white border rounded text-sm whitespace-nowrap">
                   {r}
-                </li>
+                </div>
               ))}
-            </ul>
+            </InfiniteCarousel>
           )}
         </div>
 

@@ -70,24 +70,24 @@ export default function UniversityStats({
   ].filter(stat => stat.value !== null);
 
   return (
-    <section id="stats" className="py-8">
-      <div className="mb-6">
-        <h3 className="text-xl font-semibold">University at a Glance</h3>
-        <p className="text-sm text-muted-foreground mt-1">Key facts and figures</p>
+    <section id="stats" className="py-4 sm:py-8">
+      <div className="mb-4 sm:mb-6">
+        <h3 className="text-lg sm:text-xl font-semibold">University at a Glance</h3>
+        <p className="text-xs sm:text-sm text-muted-foreground mt-1">Key facts and figures</p>
       </div>
       
-      <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
         {stats.map((stat, index) => {
           const Icon = stat.icon;
           return (
-            <Card key={index} className="p-4 hover:shadow-md transition-shadow">
-              <div className="flex items-start gap-3">
-                <div className={`p-2 rounded-lg ${stat.bgColor}`}>
-                  <Icon className={`h-5 w-5 ${stat.color}`} />
+            <Card key={index} className="p-3 sm:p-4 hover:shadow-md transition-shadow">
+              <div className="flex items-start gap-2 sm:gap-3">
+                <div className={`p-1.5 sm:p-2 rounded-lg ${stat.bgColor} flex-shrink-0`}>
+                  <Icon className={`h-4 w-4 sm:h-5 sm:w-5 ${stat.color}`} />
                 </div>
                 <div className="flex-1 min-w-0">
-                  <p className="text-xs text-muted-foreground mb-1">{stat.label}</p>
-                  <p className="font-semibold text-sm truncate">{stat.value}</p>
+                  <p className="text-[10px] sm:text-xs text-muted-foreground mb-0.5 sm:mb-1">{stat.label}</p>
+                  <p className="font-semibold text-xs sm:text-sm truncate">{stat.value}</p>
                 </div>
               </div>
             </Card>

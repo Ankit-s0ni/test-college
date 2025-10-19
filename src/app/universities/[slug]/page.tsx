@@ -525,7 +525,7 @@ function convertAPIDataToPageData(apiResponse: UniversityDetailAPIResponse): Uni
         return locations.split(',').map((loc: any) => String(loc).trim()).filter(Boolean);
       }
 
-      // If it's an object (likely GeoJSON), try to summarize coordinates
+      // If it's an object (likely GeoJSON or location object), handle appropriately
       if (locations && typeof locations === 'object') {
         // Handle GeoJSON Polygon/Point types
         try {
@@ -539,6 +539,12 @@ function convertAPIDataToPageData(apiResponse: UniversityDetailAPIResponse): Uni
             const coords = locations.coordinates[0] || [];
             const sample = coords.slice(0, 3).map((c: any) => `${c[1].toFixed(5)}, ${c[0].toFixed(5)}`);
             return [`Polygon with ${coords.length} points`, ...sample];
+          }
+
+          // If it's a regular location object with address fields (city, state, etc.), return it as-is
+          // The campus-section component will handle the formatting
+          if (locations.city || locations.state || locations.address) {
+            return locations;
           }
 
           // fallback: stringify object keys
@@ -834,7 +840,7 @@ function HeroSection({
   return (
     <section className="relative">
       {/* banner */}
-      <div className="relative h-[220px] sm:h-[280px] md:h-[340px] lg:h-[400px]">
+      <div className="relative h-[180px] sm:h-[240px] md:h-[300px] lg:h-[400px]">
         {data.headerImage ? (
           <>
             <Image src={data.headerImage} alt={data.name} fill className="object-cover" priority />
@@ -846,35 +852,35 @@ function HeroSection({
       </div>
 
       {/* content */}
-      <div className="container mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-8 lg:py-10">
-        <div className="grid gap-8 lg:grid-cols-2">
+      <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-6 sm:py-8 lg:py-10">
+        <div className="grid gap-6 lg:gap-8 lg:grid-cols-2">
           {/* LEFT */}
-          <div>
-            <div className="flex items-center gap-3 flex-wrap mb-3">
-              <h1 className="text-3xl md:text-4xl font-extrabold tracking-tight">{data.name}</h1>
+          <div className="min-w-0">
+            <div className="flex items-center gap-2 sm:gap-3 flex-wrap mb-3">
+              <h1 className="text-2xl sm:text-3xl md:text-4xl font-extrabold tracking-tight break-words">{data.name}</h1>
               {(data as UniversityPageDataAPI).universityType && (
-                <span className="px-3 py-1 text-xs font-semibold bg-blue-100 text-blue-700 rounded-full">
+                <span className="px-2 sm:px-3 py-1 text-xs font-semibold bg-blue-100 text-blue-700 rounded-full whitespace-nowrap">
                   {(data as UniversityPageDataAPI).universityType}
                 </span>
               )}
             </div>
             
-            <p className="mt-3 text-lg text-muted-foreground">{data.details}</p>
+            <p className="mt-3 text-sm sm:text-base lg:text-lg text-muted-foreground break-words">{data.details}</p>
 
-            <div className="mt-4 flex flex-wrap gap-4 text-sm">
-              <span className="flex items-center gap-2">
-                📍 {data.location}
+            <div className="mt-4 flex flex-wrap gap-2 sm:gap-4 text-xs sm:text-sm">
+              <span className="flex items-center gap-1.5 sm:gap-2">
+                📍 <span className="break-all">{data.location}</span>
               </span>
-              <span className="flex items-center gap-2">
+              <span className="flex items-center gap-1.5 sm:gap-2 whitespace-nowrap">
                 🏛️ Established {data.established}
               </span>
               {data.ratings.overall > 0 && (
-                <span className="flex items-center gap-2">
+                <span className="flex items-center gap-1.5 sm:gap-2 whitespace-nowrap">
                   ⭐ {data.ratings.overall.toFixed(1)} Rating
                 </span>
               )}
               {(data as UniversityPageDataAPI).affiliation && (
-                <span className="flex items-center gap-2">
+                <span className="flex items-center gap-1.5 sm:gap-2 break-words">
                   ✓ {(data as UniversityPageDataAPI).affiliation}
                 </span>
               )}
@@ -882,14 +888,14 @@ function HeroSection({
 
             {/* Last verified badge */}
             {(data as UniversityPageDataAPI).lastVerified && (
-              <div className="mt-3 text-xs text-muted-foreground">
+              <div className="mt-3 text-xs text-muted-foreground break-words">
                 ℹ️ Information last verified on {new Date((data as UniversityPageDataAPI).lastVerified!).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
               </div>
             )}
 
-            {/* small CTAs */}
-            <div className="mt-6 flex flex-wrap gap-3">
-              <Button asChild className="bg-[#1EC408] hover:bg-green-700">
+            {/* CTAs */}
+            <div className="mt-6 flex flex-col sm:flex-row flex-wrap gap-3">
+              <Button asChild className="bg-[#1EC408] hover:bg-green-700 w-full sm:w-auto">
                 <Link href={data.prospectusLink}>
                   <FileDown className="mr-2 h-4 w-4" />
                   Download Prospectus
@@ -897,7 +903,7 @@ function HeroSection({
               </Button>
 
               {(data as UniversityPageDataAPI).website && (
-                <Button asChild variant="outline" className="border-blue-600 text-blue-700 hover:bg-blue-50">
+                <Button asChild variant="outline" className="border-blue-600 text-blue-700 hover:bg-blue-50 w-full sm:w-auto">
                   <Link href={(data as UniversityPageDataAPI).website!} target="_blank" rel="noopener noreferrer">
                     <svg className="mr-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
@@ -911,46 +917,46 @@ function HeroSection({
                 universityName={data.name}
                 triggerContent="Talk to our expert"
                 modalTitle={`Schedule a Call with ${data.name}`}
-                triggerClassName="border-green-600 text-green-700 hover:bg-green-50 w-[200px] bg-transparent"
+                triggerClassName="border-green-600 text-green-700 hover:bg-green-50 w-full sm:w-auto bg-transparent"
                 calLink={data.scheduleLink || undefined}
               />
             </div>
           </div>
 
           {/* RIGHT: ratings */}
-          <div className="grid grid-cols-1 sm:grid-cols-[1fr_auto] items-center gap-6">
-            <div>
+          <div className="grid grid-cols-1 sm:grid-cols-[1fr_auto] items-center gap-6 min-w-0">
+            <div className="min-w-0">
               <div className="flex items-baseline gap-2">
-                <h3 className="text-lg font-semibold">Peripheral Rating</h3>
-                <span className="text-sm text-muted-foreground">(Out of 5)</span>
+                <h3 className="text-base sm:text-lg font-semibold">Peripheral Rating</h3>
+                <span className="text-xs sm:text-sm text-muted-foreground whitespace-nowrap">(Out of 5)</span>
               </div>
 
-              <div className="mt-4 space-y-4">
-                <div className="flex items-center justify-between gap-6">
-                  <span className="text-[15px] text-muted-foreground">Average Ratings</span>
-                  <div className="flex items-center gap-2">
-                    <span className="font-semibold">{data.ratings.average.toFixed(1)}</span>
+              <div className="mt-4 space-y-3 sm:space-y-4">
+                <div className="flex items-center justify-between gap-3 sm:gap-6">
+                  <span className="text-sm sm:text-[15px] text-muted-foreground">Average Ratings</span>
+                  <div className="flex items-center gap-1.5 sm:gap-2">
+                    <span className="font-semibold text-sm sm:text-base">{data.ratings.average.toFixed(1)}</span>
                     <Stars value={data.ratings.average} />
                   </div>
                 </div>
-                <div className="flex items-center justify-between gap-6">
-                  <span className="text-[15px] text-muted-foreground">Digital Infrastructure</span>
-                  <div className="flex items-center gap-2">
-                    <span className="font-semibold">{data.ratings.DI.toFixed(1)}</span>
+                <div className="flex items-center justify-between gap-3 sm:gap-6">
+                  <span className="text-sm sm:text-[15px] text-muted-foreground">Digital Infrastructure</span>
+                  <div className="flex items-center gap-1.5 sm:gap-2">
+                    <span className="font-semibold text-sm sm:text-base">{data.ratings.DI.toFixed(1)}</span>
                     <Stars value={data.ratings.DI} />
                   </div>
                 </div>
-                <div className="flex items-center justify-between gap-6">
-                  <span className="text-[15px] text-muted-foreground">Curriculum</span>
-                  <div className="flex items-center gap-2">
-                    <span className="font-semibold">{data.ratings.curriculum.toFixed(1)}</span>
+                <div className="flex items-center justify-between gap-3 sm:gap-6">
+                  <span className="text-sm sm:text-[15px] text-muted-foreground">Curriculum</span>
+                  <div className="flex items-center gap-1.5 sm:gap-2">
+                    <span className="font-semibold text-sm sm:text-base">{data.ratings.curriculum.toFixed(1)}</span>
                     <Stars value={data.ratings.curriculum} />
                   </div>
                 </div>
-                <div className="flex items-center justify-between gap-6">
-                  <span className="text-[15px] text-muted-foreground">Value For Money</span>
-                  <div className="flex items-center gap-2">
-                    <span className="font-semibold">{data.ratings.VFM.toFixed(1)}</span>
+                <div className="flex items-center justify-between gap-3 sm:gap-6">
+                  <span className="text-sm sm:text-[15px] text-muted-foreground">Value For Money</span>
+                  <div className="flex items-center gap-1.5 sm:gap-2">
+                    <span className="font-semibold text-sm sm:text-base">{data.ratings.VFM.toFixed(1)}</span>
                     <Stars value={data.ratings.VFM} />
                   </div>
                 </div>
@@ -976,19 +982,19 @@ function HeroSection({
 
 function FaqSection({ data }: { data: Faq }) {
   return (
-    <section id="faq" className="bg-[#F7EEFD] px-5 py-8">
+    <section id="faq" className="bg-[#F7EEFD] px-3 sm:px-5 py-6 sm:py-8 rounded-lg">
       <SectionHeader title="FAQs" subtitle="List of questions that are generally asked!" />
-      <Accordion type="single" collapsible className="space-y-3">
+      <Accordion type="single" collapsible className="w-full space-y-2 sm:space-y-3">
         {data.map((f, i) => (
           <AccordionItem
             key={i}
             value={`faq-${i}`}
-            className="rounded-xl border bg-card shadow-sm overflow-hidden"
+            className="rounded-lg sm:rounded-xl border bg-card shadow-sm overflow-hidden"
           >
-            <AccordionTrigger className="px-4 py-3 text-left hover:no-underline">
-              {f.question}
+            <AccordionTrigger className="px-3 sm:px-4 py-2.5 sm:py-3 text-left hover:no-underline text-sm sm:text-base break-words [&[data-state=open]>svg]:rotate-180">
+              <span className="pr-2 break-words">{f.question}</span>
             </AccordionTrigger>
-            <AccordionContent className="px-4 pb-4 text-sm text-muted-foreground">
+            <AccordionContent className="px-3 sm:px-4 pb-3 sm:pb-4 text-xs sm:text-sm text-muted-foreground break-words overflow-hidden">
               {f.answer}
             </AccordionContent>
           </AccordionItem>
@@ -1080,17 +1086,17 @@ export default function UniversitySlugPage({ params }: any) {
         universityId={apiData?.data?.id || pageData.name}
       />
 
-      <section className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
-        <div className="grid lg:grid-cols-[280px_800px] gap-6 lg:gap-8 mb-6">
-          {/* Left rail nav */}
+      <section className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
+        <div className="grid grid-cols-1 lg:grid-cols-[280px_1fr] gap-6 lg:gap-8 mb-6">
+          {/* Left rail nav - Hidden on mobile, shown on desktop */}
           <aside className="hidden lg:block">
             <Card className="sticky top-24 py-0 border rounded-none">
               <UniversitySidebar />
             </Card>
           </aside>
 
-          {/* Main column */}
-          <main className="space-y-8 lg:space-y-10">
+          {/* Main column - Full width on mobile, with sidebar on desktop */}
+          <main className="space-y-6 sm:space-y-8 lg:space-y-10 min-w-0">
             {/* University Stats Section - NEW */}
             {(pageData as UniversityPageDataAPI) && (
               <UniversityStats
@@ -1160,12 +1166,6 @@ export default function UniversitySlugPage({ params }: any) {
             {!pageData.partners && <div id="partners" />}
             {pageData.campus && <CampusSection data={pageData.campus} />}
             
-            {/* Enhanced Contact Section - NEW */}
-            <EnhancedContactSection
-              contactDetails={(pageData as UniversityPageDataAPI).contactDetails}
-              generalContact={(pageData as any).contact}
-            />
-            
             {pageData.advantages && <AdvantagesSection data={pageData.advantages} />}
             
             {/* FAQ section */}
@@ -1176,6 +1176,12 @@ export default function UniversitySlugPage({ params }: any) {
             <div id="similar-universities" />
             
             {pageData.reviews && <ReviewsSection data={pageData.reviews} />}
+            
+            {/* Enhanced Contact Section - Moved to end */}
+            <EnhancedContactSection
+              contactDetails={(pageData as UniversityPageDataAPI).contactDetails}
+              generalContact={(pageData as any).contact}
+            />
 
             {/* Show message if using API data but no optional sections are available */}
             {apiData && !pageData.about && !pageData.approvals && (!pageData.courses || pageData.courses.length === 0) && !pageData.ranking && !pageData.reviews && !pageData.financialAid && !pageData.partners && !pageData.campus && !pageData.advantages && (!pageData.faq || pageData.faq.length === 0) && (
