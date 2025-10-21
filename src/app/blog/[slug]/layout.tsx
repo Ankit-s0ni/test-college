@@ -1,8 +1,9 @@
 import type { Metadata } from 'next';
-import { blogsAPI } from '@/lib/api';
 import { SITE_BASE_URL } from '@/lib/config';
+import { BlogsAPIResponse, BlogDetailAPIResponse } from '@/types/blog';
 
 const SITE = process.env.NEXT_PUBLIC_SITE_URL || 'https://collegecosmos.com';
+const BASE = process.env.NEXT_PUBLIC_API_URL || 'https://admin.collegecosmos.in/api';
 export const revalidate = 3600; // 1 hour
 
 type BlogSeo = {
@@ -31,27 +32,38 @@ type BlogSeo = {
   readTimeMin?: number;
 };
 
+// Use direct fetch with proper caching for build-time metadata generation
 async function fetchBlogSeo(slug: string): Promise<BlogSeo | null> {
   try {
     console.log('🔍 [Blog SEO] Fetching blog for slug:', slug);
     
-    // Get all blogs to find the one with matching slug
-    const blogsResponse = await blogsAPI.getAll();
-    const matchingBlog = blogsResponse.data.find((blog) => blog.slug === slug);
-    
-    if (!matchingBlog) {
-      console.log('❌ [Blog SEO] Blog not found for slug:', slug);
-      return null;
-    }
-
-    // Get full blog details
-    const blogDetailResponse = await blogsAPI.getById(matchingBlog.id.toString());
-    console.log('✅ [Blog SEO] Blog data fetched:', {
-      title: blogDetailResponse.data.title,
-      hasSEO: !!blogDetailResponse.data.seo,
+    // Fetch blog by slug directly - with caching for build
+    const response = await fetch(`${BASE}/blogs/slug/${slug}`, {
+      next: { revalidate: 3600 }, // Cache for 1 hour
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+      },
     });
     
-    return blogDetailResponse.data;
+    if (!response.ok) {
+      console.error('❌ [Blog SEO] Failed to fetch blog');
+      return null;
+    }
+    
+    const data: BlogDetailAPIResponse = await response.json();
+    
+    if (!data.data) {
+      console.error('❌ [Blog SEO] No blog data returned');
+      return null;
+    }
+    
+    console.log('✅ [Blog SEO] Blog data fetched:', {
+      title: data.data.title,
+      hasSEO: !!data.data.seo,
+    });
+    
+    return data.data as BlogSeo;
   } catch (error) {
     console.error('❌ [Blog SEO] Error fetching blog SEO data:', error);
     return null;

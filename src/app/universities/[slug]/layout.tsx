@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
-import { universitiesAPI } from '@/lib/api';
 import Script from 'next/script';
+import { UniversitiesAPIResponse, UniversityDetailAPIResponse } from '@/types/university';
 
 const SITE = process.env.NEXT_PUBLIC_SITE_URL || 'https://collegecosmos.com';
 const BASE = process.env.NEXT_PUBLIC_API_URL || 'https://admin.collegecosmos.in/api';
@@ -26,28 +26,56 @@ type Seoable = {
   };
 };
 
+// Use direct fetch with proper caching for build-time metadata generation
 async function fetchSeo(slug: string): Promise<Seoable | null> {
   try {
     console.log('[Metadata] Fetching SEO data for slug:', slug);
     
-    // Use the same API call as the page component
-    const response = await universitiesAPI.getBySlug(slug);
+    // First get all universities to find ID - with caching for build
+    const allUniversitiesResponse = await fetch(`${BASE}/universities`, {
+      next: { revalidate: 3600 }, // Cache for 1 hour
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+      },
+    });
     
-    console.log('[Metadata] API Response:', response?.data?.name || 'No data');
-    
-    if (!response?.data) {
-      console.error('[Metadata] No data returned from API');
+    if (!allUniversitiesResponse.ok) {
+      console.error('[Metadata] Failed to fetch universities list');
       return null;
     }
     
-    const university = response.data;
-    console.log('[Metadata] SEO data:', {
-      hasMetaTitle: !!university.seo?.metaTitle,
-      hasMetaDescription: !!university.seo?.metaDescription,
-      hasCanonicalURL: !!university.seo?.canonicalURL,
+    const allUniversities: UniversitiesAPIResponse = await allUniversitiesResponse.json();
+    const university = allUniversities.data.find(uni => uni.slug === slug);
+    
+    if (!university) {
+      console.error('[Metadata] University not found with slug:', slug);
+      return null;
+    }
+    
+    // Fetch detailed university data - with caching for build
+    const detailResponse = await fetch(`${BASE}/universities/${university.id}`, {
+      next: { revalidate: 3600 }, // Cache for 1 hour
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+      },
     });
     
-    return university as Seoable;
+    if (!detailResponse.ok) {
+      console.error('[Metadata] Failed to fetch university details');
+      return null;
+    }
+    
+    const detailData: UniversityDetailAPIResponse = await detailResponse.json();
+    
+    console.log('[Metadata] SEO data fetched:', {
+      name: detailData.data.name,
+      hasMetaTitle: !!detailData.data.seo?.metaTitle,
+      hasMetaDescription: !!detailData.data.seo?.metaDescription,
+    });
+    
+    return detailData.data as Seoable;
   } catch (error) {
     console.error('[Metadata] Error fetching university SEO data:', error);
     return null;
