@@ -141,6 +141,33 @@ export interface UniversityAPI {
   facilities?: any[];
   placements?: any[];
   fees?: any[];
+  seo?: {
+    id: number;
+    metaTitle?: string;
+    metaDescription?: string;
+    metaKeywords?: string;
+    structuredData?: any;
+    canonicalURL?: string;
+  };
+  brochures?: Array<{
+    id: number;
+    name: string;
+    url: string;
+    alternativeText?: string;
+  }>;
+  hiringPartners?: any[];
+  contactDetails?: any[];
+  advantages?: any[];
+  faqs?: any[];
+  campusGroups?: any[];
+  placementRecords?: any[];
+  financialAid?: any;
+  studentStrength?: number;
+  facultyCount?: number;
+  campusSize?: number;
+  libraryBooks?: number;
+  canonicalUrl?: string;
+  internalNotes?: string;
 }
 
 export interface UniversitiesAPIResponse {

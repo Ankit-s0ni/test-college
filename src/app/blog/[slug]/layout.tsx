@@ -1,11 +1,12 @@
 import type { Metadata } from 'next';
-import qs from 'qs';
+import { blogsAPI } from '@/lib/api';
+import { SITE_BASE_URL } from '@/lib/config';
 
-const BASE = process.env.NEXT_PUBLIC_API_URL || 'https://admin.collegecosmos.in/api';
 const SITE = process.env.NEXT_PUBLIC_SITE_URL || 'https://collegecosmos.com';
-export const revalidate = 60 * 30;
+export const revalidate = 3600; // 1 hour
 
-type Seoable = {
+type BlogSeo = {
+  id: number;
   title: string;
   slug: string;
   excerpt?: string;
@@ -15,31 +16,44 @@ type Seoable = {
     metaKeywords?: string;
     canonicalURL?: string;
   };
-  coverImage?: { url: string };
+  coverImage?: { 
+    url: string;
+    alternativeText?: string | null;
+    width?: number;
+    height?: number;
+  };
+  cover?: {
+    url: string;
+  };
   publishedAt?: string;
+  updatedAt?: string;
   author?: { name?: string };
+  readTimeMin?: number;
 };
 
-async function fetchSeo(slug: string): Promise<Seoable | null> {
-  const query = qs.stringify(
-    { 
-      filters: { slug: { $eq: slug } }, 
-      populate: ['seo', 'coverImage', 'author'] 
-    },
-    { encodeValuesOnly: true },
-  );
-  
+async function fetchBlogSeo(slug: string): Promise<BlogSeo | null> {
   try {
-    const res = await fetch(`${BASE}/blogs?${query}`, { 
-      next: { revalidate },
-      cache: 'force-cache'
+    console.log('🔍 [Blog SEO] Fetching blog for slug:', slug);
+    
+    // Get all blogs to find the one with matching slug
+    const blogsResponse = await blogsAPI.getAll();
+    const matchingBlog = blogsResponse.data.find((blog) => blog.slug === slug);
+    
+    if (!matchingBlog) {
+      console.log('❌ [Blog SEO] Blog not found for slug:', slug);
+      return null;
+    }
+
+    // Get full blog details
+    const blogDetailResponse = await blogsAPI.getById(matchingBlog.id.toString());
+    console.log('✅ [Blog SEO] Blog data fetched:', {
+      title: blogDetailResponse.data.title,
+      hasSEO: !!blogDetailResponse.data.seo,
     });
     
-    if (!res.ok) return null;
-    const json = await res.json();
-    return json?.data?.[0] ?? null;
+    return blogDetailResponse.data;
   } catch (error) {
-    console.error('Error fetching SEO data:', error);
+    console.error('❌ [Blog SEO] Error fetching blog SEO data:', error);
     return null;
   }
 }
@@ -47,9 +61,11 @@ async function fetchSeo(slug: string): Promise<Seoable | null> {
 export async function generateMetadata({
   params,
 }: {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
-  const entry = await fetchSeo(params.slug);
+  const { slug } = await params;
+  const entry = await fetchBlogSeo(slug);
+  
   if (!entry) {
     return {
       title: 'Blog Post - College Cosmos',
@@ -60,39 +76,72 @@ export async function generateMetadata({
   // Use SEO fields from API with fallbacks
   const title = entry.seo?.metaTitle || entry.title;
   const desc = entry.seo?.metaDescription || entry.excerpt || 'Read this article on our blog.';
-  const keywords = entry.seo?.metaKeywords?.split(',').map(k => k.trim()) || [];
+  const keywords = entry.seo?.metaKeywords?.split(',').map((k: string) => k.trim()) || [];
   
   // Build Open Graph image URL
-  const baseUrl = BASE.replace('/api', '');
   let ogImage: string | undefined;
   if (entry.coverImage?.url) {
     ogImage = entry.coverImage.url.startsWith('http') 
       ? entry.coverImage.url 
-      : `${baseUrl}${entry.coverImage.url}`;
+      : `${SITE_BASE_URL}${entry.coverImage.url}`;
+  } else if (entry.cover?.url) {
+    ogImage = entry.cover.url.startsWith('http')
+      ? entry.cover.url
+      : `${SITE_BASE_URL}${entry.cover.url}`;
   }
 
   // Use custom canonical URL if provided, otherwise generate
-  const canonicalUrl = entry.seo?.canonicalURL || `${SITE}/blog/${params.slug}`;
+  const canonicalUrl = entry.seo?.canonicalURL || `${SITE}/blog/${slug}`;
+  const authorName = entry.author?.name || 'College Cosmos Team';
+  const publishedTime = entry.publishedAt;
+  const modifiedTime = entry.updatedAt || entry.publishedAt;
+
+  console.log('📝 [Blog SEO] Generated metadata:', {
+    title,
+    canonicalUrl,
+    hasCoverImage: !!ogImage,
+    author: authorName,
+  });
 
   return {
     title,
     description: desc,
     keywords: keywords.length > 0 ? keywords : undefined,
+    authors: [{ name: authorName }],
     alternates: { canonical: canonicalUrl },
     openGraph: {
       title,
       description: desc,
       url: canonicalUrl,
       type: 'article',
-      images: ogImage ? [{ url: ogImage }] : undefined,
-      publishedTime: entry.publishedAt,
-      authors: entry.author?.name ? [entry.author.name] : undefined,
+      siteName: 'College Cosmos',
+      publishedTime,
+      modifiedTime,
+      authors: [authorName],
+      images: ogImage ? [{
+        url: ogImage,
+        alt: entry.coverImage?.alternativeText || entry.title,
+        width: entry.coverImage?.width || 1200,
+        height: entry.coverImage?.height || 630,
+      }] : undefined,
     },
     twitter: {
       card: 'summary_large_image',
       title,
       description: desc,
       images: ogImage ? [ogImage] : undefined,
+      creator: '@collegecosmos',
+    },
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        'max-video-preview': -1,
+        'max-image-preview': 'large',
+        'max-snippet': -1,
+      },
     },
   };
 }

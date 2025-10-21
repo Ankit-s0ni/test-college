@@ -1079,6 +1079,10 @@ export default function UniversitySlugPage({ params }: any) {
     );
   }
 
+  // Extract SEO data and logo URL for dynamic head injection
+  const seoData = (pageData as UniversityPageDataAPI).seo;
+  const logoUrl = apiData?.data?.logo?.url ? `${SITE_BASE_URL}${apiData.data.logo.url}` : undefined;
+
   return (
     <div className="bg-[#F7EEFD66]">
       <HeroSection 
