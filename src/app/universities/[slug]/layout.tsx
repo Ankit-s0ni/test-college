@@ -4,7 +4,8 @@ import { UniversitiesAPIResponse, UniversityDetailAPIResponse } from '@/types/un
 
 const SITE = process.env.NEXT_PUBLIC_SITE_URL || 'https://collegecosmos.com';
 const BASE = process.env.NEXT_PUBLIC_API_URL || 'https://admin.collegecosmos.in/api';
-export const revalidate = 60 * 30; // Revalidate every 30 minutes
+// Use shorter cache time in development, longer in production
+export const revalidate = process.env.NODE_ENV === 'development' ? 60 : 60 * 30; // 1 min in dev, 30 mins in prod
 
 type Seoable = {
   name: string;
@@ -33,7 +34,7 @@ async function fetchSeo(slug: string): Promise<Seoable | null> {
     
     // First get all universities to find ID - with caching for build
     const allUniversitiesResponse = await fetch(`${BASE}/universities`, {
-      next: { revalidate: 3600 }, // Cache for 1 hour
+      next: { revalidate: process.env.NODE_ENV === 'development' ? 60 : 3600 }, // 1 min in dev, 1 hour in prod
       headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
@@ -55,7 +56,7 @@ async function fetchSeo(slug: string): Promise<Seoable | null> {
     
     // Fetch detailed university data - with caching for build
     const detailResponse = await fetch(`${BASE}/universities/${university.id}`, {
-      next: { revalidate: 3600 }, // Cache for 1 hour
+      next: { revalidate: process.env.NODE_ENV === 'development' ? 60 : 3600 }, // 1 min in dev, 1 hour in prod
       headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
@@ -171,7 +172,7 @@ export async function generateStaticParams() {
   try {
     // Fetch top universities to pre-generate
     const response = await fetch(`${BASE}/universities?pagination[limit]=20&filters[featured]=true`, {
-      next: { revalidate: 3600 }, // Cache for 1 hour
+      next: { revalidate: process.env.NODE_ENV === 'development' ? 60 : 3600 }, // 1 min in dev, 1 hour in prod
     });
     
     if (!response.ok) return [];

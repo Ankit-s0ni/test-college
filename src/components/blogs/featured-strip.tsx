@@ -1,5 +1,6 @@
-'use client';
+ 'use client';
 
+import { useCallback } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Badge } from '@/components/ui/badge';
@@ -85,6 +86,38 @@ export default function FeaturedStrip({ blogs = [] }: FeaturedStripProps) {
                     type="button"
                     aria-label="Share"
                     className="ml-2 inline-flex items-center justify-center rounded-full border bg-white text-slate-600 hover:text-slate-900 hover:shadow px-2.5 h-8"
+                    onClick={useCallback(() => {
+                      try {
+                        const origin = window.location?.origin || '';
+                        const url = `${origin}/blog/${featured.slug}`;
+                        const title = featured.title || '';
+
+                        if (navigator.share) {
+                          navigator.share({ title, url }).catch(() => {});
+                          return;
+                        }
+
+                        const twitter = `https://twitter.com/intent/tweet?text=${encodeURIComponent(
+                          title,
+                        )}&url=${encodeURIComponent(url)}`;
+                        const win = window.open(twitter, '_blank', 'noopener,noreferrer');
+                        if (!win) {
+                          if (navigator.clipboard && navigator.clipboard.writeText) {
+                            navigator.clipboard.writeText(url).then(() => {
+                              alert('Link copied to clipboard');
+                            });
+                          }
+                        }
+                      } catch (err) {
+                        try {
+                          const origin = window.location?.origin || '';
+                          const url = `${origin}/blog/${featured.slug}`;
+                          if (navigator.clipboard && navigator.clipboard.writeText) {
+                            navigator.clipboard.writeText(url);
+                          }
+                        } catch (_e) {}
+                      }
+                    }, [featured.slug, featured.title])}
                   >
                     <Share2 className="h-4 w-4" />
                   </button>

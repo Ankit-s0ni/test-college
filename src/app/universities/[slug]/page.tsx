@@ -52,133 +52,6 @@ import TalkToExpertModal from '@/components/talk-to-expert-modal';
 import UniversityStats from '@/components/university/university-stats';
 import EnhancedContactSection from '@/components/university/enhanced-contact-section';
 
-/* -------------------------------------------------------------------------- */
-/*                                JSON TYPES                                  */
-/* -------------------------------------------------------------------------- */
-
-export type Ratings = {
-  overall: number;
-  average: number;
-  DI: number; // delivery/interaction
-  curriculum: number;
-  VFM: number; // value for money
-};
-
-export type About = {
-  title: string;
-  description: string;
-  courses: Array<{
-    name: string;
-    perSem: string;
-    total: string;
-    online: boolean;
-  }>;
-};
-
-export type Approvals = {
-  title: string;
-  description: string;
-  // items preserve original API objects (body, grade, logo url, plus new fields)
-  items: Array<{ 
-    body?: string; 
-    grade?: string; 
-    status?: string; 
-    logo?: string;
-    fullName?: string;
-    website?: string;
-    description?: string;
-    validFrom?: string;
-    validUntil?: string;
-  }>;
-};
-
-export type CoursesHero = {
-  image: string;
-  detailsLink: string;
-  prospectusLink: string;
-};
-
-export type Certificate = {
-  title: string;
-  images: string[];
-};
-
-export type Ranking = {
-  title: string;
-  rankings: Array<{ year: string; body: string; rank: string }>;
-};
-
-export type FinancialAid = {
-  title: string;
-  description: string;
-  tableData: Array<{
-    category: string;
-    scholarshipCredit: string;
-    eligibilityDocument: string;
-  }>;
-  emiAvailable: boolean;
-  loans: Array<{
-    program: string;
-    options?: any;
-    title: string;
-    total: string;
-    loanAmount: string;
-    interest: string;
-    tenure: string;
-    emi: string;
-  }>;
-};
-
-export type Admission = {
-  title: string;
-  description: string;
-};
-
-export type HiringPartners = {
-  title: string;
-  description: string;
-  images: string[];
-  names?: string[];
-};
-
-export type Examination = {
-  title: string;
-  description: string;
-};
-
-export type Campus = {
-  title: string;
-  groups: any[];
-};
-
-export type Advantages = {
-  title: string;
-  description: string;
-  tableData: Array<{ benefit: string; description: string }>;
-};
-
-export type Faq = Array<{ question: string; answer: string }>;
-
-export type Section13 = {
-  title: string;
-  description: string;
-  data: Array<{
-    image: string;
-    name: string;
-    affiliation: string;
-    rating: number;
-    prospectusLink: string;
-    viewDetailsLink: string;
-  }>;
-};
-
-export type Reviews = {
-  total: { count: number; average: number };
-  counts: { one: number; two: number; three: number; four: number; five: number };
-  peripheral: { avg: number; DI: number; curr: number; VFM: number };
-  list: Array<{ image: string; name: string; date: string; description: string; rating: number }>;
-};
-
 export type Fees = {
   title: string;
   description: string;
@@ -195,114 +68,99 @@ export type Fees = {
   }>;
 };
 
-export type UniversityPageDataAPI = {
-  name: string;
-  details: string;
-  location: string;
-  established: number;
-  ratings: Ratings;
-  prospectusLink: string;
-  scheduleLink: string;
-  applyLink: string;
-  headerImage: string | null;
-  logo: string | null;
-  website?: string;
-  universityType?: string;
-  affiliation?: string;
-  studentStrength?: number;
-  facultyCount?: number;
-  campusSize?: number;
-  libraryBooks?: number;
-  hostelFacility?: boolean;
-  lastVerified?: string;
-  about?: About;
-  approvals?: Approvals;
-  courses?: CoursesHero[];
-  ranking?: Ranking;
-  reviews?: Reviews;
-  financialAid?: FinancialAid;
-  partners?: HiringPartners;
-  campus?: Campus;
-  advantages?: Advantages;
-  gallery?: string[];
-  contact?: {
-    phone?: string | null;
-    email?: string | null;
-    fax?: string | null;
-    tollFree?: string | null;
-  };
-  contactDetails?: Array<{
-    id: number;
-    department: string;
-    contactPerson?: string;
-    phone?: string;
-    email?: string;
-    workingHours?: string;
+export type Ratings = {
+  overall: number;
+  average: number;
+  DI: number;
+  curriculum: number;
+  VFM: number;
+};
+
+export type Faq = Array<{ question: string; answer: string }>;
+
+// Exported type used by HiringPartnerSection component
+export type HiringPartners = {
+  images?: string[];
+  names?: string[];
+  title?: string;
+  description?: string;
+};
+
+export type About = {
+  title: string;
+  description: string;
+  courses?: Array<any>;
+};
+
+export type Section13 = {
+  title?: string;
+  description?: string;
+  data: Array<{
+    image: string;
+    name: string;
+    rating?: number;
+    affiliation?: string;
+    prospectusLink: string;
+    viewDetailsLink: string;
   }>;
-  admissions?: {
-    applicationStart?: string | null;
-    applicationEnd?: string | null;
-    examDate?: string | null;
-    resultDate?: string | null;
-    selectionProcess?: string | null;
-    applicationFee?: number | null;
-  };
-  facilities?: Array<{ id?: number; name?: string; description?: string; category?: string; availability?: boolean; capacity?: number }>;
-  placements?: Array<{ id?: number; year?: number | string; totalStudents?: number; studentsPlaced?: number; placementPercentage?: number | null; averagePackage?: number | null; highestPackage?: number | null; lowestPackage?: number | null; topRecruiters?: string[] }>;
-  placementRecords?: Array<any>;
-  courseDetails?: Array<{ id?: number; courseName?: string; duration?: string; fees?: string | number; mode?: string; eligibility?: string; syllabus?: string; specializations?: string[] }>;
-  faq?: Faq;
-  examination?: Examination;
-  certificate?: Certificate;
-  fees?: Fees;
-  seo?: {
-    metaTitle?: string;
-    metaDescription?: string;
-    metaKeywords?: string;
-    canonicalURL?: string;
-  };
 };
 
-export type UniversityPageData = {
-  name: string;
-  details: string;
-  location: string;
-  established: number;
-  ratings: Ratings;
-  prospectusLink: string;
-  scheduleLink: string;
-  applyLink: string;
-  headerImage: string;
-  logo: string;
-
-  about: About;
-  approvals: Approvals;
-  courses: CoursesHero[];
-  certificate: Certificate;
-  ranking: Ranking;
-  financialAid: FinancialAid;
-  admission: Admission;
-  partners: HiringPartners;
-  examination: Examination;
-  campus: Campus;
-  advantages: Advantages;
-  faq: Faq;
-  section13: Section13; // “Similar Programs/Universities” style block
-  reviews: Reviews;
-  fees?: Fees;
-  admissions?: {
-    applicationStart?: string | null;
-    applicationEnd?: string | null;
-    examDate?: string | null;
-    resultDate?: string | null;
-    selectionProcess?: string | null;
-    applicationFee?: number | null;
-  };
-  facilities?: Array<{ id?: number; name?: string; description?: string; category?: string; availability?: boolean; capacity?: number }>;
-  placements?: Array<{ id?: number; year?: number | string; totalStudents?: number; studentsPlaced?: number; placementPercentage?: number | null; averagePackage?: number | null; highestPackage?: number | null; lowestPackage?: number | null; topRecruiters?: string[] }>;
-  placementRecords?: Array<any>;
-  courseDetails?: Array<{ id?: number; courseName?: string; duration?: string; fees?: string | number; mode?: string; eligibility?: string; syllabus?: string; specializations?: string[] }>;
+export type Reviews = {
+  total: { count: number; average: number };
+  counts: { one: number; two: number; three: number; four: number; five: number };
+  peripheral: { avg: number; DI: number; curr: number; VFM: number };
+  list: Array<{ image: string; name: string; date: string; description: string; rating: number }>;
 };
+
+export type Ranking = {
+  title?: string;
+  rankings: Array<{ year?: string; body?: string; rank?: string | number }>;
+};
+
+export type FinancialAid = {
+  title?: string;
+  description?: string;
+  tableData: Array<{ category: string; scholarshipCredit: string; eligibilityDocument: string }>;
+  emiAvailable?: boolean;
+  loans: Array<{
+    program?: string;
+    options: Array<{ mode?: string; total?: string; loanAmount?: string; interest?: string; tenure?: string; emi?: any }>;
+    title?: string;
+    total?: string;
+    loanAmount?: string;
+    interest?: string;
+    tenure?: string;
+    emi?: string | null;
+  }>;
+};
+
+export type Certificate = { title: string; images: Array<any> };
+
+export type Campus = {
+  title?: string;
+  groups: Array<{ label?: string; color?: string; locations?: any; geo?: any }>;
+};
+
+export type Approvals = {
+  title?: string;
+  description?: string;
+  items: Array<{
+    body?: string;
+    grade?: string;
+    status?: string;
+    logo?: string;
+    fullName?: string;
+    website?: string;
+    description?: string;
+    validFrom?: string;
+    validUntil?: string;
+  }>;
+};
+
+export type Advantages = { title?: string; description?: string; tableData: Array<{ benefit: string; description: string }> };
+
+export type UniversityPageDataAPI = any;
+export type UniversityPageData = any;
 
 /* -------------------------------------------------------------------------- */
 /*                              DUMMY PAGE DATA                                */
@@ -839,8 +697,8 @@ function HeroSection({
 }) {
   return (
     <section className="relative">
-      {/* banner */}
-      <div className="relative h-[180px] sm:h-[240px] md:h-[300px] lg:h-[400px]">
+      {/* banner with overlayed content */}
+  <div className="relative h-[180px] sm:h-[240px] md:h-[300px] lg:h-[50vh]">
         {data.headerImage ? (
           <>
             <Image src={data.headerImage} alt={data.name} fill className="object-cover" priority />
@@ -849,132 +707,123 @@ function HeroSection({
         ) : (
           <div className="h-full w-full bg-gray-100" />
         )}
-      </div>
 
-      {/* content */}
-      <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-6 sm:py-8 lg:py-10">
-        <div className="grid gap-6 lg:gap-8 lg:grid-cols-2">
-          {/* LEFT */}
-          <div className="min-w-0">
-            <div className="flex items-center gap-2 sm:gap-3 flex-wrap mb-3">
-              <h1 className="text-2xl sm:text-3xl md:text-4xl font-extrabold tracking-tight break-words">{data.name}</h1>
-              {(data as UniversityPageDataAPI).universityType && (
-                <span className="px-2 sm:px-3 py-1 text-xs font-semibold bg-blue-100 text-blue-700 rounded-full whitespace-nowrap">
-                  {(data as UniversityPageDataAPI).universityType}
-                </span>
-              )}
-            </div>
-            
-            <p className="mt-3 text-sm sm:text-base lg:text-lg text-muted-foreground break-words">{data.details}</p>
-
-            <div className="mt-4 flex flex-wrap gap-2 sm:gap-4 text-xs sm:text-sm">
-              <span className="flex items-center gap-1.5 sm:gap-2">
-                📍 <span className="break-all">{data.location}</span>
-              </span>
-              <span className="flex items-center gap-1.5 sm:gap-2 whitespace-nowrap">
-                🏛️ Established {data.established}
-              </span>
-              {data.ratings.overall > 0 && (
-                <span className="flex items-center gap-1.5 sm:gap-2 whitespace-nowrap">
-                  ⭐ {data.ratings.overall.toFixed(1)} Rating
-                </span>
-              )}
-              {(data as UniversityPageDataAPI).affiliation && (
-                <span className="flex items-center gap-1.5 sm:gap-2 break-words">
-                  ✓ {(data as UniversityPageDataAPI).affiliation}
-                </span>
-              )}
-            </div>
-
-            {/* Last verified badge */}
-            {(data as UniversityPageDataAPI).lastVerified && (
-              <div className="mt-3 text-xs text-muted-foreground break-words">
-                ℹ️ Information last verified on {new Date((data as UniversityPageDataAPI).lastVerified!).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
-              </div>
-            )}
-
-            {/* CTAs */}
-            <div className="mt-6 flex flex-col sm:flex-row flex-wrap gap-3">
-              <Button asChild className="bg-[#1EC408] hover:bg-green-700 w-full sm:w-auto">
-                <Link href={data.prospectusLink}>
-                  <FileDown className="mr-2 h-4 w-4" />
-                  Download Prospectus
-                </Link>
-              </Button>
-
-              {(data as UniversityPageDataAPI).website && (
-                <Button asChild variant="outline" className="border-blue-600 text-blue-700 hover:bg-blue-50 w-full sm:w-auto">
-                  <Link href={(data as UniversityPageDataAPI).website!} target="_blank" rel="noopener noreferrer">
-                    <svg className="mr-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                    </svg>
-                    Visit Website
-                  </Link>
-                </Button>
+        {/* overlay: only show logo + title centered (start from mid-image) */}
+        <div className="absolute inset-0 flex items-center">
+          <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="w-full text-center">
+              {(data as UniversityPageDataAPI).logo && (
+                <div className="mx-auto mb-4 w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 rounded-lg overflow-hidden bg-white/90 flex items-center justify-center">
+                  <Image
+                    src={(data as UniversityPageDataAPI).logo as string}
+                    alt={`${data.name} logo`}
+                    width={112}
+                    height={112}
+                    className="object-contain"
+                    priority={false}
+                  />
+                </div>
               )}
 
-              <TalkToExpertModal
-                universityName={data.name}
-                triggerContent="Talk to our expert"
-                modalTitle={`Schedule a Call with ${data.name}`}
-                triggerClassName="border-green-600 text-green-700 hover:bg-green-50 w-full sm:w-auto bg-transparent"
-                calLink={data.scheduleLink || undefined}
-              />
+              <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-extrabold text-white drop-shadow-lg">{data.name}</h1>
             </div>
           </div>
+        </div>
 
-          {/* RIGHT: ratings */}
-          <div className="grid grid-cols-1 sm:grid-cols-[1fr_auto] items-center gap-6 min-w-0">
-            <div className="min-w-0">
-              <div className="flex items-baseline gap-2">
-                <h3 className="text-base sm:text-lg font-semibold">Peripheral Rating</h3>
-                <span className="text-xs sm:text-sm text-muted-foreground whitespace-nowrap">(Out of 5)</span>
+        {/* details panel below image - contains description, CTAs and ratings */}
+      </div>
+
+  <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 mt-6">
+        <div className="bg-white/5 backdrop-blur-sm rounded-t-lg p-5 sm:p-6 lg:p-8 shadow-sm">
+          <div className="grid gap-6 lg:grid-cols-2 items-start">
+            {/* LEFT: description + CTAs */}
+            <div>
+              <p className="text-sm sm:text-base text-muted-foreground mb-3">{data.details}</p>
+
+              <div className="flex flex-wrap gap-2 sm:gap-4 text-xs sm:text-sm mb-3">
+                <span className="flex items-center gap-1.5 sm:gap-2">📍 <span className="break-all">{data.location}</span></span>
+                <span className="flex items-center gap-1.5 sm:gap-2 whitespace-nowrap">🏛️ Established {data.established}</span>
+                {data.ratings.overall > 0 && (<span className="flex items-center gap-1.5 sm:gap-2 whitespace-nowrap">⭐ {data.ratings.overall.toFixed(1)} Rating</span>)}
+                {(data as UniversityPageDataAPI).affiliation && (<span className="flex items-center gap-1.5 sm:gap-2 break-words">✓ {(data as UniversityPageDataAPI).affiliation}</span>)}
               </div>
 
-              <div className="mt-4 space-y-3 sm:space-y-4">
-                <div className="flex items-center justify-between gap-3 sm:gap-6">
-                  <span className="text-sm sm:text-[15px] text-muted-foreground">Average Ratings</span>
-                  <div className="flex items-center gap-1.5 sm:gap-2">
-                    <span className="font-semibold text-sm sm:text-base">{data.ratings.average.toFixed(1)}</span>
-                    <Stars value={data.ratings.average} />
-                  </div>
-                </div>
-                <div className="flex items-center justify-between gap-3 sm:gap-6">
-                  <span className="text-sm sm:text-[15px] text-muted-foreground">Digital Infrastructure</span>
-                  <div className="flex items-center gap-1.5 sm:gap-2">
-                    <span className="font-semibold text-sm sm:text-base">{data.ratings.DI.toFixed(1)}</span>
-                    <Stars value={data.ratings.DI} />
-                  </div>
-                </div>
-                <div className="flex items-center justify-between gap-3 sm:gap-6">
-                  <span className="text-sm sm:text-[15px] text-muted-foreground">Curriculum</span>
-                  <div className="flex items-center gap-1.5 sm:gap-2">
-                    <span className="font-semibold text-sm sm:text-base">{data.ratings.curriculum.toFixed(1)}</span>
-                    <Stars value={data.ratings.curriculum} />
-                  </div>
-                </div>
-                <div className="flex items-center justify-between gap-3 sm:gap-6">
-                  <span className="text-sm sm:text-[15px] text-muted-foreground">Value For Money</span>
-                  <div className="flex items-center gap-1.5 sm:gap-2">
-                    <span className="font-semibold text-sm sm:text-base">{data.ratings.VFM.toFixed(1)}</span>
-                    <Stars value={data.ratings.VFM} />
-                  </div>
-                </div>
+              <div className="flex flex-col sm:flex-row gap-3">
+                <Button asChild className="bg-[#1EC408] hover:bg-green-700 w-full sm:w-auto">
+                  <Link href={data.prospectusLink}>
+                    <FileDown className="mr-2 h-4 w-4" />
+                    Download Prospectus
+                  </Link>
+                </Button>
 
-                <ReviewModal 
-                  universityId={universityId || data.name} 
-                  universityName={data.name} 
+                {(data as UniversityPageDataAPI).website && (
+                  <Button asChild variant="outline" className="border-white/30 text-white hover:bg-white/5 w-full sm:w-auto">
+                    <Link href={(data as UniversityPageDataAPI).website!} target="_blank" rel="noopener noreferrer">Visit Website</Link>
+                  </Button>
+                )}
+
+                <TalkToExpertModal
+                  universityName={data.name}
+                  triggerContent="Talk to our expert"
+                  modalTitle={`Schedule a Call with ${data.name}`}
+                  triggerClassName="border-white/30 text-white hover:bg-white/5 w-full sm:w-auto bg-transparent"
+                  calLink={data.scheduleLink || undefined}
                 />
               </div>
             </div>
 
-            <div className="justify-self-center sm:justify-self-end">
-              <Gauge value={data.ratings.overall} />
+            {/* RIGHT: ratings + gauge */}
+            <div className="grid grid-cols-1 sm:grid-cols-[1fr_auto] items-center gap-6 min-w-0">
+              <div className="min-w-0">
+                <div className="flex items-baseline gap-2">
+                  <h3 className="text-base sm:text-lg font-semibold">Peripheral Rating</h3>
+                  <span className="text-xs sm:text-sm text-muted-foreground whitespace-nowrap">(Out of 5)</span>
+                </div>
+
+                <div className="mt-4 space-y-3 sm:space-y-4">
+                  <div className="flex items-center justify-between gap-3 sm:gap-6">
+                    <span className="text-sm sm:text-[15px] text-muted-foreground">Average Ratings</span>
+                    <div className="flex items-center gap-1.5 sm:gap-2">
+                      <span className="font-semibold text-sm sm:text-base">{data.ratings.average.toFixed(1)}</span>
+                      <Stars value={data.ratings.average} />
+                    </div>
+                  </div>
+                  <div className="flex items-center justify-between gap-3 sm:gap-6">
+                    <span className="text-sm sm:text-[15px] text-muted-foreground">Digital Infrastructure</span>
+                    <div className="flex items-center gap-1.5 sm:gap-2">
+                      <span className="font-semibold text-sm sm:text-base">{data.ratings.DI.toFixed(1)}</span>
+                      <Stars value={data.ratings.DI} />
+                    </div>
+                  </div>
+                  <div className="flex items-center justify-between gap-3 sm:gap-6">
+                    <span className="text-sm sm:text-[15px] text-muted-foreground">Curriculum</span>
+                    <div className="flex items-center gap-1.5 sm:gap-2">
+                      <span className="font-semibold text-sm sm:text-base">{data.ratings.curriculum.toFixed(1)}</span>
+                      <Stars value={data.ratings.curriculum} />
+                    </div>
+                  </div>
+                  <div className="flex items-center justify-between gap-3 sm:gap-6">
+                    <span className="text-sm sm:text-[15px] text-muted-foreground">Value For Money</span>
+                    <div className="flex items-center gap-1.5 sm:gap-2">
+                      <span className="font-semibold text-sm sm:text-base">{data.ratings.VFM.toFixed(1)}</span>
+                      <Stars value={data.ratings.VFM} />
+                    </div>
+                  </div>
+
+                  <ReviewModal 
+                    universityId={universityId || data.name} 
+                    universityName={data.name} 
+                  />
+                </div>
+              </div>
+
+              <div className="justify-self-center sm:justify-self-end">
+                <Gauge value={data.ratings.overall} />
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </section>
+  </section>
   );
 }
 

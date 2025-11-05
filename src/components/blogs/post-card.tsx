@@ -1,5 +1,6 @@
-'use client';
+ 'use client';
 
+import { useCallback } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Card, CardContent } from '@/components/ui/card';
@@ -61,7 +62,53 @@ export default function PostCard({ post }: { post: BlogPost }) {
             </span>
           </Link>
 
-          <button type="button" aria-label="Share" className="text-slate-600 hover:text-slate-900">
+          <button
+            type="button"
+            aria-label="Share"
+            className="text-slate-600 hover:text-slate-900"
+            onClick={useCallback(() => {
+              try {
+                const origin = window.location?.origin || '';
+                const url = `${origin}/blog/${post.slug}`;
+                const title = post.title || '';
+
+                if (navigator.share) {
+                  // Use native share sheet when available
+                  navigator.share({ title, url }).catch(() => {
+                    // ignored
+                  });
+                  return;
+                }
+
+                // Fallback: open Twitter share intent in a new window
+                const twitter = `https://twitter.com/intent/tweet?text=${encodeURIComponent(
+                  title,
+                )}&url=${encodeURIComponent(url)}`;
+                const win = window.open(twitter, '_blank', 'noopener,noreferrer');
+                if (!win) {
+                  // If popup blocked, copy to clipboard as last resort
+                  if (navigator.clipboard && navigator.clipboard.writeText) {
+                    navigator.clipboard.writeText(url).then(() => {
+                      // best-effort user feedback: small alert
+                      // keep minimal to avoid adding UI deps
+                      alert('Link copied to clipboard');
+                    });
+                  }
+                }
+              } catch (err) {
+                // Silent fail to avoid breaking the UI; best-effort copy
+                try {
+                  const origin = window.location?.origin || '';
+                  const url = `${origin}/blog/${post.slug}`;
+                  if (navigator.clipboard && navigator.clipboard.writeText) {
+                    navigator.clipboard.writeText(url);
+                  }
+                } catch (_e) {
+                  // give up
+                }
+              }
+            }, [post.slug, post.title])}
+          >
             <Share2 className="h-5 w-5" />
           </button>
         </div>
